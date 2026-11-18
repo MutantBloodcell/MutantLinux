@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MutantLinux OS & Package Store</title>
+  <style>
+    :root { --bg: #0b0f17; --card: #131a26; --border: #253047; --accent: #00e676; --blue: #38bdf8; --text: #e2e8f0; --muted: #94a3b8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    header { background: linear-gradient(135deg, #111827, #0f172a); border-bottom: 1px solid var(--border); padding: 40px 20px; text-align: center; }
+    h1 { margin: 0 0 10px; font-size: 2.2rem; color: var(--accent); letter-spacing: 0.5px; }
+    .sub { color: var(--muted); max-width: 600px; margin: 0 auto 20px; }
+    .btn { display: inline-block; background: var(--accent); color: #052e16; font-weight: 700; text-decoration: none; padding: 10px 20px; border-radius: 8px; margin: 5px; }
+    .btn-sec { background: #1e293b; color: var(--blue); border: 1px solid var(--border); }
+    main { max-width: 960px; margin: 30px auto; padding: 0 20px; }
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    input, select { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 1rem; }
+    input { flex: 1; min-width: 220px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; }
+    .tag { display: inline-block; font-size: 0.75rem; background: #1e293b; color: var(--blue); padding: 2px 8px; border-radius: 99px; margin-bottom: 8px; }
+    .pkg-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 6px; color: #fff; }
+    .pkg-desc { color: var(--muted); font-size: 0.92rem; margin-bottom: 14px; }
+    .cmd-box { background: #090d14; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-family: monospace; font-size: 0.85rem; color: var(--accent); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .copy-btn { background: #1e293b; border: none; color: var(--text); padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+    .dl-link { color: var(--blue); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MutantLinux 1.0 ARM64</h1>
+    <p class="sub">Independent ARM64 Linux distribution built from scratch with MutantDE, musl + glibc hybrid support, and the <code>mpkg</code> Package Store.</p>
+    <a class="btn" id="iso-btn" href="../../releases">Download ARM64 ISO</a>
+    <a class="btn btn-sec" href="../..">GitHub Source</a>
+  </header>
+
+  <main>
+    <h2>MutantLinux Package Store (<code>aarch64</code>)</h2>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search packages (e.g., mutantde, nano, htop)...">
+      <select id="category">
+        <option value="all">All Categories</option>
+        <option value="Desktop">Desktop</option>
+        <option value="Utilities">Utilities</option>
+        <option value="System">System</option>
+      </select>
+    </div>
+    <div class="grid" id="pkg-grid">Loading store catalog...</div>
+  </main>
+
+  <script>
+    let allPackages = [];
+    let releaseAssets = {};
+
+    async function loadStore() {
+      const owner = window.location.hostname.split('.')[0] || 'MutantBloodcell';
+      const repo = window.location.pathname.split('/').filter(Boolean)[0] || 'MutantLinux';
+      const ghBase = 'https://' + '://github.com' + owner + '/' + repo;
+      document.getElementById('iso-btn').href = ghBase + '/releases';
+      document.querySelector('.btn-sec').href = ghBase;
+
+      try {
+        const relRes = await fetch('https://' + 'api.://github.comrepos/' + owner + '/' + repo + '/releases/latest');
+        if (relRes.ok) {
+          const relData = await relRes.json();
+          (relData.assets || []).forEach(a => {
+            releaseAssets[a.name] = a.browser_download_url;
+            if (a.name.endsWith('.iso')) document.getElementById('iso-btn').href = a.browser_download_url;
+          });
+        }
+      } catch (e) {}
+
+      try {
+        const res = await fetch('repo/aarch64/packages.json');
+        const data = await res.json();
+        allPackages = data.packages || [];
+        render(allPackages);
+      } catch (e) {
+        document.getElementById('pkg-grid').innerHTML = '<p>Could not load repo/aarch64/packages.json</p>';
+      }
+    }
+
+    function render(list) {
+      const grid = document.getElementById('pkg-grid');
+      if (!list.length) { grid.innerHTML = '<p>No matching packages found.</p>'; return; }
+      grid.innerHTML = list.map(p => {
+        const dlUrl = releaseAssets[p.file] || ('repo/aarch64/' + p.file);
+        return `
+        <div class="card">
+          <div>
+            <span class="tag">${p.category} • v${p.version} • ${p.size}</span>
+            <div class="pkg-title">${p.name}</div>
+            <p class="pkg-desc">${p.description}</p>
+          </div>
+          <div>
+            <div class="cmd-box">
+              <span>mpkg install ${p.name}</span>
+              <button class="copy-btn" onclick="navigator.clipboard.writeText('mpkg install ${p.name}')">Copy</button>
+            </div>
+            <a class="dl-link" href="${dlUrl}">Direct Download (.mpk) &rarr;</a>
+          </div>
+        </div>
+      `}).join('');
+    }
+
+    function filter() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const cat = document.getElementById('category').value;
+      render(allPackages.filter(p =>
+        (cat === 'all' || p.category === cat) &&
+        (p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
+      ));
+    }
+
+    document.getElementById('search').addEventListener('input', filter);
+    document.getElementById('category').addEventListener('change', filter);
+    loadStore();
+  </script>
+</body>
+</html>

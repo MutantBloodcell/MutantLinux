@@ -1,0 +1,15 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export HOME=/root
+export DISPLAY=:0
+mkdir -p /tmp/.X11-unix
+chmod 1777 /tmp/.X11-unix
+
+/usr/sbin/mutant-hwdetect 2>/dev/null
+if [ -x /usr/bin/xinit ] && [ -x /usr/bin/startmutantde ]; then
+    exec xinit /usr/bin/startmutantde -- /usr/bin/Xorg :0 vt1 -nolisten tcp -keeptty
+else
+    echo "Missing binary check:"
+    ls -l /usr/bin/xinit /usr/bin/Xorg /usr/bin/startmutantde
+    sleep 5
+fi

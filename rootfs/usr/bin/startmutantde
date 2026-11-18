@@ -1,0 +1,86 @@
+#!/bin/sh
+exec >/var/log/mutantde.log 2>&1
+
+export HOME=/root
+export USER=root
+export DISPLAY=:0
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export XDG_RUNTIME_DIR=/tmp/runtime-root
+export XDG_DATA_DIRS=/usr/local/share:/usr/share
+export XDG_CONFIG_DIRS=/etc/xdg
+export XDG_CURRENT_DESKTOP="MutantDE"
+export DESKTOP_SESSION="mutantde"
+export XCURSOR_THEME="Adwaita"
+export GSK_RENDERER=cairo
+export LIBGL_ALWAYS_SOFTWARE=1
+
+mkdir -p "$XDG_RUNTIME_DIR" /root/Desktop /root/.config/tint2 /root/.config/openbox
+chmod 700 "$XDG_RUNTIME_DIR"
+
+cat << 'TINT' > /root/.config/tint2/tint2rc
+# Background 1: Panel
+rounded = 0
+border_width = 2
+background_color = #1e293b 100
+border_color = #38bdf8 100
+
+# Panel
+panel_items = TSC
+panel_size = 100% 36
+panel_margin = 0 0
+panel_padding = 8 4 8
+panel_background_id = 1
+panel_position = bottom center horizontal
+panel_layer = top
+panel_monitor = all
+
+# Taskbar
+taskbar_mode = single_desktop
+taskbar_padding = 4 2 4
+task_text = 1
+task_centered = 1
+task_font = DejaVu Sans 10
+task_font_color = #ffffff 100
+
+# Clock
+time1_format = %H:%M
+time1_font = DejaVu Sans Bold 11
+clock_font_color = #00e676 100
+clock_padding = 10 4
+TINT
+
+cat << 'MENU' > /root/.config/openbox/menu.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org">
+  <menu id="root-menu" label="MutantLinux 1.0">
+    <item label="Terminal">
+      <action name="Execute"><command>lxterminal</command></action>
+    </item>
+    <item label="XTerm Fallback">
+      <action name="Execute"><command>xterm -bg "#0b0f17" -fg "#00e676"</command></action>
+    </item>
+    <item label="File Manager">
+      <action name="Execute"><command>pcmanfm</command></action>
+    </item>
+    <separator />
+    <item label="Reboot">
+      <action name="Execute"><command>reboot -f</command></action>
+    </item>
+  </menu>
+</openbox_menu>
+MENU
+
+xset r off 2>/dev/null
+xsetroot -solid "#1e3a5f" -cursor_name left_ptr 2>/dev/null
+
+exec dbus-run-session -- sh -c '
+    pipewire &
+    wireplumber &
+    pipewire-pulse &
+    openbox &
+    sleep 1
+    tint2 &
+    pcmanfm --desktop &
+    lxterminal &
+    while true; do sleep 60; done
+'

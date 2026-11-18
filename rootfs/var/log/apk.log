@@ -1,0 +1,1387 @@
+
+Running `apk add --root /MutantLinux/build/mutantde-pkg --initdb --no-cache xorg-server xf86-video-fbdev xf86-input-libinput xinit xfce4-session xfdesktop thunar xfce4-terminal adwaita-icon-theme ttf-dejavu` at 2026-11-18 02:31:38
+apk-tools 3.0.9-r0, compiled for aarch64.
+(  1/171) Installing musl (1.2.6-r3)
+(  2/171) Installing libxau (1.0.12-r0)
+(  3/171) Installing libmd (1.2.0-r0)
+(  4/171) Installing libbsd (0.12.2-r0)
+(  5/171) Installing libxdmcp (1.1.5-r1)
+(  6/171) Installing libxcb (1.17.0-r2)
+(  7/171) Installing libx11 (1.8.14-r0)
+(  8/171) Installing libxext (1.3.7-r0)
+(  9/171) Installing libxrender (0.9.13-r0)
+( 10/171) Installing busybox (1.37.0-r31)
+  Executing busybox-1.37.0-r31.post-install
+( 11/171) Installing busybox-binsh (1.37.0-r31)
+( 12/171) Installing libexpat (2.10.0-r0)
+( 13/171) Installing brotli-libs (1.2.1-r0)
+( 14/171) Installing libbz2 (1.0.8-r6)
+( 15/171) Installing zlib (1.4-r0)
+( 16/171) Installing libpng (1.6.59-r0)
+( 17/171) Installing freetype (2.14.3-r0)
+( 18/171) Installing fontconfig (2.17.1-r1)
+( 19/171) Installing pixman (0.46.4-r0)
+( 20/171) Installing cairo (1.18.4-r1)
+( 21/171) Installing libgcc (15.2.0-r5)
+( 22/171) Installing libffi (3.5.2-r1)
+( 23/171) Installing libintl (1.0-r0)
+( 24/171) Installing libeconf (0.8.3-r0)
+( 25/171) Installing libblkid (2.42.3-r1)
+( 26/171) Installing libmount (2.42.3-r1)
+( 27/171) Installing pcre2 (10.49-r0)
+( 28/171) Installing glib (2.88.1-r1)
+( 29/171) Installing libdav1d (1.5.3-r0)
+( 30/171) Installing pkgconf (2.5.1-r0)
+( 31/171) Installing libstdc++ (15.2.0-r5)
+( 32/171) Installing xz-libs (5.8.4-r0)
+( 33/171) Installing libxml2 (2.13.9-r2)
+( 34/171) Installing shared-mime-info (2.4-r7)
+( 35/171) Installing libcap2 (2.78-r0)
+( 36/171) Installing bubblewrap (0.12.0-r0)
+( 37/171) Installing lcms2 (2.19-r0)
+( 38/171) Installing libseccomp (2.6.1-r0)
+( 39/171) Installing libglycin (2.1.5-r0)
+  Executing libglycin-2.1.5-r0.post-install
+  * glycin loaders got split into their individual subpackages.
+  * By default, only glycin-image-rs & glycin-svg are installed.
+  * Additional loader subpackages are glycin-heif, glycin-jxl & glycin-raw.
+  * 
+  * To install all available loaders, install glycin-loaders-all.
+  * 
+  * Also the glycin-thumbnailer got subpackaged and isn't installed by default.
+( 40/171) Installing glycin-image-rs (2.1.5-r0)
+( 41/171) Installing gdk-pixbuf (2.44.7-r1)
+( 42/171) Installing libxft (2.3.9-r0)
+( 43/171) Installing fribidi (1.0.16-r3)
+( 44/171) Installing graphite2 (1.3.14-r6)
+( 45/171) Installing harfbuzz (13.2.1-r0)
+( 46/171) Installing pango (1.57.1-r0)
+( 47/171) Installing librsvg (2.62.3-r0)
+( 48/171) Installing glycin-svg (2.1.5-r0)
+( 49/171) Installing adwaita-icon-theme (50.0-r1)
+( 50/171) Installing desktop-file-utils (0.28-r0)
+( 51/171) Installing hicolor-icon-theme (0.18-r0)
+( 52/171) Installing libatk-1.0 (2.60.5-r0)
+( 53/171) Installing gobject-introspection (1.86.0-r1)
+( 54/171) Installing libxcomposite (0.4.7-r0)
+( 55/171) Installing libxfixes (6.0.2-r0)
+( 56/171) Installing libxcursor (1.2.3-r0)
+( 57/171) Installing libxdamage (1.1.7-r0)
+( 58/171) Installing libxi (1.8.4-r0)
+( 59/171) Installing libxinerama (1.1.6-r0)
+( 60/171) Installing libxrandr (1.5.5-r0)
+( 61/171) Installing dbus-libs (1.16.2-r2)
+( 62/171) Installing at-spi2-core-libs (2.60.5-r0)
+( 63/171) Installing libxtst (1.2.6-r0)
+( 64/171) Installing at-spi2-core (2.60.5-r0)
+( 65/171) Installing libatk-bridge-2.0 (2.60.5-r0)
+( 66/171) Installing cairo-gobject (1.18.4-r1)
+( 67/171) Installing avahi-libs (0.9_rc4-r0)
+( 68/171) Installing gmp (6.3.0-r4)
+( 69/171) Installing nettle (3.10.2-r0)
+( 70/171) Installing libunistring (1.4.2-r0)
+( 71/171) Installing libidn2 (2.3.8-r0)
+( 72/171) Installing libtasn1 (4.21.0-r0)
+( 73/171) Installing p11-kit (0.26.2-r0)
+( 74/171) Installing zstd-libs (1.5.7-r2)
+( 75/171) Installing gnutls (3.8.13-r0)
+( 76/171) Installing cups-libs (2.4.19-r1)
+( 77/171) Installing libepoxy (1.5.10-r1)
+( 78/171) Installing wayland-libs-client (1.25.0-r0)
+( 79/171) Installing wayland-libs-cursor (1.25.0-r0)
+( 80/171) Installing wayland-libs-egl (1.25.0-r0)
+( 81/171) Installing xkeyboard-config (2.47-r0)
+( 82/171) Installing libxkbcommon (1.13.1-r0)
+( 83/171) Installing gtk+3.0 (3.24.52-r0)
+( 84/171) Installing libxfce4util (4.20.1-r0)
+( 85/171) Installing exo-libs (4.20.0-r0)
+( 86/171) Installing libice (1.1.2-r0)
+( 87/171) Installing libuuid (2.42.3-r1)
+( 88/171) Installing libsm (1.2.6-r0)
+( 89/171) Installing libgtop (2.41.3-r1)
+( 90/171) Installing xcb-util (0.4.1-r3)
+( 91/171) Installing startup-notification (0.12-r8)
+( 92/171) Installing xfconf (4.20.0-r2)
+( 93/171) Installing libxfce4ui (4.20.1-r1)
+( 94/171) Installing exo (4.20.0-r0)
+( 95/171) Installing gtk-update-icon-cache (3.24.52-r0)
+( 96/171) Installing libexif (0.6.26-r0)
+( 97/171) Installing eudev-libs (3.2.14-r6)
+( 98/171) Installing libgudev (238-r1)
+( 99/171) Installing libnotify (0.8.8-r0)
+(100/171) Installing gtk-layer-shell (0.10.1-r0)
+(101/171) Installing libxfce4panel (4.20.7-r0)
+(102/171) Installing thunar (4.20.8-r0)
+  Executing thunar-4.20.8-r0.post-install
+(103/171) Installing encodings (1.1.0-r0)
+(104/171) Installing libfontenc (1.1.9-r0)
+(105/171) Installing mkfontscale (1.2.4-r0)
+(106/171) Installing font-dejavu (2.37-r6)
+(107/171) Installing libevdev (1.13.6-r0)
+(108/171) Installing mtdev (1.1.7-r0)
+(109/171) Installing libinput-libs (1.31.3-r0)
+(110/171) Installing xf86-input-libinput (1.5.0-r0)
+(111/171) Installing xf86-video-fbdev (0.5.0-r6)
+(112/171) Installing iceauth (1.0.11-r0)
+(113/171) Installing dbus (1.16.2-r2)
+  Executing dbus-1.16.2-r2.pre-install
+  Executing dbus-1.16.2-r2.post-install
+(114/171) Installing dbus-daemon-launch-helper (1.16.2-r2)
+(115/171) Installing dbus-x11 (1.16.2-r2)
+(116/171) Installing ncurses-terminfo-base (6.6_p20260516-r0)
+(117/171) Installing libncursesw (6.6_p20260516-r0)
+(118/171) Installing skalibs-libs (2.15.0.0-r0)
+(119/171) Installing utmps-libs (0.1.3.3-r0)
+(120/171) Installing libproc2 (4.0.6-r0)
+(121/171) Installing procps-ng (4.0.6-r0)
+(122/171) Installing polkit-noelogind-libs (127-r2)
+(123/171) Installing libxres (1.2.3-r0)
+(124/171) Installing libwnck3 (43.3-r0)
+(125/171) Installing libdisplay-info (0.3.0-r0)
+(126/171) Installing libxfce4windowing (4.20.6-r0)
+(127/171) Installing xfce4-session (4.20.2-r0)
+(128/171) Installing libutempter (1.2.3-r1)
+(129/171) Installing adwaita-fonts-sans (50.0-r0)
+(130/171) Installing adwaita-fonts-mono (50.0-r0)
+(131/171) Installing adwaita-fonts (50.0-r0)
+(132/171) Installing vte3-profile (0.84.0-r2)
+(133/171) Installing icu-data-en (78.1-r0)
+  Executing icu-data-en-78.1-r0.post-install
+  * If you need ICU with non-English locales and legacy charset support, install
+  * package icu-data-full.
+(134/171) Installing icu-libs (78.1-r0)
+(135/171) Installing lz4-libs (1.10.0-r1)
+(136/171) Installing simdutf (9.0.0-r0)
+(137/171) Installing vte3 (0.84.0-r2)
+(138/171) Installing xfce4-terminal (1.2.0-r0)
+(139/171) Installing garcon (4.20.0-r0)
+(140/171) Installing yaml (0.2.5-r2)
+(141/171) Installing xfdesktop (4.20.1-r0)
+(142/171) Installing libxt (1.3.1-r0)
+(143/171) Installing libxmu (1.3.1-r0)
+(144/171) Installing xauth (1.1.5-r0)
+(145/171) Installing mcookie (2.42.3-r1)
+(146/171) Installing xmodmap (1.0.11-r1)
+(147/171) Installing xrdb (1.2.2-r0)
+(148/171) Installing xinit (1.4.4-r0)
+(149/171) Installing font-alias (1.0.6-r0)
+(150/171) Installing util-macros (1.20.2-r0)
+(151/171) Installing font-cursor-misc (1.0.4-r1)
+(152/171) Installing font-misc-misc (1.1.3-r1)
+(153/171) Installing llvm22-libs (22.1.3-r1)
+(154/171) Installing spirv-tools (1.4.341.0-r0)
+(155/171) Installing hwdata-pci (0.408-r0)
+(156/171) Installing libpciaccess (0.19-r0)
+(157/171) Installing libdrm (2.4.134-r0)
+(158/171) Installing libelf (0.195-r0)
+(159/171) Installing libxshmfence (1.3.3-r0)
+(160/171) Installing mesa (26.1.6-r0)
+(161/171) Installing mesa-gles (26.1.6-r0)
+(162/171) Installing mesa-gbm (26.1.6-r0)
+(163/171) Installing mesa-egl (26.1.6-r0)
+(164/171) Installing libxkbfile (1.2.0-r0)
+(165/171) Installing xkbcomp (1.5.0-r0)
+(166/171) Installing xorg-server-common (21.1.26-r0)
+(167/171) Installing libxxf86vm (1.1.7-r0)
+(168/171) Installing mesa-gl (26.1.6-r0)
+(169/171) Installing libxfont2 (2.0.8-r0)
+(170/171) Installing libxcvt (0.1.3-r0)
+(171/171) Installing xorg-server (21.1.26-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing fontconfig-2.17.1-r1.trigger
+Executing glib-2.88.1-r1.trigger
+Executing shared-mime-info-2.4-r7.trigger
+Executing gdk-pixbuf-2.44.7-r1.trigger
+Executing desktop-file-utils-0.28-r0.trigger
+Executing gtk+3.0-3.24.52-r0.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+Executing mkfontscale-1.2.4-r0.trigger
+Executing dbus-1.16.2-r2.trigger
+OK: 341.6 MiB in 171 packages
+
+Running `apk add --root /MutantLinux/rootfs --initdb --no-cache dbus xf86-input-evdev` at 2026-11-18 02:46:48
+apk-tools 3.0.9-r0, compiled for aarch64.
+(  1/293) Purging adwaita-icon-theme (50.0-r1)
+(  2/293) Purging font-dejavu (2.37-r6)
+(  3/293) Purging xf86-input-libinput (1.5.0-r0)
+(  4/293) Purging xf86-video-fbdev (0.5.0-r6)
+(  5/293) Purging xfce4-session (4.20.2-r0)
+(  6/293) Purging iceauth (1.0.11-r0)
+(  7/293) Purging dbus-x11 (1.16.2-r2)
+(  8/293) Purging xfce4-terminal (1.2.0-r0)
+(  9/293) Purging xfdesktop (4.20.1-r0)
+( 10/293) Purging xinit (1.4.4-r0)
+( 11/293) Purging xauth (1.1.5-r0)
+( 12/293) Purging mcookie (2.42.3-r1)
+( 13/293) Purging xmodmap (1.0.11-r1)
+( 14/293) Purging xrdb (1.2.2-r0)
+( 15/293) Purging xorg-server (21.1.26-r0)
+( 16/293) Purging font-cursor-misc (1.0.4-r1)
+( 17/293) Purging font-misc-misc (1.1.3-r1)
+( 18/293) Purging encodings (1.1.0-r0)
+( 19/293) Purging font-alias (1.0.6-r0)
+( 20/293) Purging mkfontscale (1.2.4-r0)
+( 21/293) Purging xkbcomp (1.5.0-r0)
+( 22/293) Purging xorg-server-common (21.1.26-r0)
+( 23/293) Purging yaml (0.2.5-r2)
+( 24/293) Installing alpine-baselayout-data (3.7.2-r1)
+  Installing file to etc/group.apk-new
+  Installing file to etc/passwd.apk-new
+  Installing file to etc/shadow.apk-new
+( 25/293) Installing alpine-baselayout (3.7.2-r1)
+  Executing alpine-baselayout-3.7.2-r1.pre-install
+  Executing alpine-baselayout-3.7.2-r1.post-install
+( 26/293) Installing alpine-keys (2.6-r0)
+( 27/293) Installing alpine-release (3.24.4-r0)
+  Installing file to etc/os-release.apk-new
+( 28/293) Installing libcrypto3 (3.5.9-r0)
+( 29/293) Installing libssl3 (3.5.9-r0)
+( 30/293) Installing ssl_client (1.37.0-r31)
+( 31/293) Installing libapk (3.0.9-r0)
+( 32/293) Installing ca-certificates-bundle (20261020-r0)
+( 33/293) Installing apk-tools (3.0.9-r0)
+( 34/293) Installing m4 (1.4.20-r1)
+( 35/293) Installing bison (3.8.2-r3)
+( 36/293) Installing jansson (2.15.0-r0)
+( 37/293) Installing binutils (2.45.1-r1)
+( 38/293) Installing libmagic (5.47-r2)
+( 39/293) Installing file (5.47-r2)
+( 40/293) Installing libgcc-static (15.2.0-r5)
+( 41/293) Installing libgomp (15.2.0-r5)
+( 42/293) Installing libatomic (15.2.0-r5)
+( 43/293) Installing isl26 (0.26-r2)
+( 44/293) Installing mpfr4 (4.2.2-r0)
+( 45/293) Installing mpc1 (1.3.1-r1)
+( 46/293) Installing gcc (15.2.0-r5)
+( 47/293) Installing libstdc++-dev (15.2.0-r5)
+( 48/293) Installing musl-dev (1.2.6-r3)
+( 49/293) Installing g++ (15.2.0-r5)
+( 50/293) Installing make (4.4.1-r4)
+( 51/293) Installing fortify-headers (3.0.1-r2)
+( 52/293) Installing patch (2.8.1-r0)
+( 53/293) Installing build-base (0.5-r4)
+( 54/293) Installing cpio (2.15-r0)
+( 55/293) Installing c-ares (1.34.9-r0)
+( 56/293) Installing nghttp2-libs (1.70.0-r0)
+( 57/293) Installing libpsl (0.21.5-r3)
+( 58/293) Installing libcurl (8.23.0-r0)
+( 59/293) Installing curl (8.23.0-r0)
+( 60/293) Installing dosfstools (4.2-r2)
+( 61/293) Installing musl-fts (1.2.7-r7)
+( 62/293) Installing libdw (0.195-r0)
+( 63/293) Installing libasm (0.195-r0)
+( 64/293) Installing json-c (0.18-r1)
+( 65/293) Installing libdebuginfod (0.195-r0)
+( 66/293) Installing xz (5.8.4-r0)
+( 67/293) Installing xz-dev (5.8.4-r0)
+( 68/293) Installing zstd (1.5.7-r2)
+( 69/293) Installing zstd-dev (1.5.7-r2)
+( 70/293) Installing zlib-dev (1.4-r0)
+( 71/293) Installing elfutils-dev (0.195-r0)
+( 72/293) Installing bzip2-dev (1.0.8-r6)
+( 73/293) Installing libxml2-utils (2.13.9-r2)
+( 74/293) Installing docbook-xml (4.5-r10)
+  Executing docbook-xml-4.5-r10.post-install
+( 75/293) Installing libxslt (1.1.43-r4)
+( 76/293) Installing docbook-xsl-ns (1.79.2-r13)
+  Executing docbook-xsl-ns-1.79.2-r13.post-install
+( 77/293) Installing docbook-xsl-nons (1.79.2-r13)
+  Executing docbook-xsl-nons-1.79.2-r13.post-install
+( 78/293) Installing docbook-xsl (1.79.2-r13)
+( 79/293) Installing gettext-asprintf (1.0-r0)
+( 80/293) Installing gettext-libs (1.0-r0)
+( 81/293) Installing gettext-envsubst (1.0-r0)
+( 82/293) Installing gettext (1.0-r0)
+( 83/293) Installing gettext-dev (1.0-r0)
+( 84/293) Installing gdbm (1.26-r0)
+( 85/293) Installing mpdecimal (4.0.1-r0)
+( 86/293) Installing libpanelw (6.6_p20260516-r0)
+( 87/293) Installing readline (8.3.3-r1)
+( 88/293) Installing sqlite-libs (3.53.4-r0)
+( 89/293) Installing python3 (3.14.10-r1)
+( 90/293) Installing python3-pycache-pyc0 (3.14.10-r1)
+( 91/293) Installing pyc (3.14.10-r1)
+( 92/293) Installing python3-pyc (3.14.10-r1)
+( 93/293) Installing py3-parsing (3.3.2-r1)
+( 94/293) Installing py3-parsing-pyc (3.3.2-r1)
+( 95/293) Installing py3-packaging (26.2-r0)
+( 96/293) Installing py3-packaging-pyc (26.2-r0)
+( 97/293) Installing linux-headers (7.0.0-r1)
+( 98/293) Installing libffi-dev (3.5.2-r1)
+( 99/293) Installing bsd-compat-headers (0.7.2-r6)
+(100/293) Installing libformw (6.6_p20260516-r0)
+(101/293) Installing libmenuw (6.6_p20260516-r0)
+(102/293) Installing libncurses++ (6.6_p20260516-r0)
+(103/293) Installing ncurses-dev (6.6_p20260516-r0)
+(104/293) Installing libedit (20260508.3.1-r1)
+(105/293) Installing libedit-dev (20260508.3.1-r1)
+(106/293) Installing libpcre2-16 (10.49-r0)
+(107/293) Installing libpcre2-32 (10.49-r0)
+(108/293) Installing pcre2-dev (10.49-r0)
+(109/293) Installing libfdisk (2.42.3-r1)
+(110/293) Installing linux-pam (1.7.1-r2)
+(111/293) Installing liblastlog2 (2.42.3-r1)
+(112/293) Installing libsmartcols (2.42.3-r1)
+(113/293) Installing sqlite (3.53.4-r0)
+(114/293) Installing sqlite-dev (3.53.4-r0)
+(115/293) Installing util-linux-dev (2.42.3-r1)
+(116/293) Installing glib-dev (2.88.1-r1)
+(117/293) Installing expat (2.10.0-r0)
+(118/293) Installing expat-dev (2.10.0-r0)
+(119/293) Installing brotli (1.2.1-r0)
+(120/293) Installing brotli-dev (1.2.1-r0)
+(121/293) Installing libpng-dev (1.6.59-r0)
+(122/293) Installing freetype-dev (2.14.3-r0)
+(123/293) Installing fontconfig-dev (2.17.1-r1)
+(124/293) Installing lcms2-plugins (2.19-r0)
+(125/293) Installing libjpeg-turbo (3.1.3-r0)
+(126/293) Installing libturbojpeg (3.1.3-r0)
+(127/293) Installing libjpeg-turbo-dev (3.1.3-r0)
+(128/293) Installing libsharpyuv (1.6.0-r0)
+(129/293) Installing libwebp (1.6.0-r0)
+(130/293) Installing tiff (4.7.2-r0)
+(131/293) Installing libtiffxx (4.7.2-r0)
+(132/293) Installing libwebpdecoder (1.6.0-r0)
+(133/293) Installing libwebpdemux (1.6.0-r0)
+(134/293) Installing libwebpmux (1.6.0-r0)
+(135/293) Installing libwebp-dev (1.6.0-r0)
+(136/293) Installing tiff-dev (4.7.2-r0)
+(137/293) Installing lcms2-dev (2.19-r0)
+(138/293) Installing libseccomp-dev (2.6.1-r0)
+(139/293) Installing libglycin-dev (2.1.5-r0)
+(140/293) Installing gdk-pixbuf-dev (2.44.7-r1)
+(141/293) Installing xorgproto (2025.1-r0)
+(142/293) Installing libxau-dev (1.0.12-r0)
+(143/293) Installing xcb-proto (1.17.0-r1)
+(144/293) Installing xcb-proto-pyc (1.17.0-r1)
+(145/293) Installing libxdmcp-dev (1.1.5-r1)
+(146/293) Installing libxcb-dev (1.17.0-r2)
+(147/293) Installing xtrans (1.6.0-r0)
+(148/293) Installing libx11-dev (1.8.14-r0)
+(149/293) Installing libpciaccess-dev (0.19-r0)
+(150/293) Installing libdrm-dev (2.4.134-r0)
+(151/293) Installing libxfixes-dev (6.0.2-r0)
+(152/293) Installing libxdamage-dev (1.1.7-r0)
+(153/293) Installing libxshmfence-dev (1.3.3-r0)
+(154/293) Installing clang22-headers (22.1.3-r2)
+(155/293) Installing libclc (22.1.3-r0)
+(156/293) Installing spirv-llvm-translator-libs (22.1.0-r0)
+(157/293) Installing clang22-libs (22.1.3-r2)
+(158/293) Installing mesa-rusticl (26.1.6-r0)
+(159/293) Installing libxext-dev (1.3.7-r0)
+(160/293) Installing libxxf86vm-dev (1.1.7-r0)
+(161/293) Installing mesa-dev (26.1.6-r0)
+(162/293) Installing libepoxy-dev (1.5.10-r1)
+(163/293) Installing libxi-dev (1.8.4-r0)
+(164/293) Installing libxinerama-dev (1.1.6-r0)
+(165/293) Installing libxkbcommon-x11 (1.13.1-r0)
+(166/293) Installing libxml2-dev (2.13.9-r2)
+(167/293) Installing libxkbcommon-dev (1.13.1-r0)
+(168/293) Installing wayland-protocols (1.48-r0)
+(169/293) Installing dbus-dev (1.16.2-r2)
+(170/293) Installing libxtst-dev (1.2.6-r0)
+(171/293) Installing at-spi2-core-dev (2.60.5-r0)
+(172/293) Installing cairo-tools (1.18.4-r1)
+(173/293) Installing pixman-dev (0.46.4-r0)
+(174/293) Installing libxrender-dev (0.9.13-r0)
+(175/293) Installing cairo-dev (1.18.4-r1)
+(176/293) Installing fribidi-dev (1.0.16-r3)
+(177/293) Installing pango-tools (1.57.1-r0)
+(178/293) Installing harfbuzz-cairo (13.2.1-r0)
+(179/293) Installing harfbuzz-gobject (13.2.1-r0)
+(180/293) Installing harfbuzz-icu (13.2.1-r0)
+(181/293) Installing harfbuzz-subset (13.2.1-r0)
+(182/293) Installing graphite2-dev (1.3.14-r6)
+(183/293) Installing icu (78.1-r0)
+(184/293) Installing icu-dev (78.1-r0)
+(185/293) Installing harfbuzz-dev (13.2.1-r0)
+(186/293) Installing libxft-dev (2.3.9-r0)
+(187/293) Installing pango-dev (1.57.1-r0)
+(188/293) Installing wayland-libs-server (1.25.0-r0)
+(189/293) Installing wayland-dev (1.25.0-r0)
+(190/293) Installing libxcomposite-dev (0.4.7-r0)
+(191/293) Installing libxcursor-dev (1.2.3-r0)
+(192/293) Installing libxrandr-dev (1.5.5-r0)
+(193/293) Installing gtk+3.0-dev (3.24.52-r0)
+(194/293) Installing libxfce4util-dev (4.20.1-r0)
+(195/293) Installing exo-dev (4.20.0-r0)
+(196/293) Installing flex (2.6.4-r8)
+(197/293) Installing libice-dev (1.1.2-r0)
+(198/293) Installing libsm-dev (1.2.6-r0)
+(199/293) Installing xcb-util-dev (0.4.1-r3)
+(200/293) Installing startup-notification-dev (0.12-r8)
+(201/293) Installing perl (5.42.3-r0)
+(202/293) Installing perl-class-inspector (1.36-r3)
+(203/293) Installing perl-file-sharedir (1.118-r1)
+(204/293) Installing perl-http-date (6.06-r0)
+(205/293) Installing perl-clone (0.50-r0)
+(206/293) Installing perl-mime-base32 (1.303-r3)
+(207/293) Installing perl-mime-base64 (3.16-r7)
+(208/293) Installing perl-uri (5.34-r0)
+(209/293) Installing perl-io-html (1.004-r1)
+(210/293) Installing perl-encode-locale (1.05-r5)
+(211/293) Installing perl-lwp-mediatypes (6.04-r3)
+(212/293) Installing perl-http-message (7.02-r0)
+(213/293) Installing perl-http-cookies (6.11-r0)
+(214/293) Installing perl-net-http (6.24-r0)
+(215/293) Installing perl-html-tagset (3.24-r0)
+(216/293) Installing perl-html-parser (3.85-r0)
+(217/293) Installing perl-file-listing (6.16-r0)
+(218/293) Installing perl-www-robotrules (6.02-r5)
+(219/293) Installing perl-http-negotiate (6.01-r5)
+(220/293) Installing perl-try-tiny (0.32-r0)
+(221/293) Installing perl-libwww (6.83-r0)
+(222/293) Installing perl-xml-parser (2.59-r0)
+(223/293) Installing intltool (0.51.0-r9)
+(224/293) Installing xfconf-dev (4.20.0-r2)
+(225/293) Installing libxfce4ui-dev (4.20.1-r1)
+(226/293) Installing garcon-dev (4.20.0-r0)
+(227/293) Installing kmod (34.2-r1)
+(228/293) Installing scanelf (1.3.9-r1)
+(229/293) Installing lddtree (1.27-r0)
+(230/293) Installing mdev-conf (4.10-r0)
+(231/293) Installing device-mapper-libs (2.03.35-r3)
+(232/293) Installing cryptsetup-libs (2.8.6-r0)
+(233/293) Installing kmod-libs (34.2-r1)
+(234/293) Installing mkinitfs (3.14.1-r0)
+  Executing mkinitfs-3.14.1-r0.post-install
+(235/293) Installing grub (2.14-r0)
+(236/293) Installing grub-efi (2.14-r0)
+(237/293) Installing less (702-r0)
+(238/293) Installing gzip (1.15-r0)
+(239/293) Installing libxres-dev (1.2.3-r0)
+(240/293) Installing libwnck3-dev (43.3-r0)
+(241/293) Installing libdisplay-info-dev (0.3.0-r0)
+(242/293) Installing libxfce4windowing-dev (4.20.6-r0)
+(243/293) Installing mtools (4.0.49-r0)
+(244/293) Installing musl-utils (1.2.6-r3)
+(245/293) Installing openssl-dev (3.5.9-r0)
+(246/293) Installing lzo (2.10-r5)
+(247/293) Installing squashfs-tools (4.7.5-r0)
+(248/293) Installing acl-libs (2.3.2-r1)
+(249/293) Installing tar (1.35-r5)
+(250/293) Installing xf86-input-evdev (2.11.0-r0)
+(251/293) Installing automake (1.18.1-r1)
+(252/293) Installing autoconf (2.73-r0)
+(253/293) Installing diffutils (3.12-r0)
+(254/293) Installing libltdl (2.6.0-r1)
+(255/293) Installing libtool (2.6.0-r1)
+(256/293) Installing py3-pygments (2.20.0-r0)
+(257/293) Installing py3-pygments-pyc (2.20.0-r0)
+(258/293) Installing gtk-doc (1.36.0-r1)
+(259/293) Installing samurai (1.2-r8)
+(260/293) Installing meson (1.11.1-r0)
+(261/293) Installing meson-pyc (1.11.1-r0)
+(262/293) Installing xfce4-dev-tools (4.20.0-r0)
+(263/293) Installing libburn (1.5.8-r0)
+(264/293) Installing libisofs (1.5.8-r0)
+(265/293) Installing libisoburn (1.5.8-r0)
+(266/293) Installing xorriso (1.5.8-r0)
+(267/293) Purging vte3 (0.84.0-r2)
+(268/293) Purging vte3-profile (0.84.0-r2)
+(269/293) Purging adwaita-fonts (50.0-r0)
+(270/293) Purging adwaita-fonts-sans (50.0-r0)
+(271/293) Purging adwaita-fonts-mono (50.0-r0)
+(272/293) Purging thunar (4.20.8-r0)
+(273/293) Purging exo (4.20.0-r0)
+(274/293) Purging gtk-update-icon-cache (3.24.52-r0)
+(275/293) Purging hicolor-icon-theme (0.18-r0)
+(276/293) Purging desktop-file-utils (0.28-r0)
+(277/293) Purging libxfce4panel (4.20.7-r0)
+(278/293) Purging gtk-layer-shell (0.10.1-r0)
+(279/293) Purging libexif (0.6.26-r0)
+(280/293) Purging libxfont2 (2.0.8-r0)
+(281/293) Purging libfontenc (1.1.9-r0)
+(282/293) Purging libgudev (238-r1)
+(283/293) Purging libinput-libs (1.31.3-r0)
+(284/293) Purging libnotify (0.8.8-r0)
+(285/293) Purging procps-ng (4.0.6-r0)
+(286/293) Purging libproc2 (4.0.6-r0)
+(287/293) Purging libutempter (1.2.3-r1)
+(288/293) Purging libxcvt (0.1.3-r0)
+(289/293) Purging libxkbfile (1.2.0-r0)
+(290/293) Purging libxmu (1.3.1-r0)
+(291/293) Purging libxt (1.3.1-r0)
+(292/293) Purging polkit-noelogind-libs (127-r2)
+(293/293) Purging simdutf (9.0.0-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing glib-2.88.1-r1.trigger
+Executing fontconfig-2.17.1-r1.trigger
+OK: 985.4 MiB in 364 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache gcompat` at 2026-11-18 03:24:02
+apk-tools 3.0.9-r0, compiled for aarch64.
+(1/3) Installing musl-obstack (1.2.3-r2)
+(2/3) Installing libucontext (1.5.1-r0)
+(3/3) Installing gcompat (1.1.0-r4)
+OK: 342.0 MiB in 174 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache curl ca-certificates` at 2026-11-18 04:53:45
+apk-tools 3.0.9-r0, compiled for aarch64.
+( 1/10) Installing libcrypto3 (3.5.9-r0)
+( 2/10) Installing ca-certificates (20261020-r0)
+( 3/10) Installing ca-certificates-bundle (20261020-r0)
+  Installing file to etc/ssl/cert.pem.apk-new
+  Installing file to etc/ssl1.1/cert.pem.apk-new
+  Installing file to etc/ssl1.1/certs.apk-new
+( 4/10) Installing c-ares (1.34.9-r0)
+( 5/10) Installing nghttp2-libs (1.70.0-r0)
+( 6/10) Installing libpsl (0.21.5-r3)
+( 7/10) Installing libssl3 (3.5.9-r0)
+( 8/10) Installing ssl_client (1.37.0-r31)
+( 9/10) Installing libcurl (8.23.0-r0)
+(10/10) Installing curl (8.23.0-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing ca-certificates-20261020-r0.trigger
+OK: 349.7 MiB in 184 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache xfce4-settings` at 2026-11-18 06:18:20
+apk-tools 3.0.9-r0, compiled for aarch64.
+(1/5) Installing libcolord (1.4.8-r4)
+(2/5) Installing upower (1.91.0-r2)
+(3/5) Installing iso-codes (4.20.1-r0)
+(4/5) Installing libxklavier (5.4-r8)
+(5/5) Installing xfce4-settings (4.20.4-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing desktop-file-utils-0.28-r0.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+Executing dbus-1.16.2-r2.trigger
+OK: 357.5 MiB in 189 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache adwaita-icon-theme hicolor-icon-theme` at 2026-11-18 06:50:12
+apk-tools 3.0.9-r0, compiled for aarch64.
+OK: 357.5 MiB in 189 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache xfwm4 libepoxy libxpresent` at 2026-11-18 06:57:58
+apk-tools 3.0.9-r0, compiled for aarch64.
+(1/2) Installing libxpresent (1.0.2-r0)
+(2/2) Installing xfwm4 (4.20.0-r1)
+Executing busybox-1.37.0-r31.trigger
+Executing desktop-file-utils-0.28-r0.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+OK: 358.9 MiB in 191 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache librsvg gvfs` at 2026-11-18 07:10:25
+apk-tools 3.0.9-r0, compiled for aarch64.
+(  1/104) Installing gsettings-desktop-schemas (50.1-r0)
+(  2/104) Installing libgpg-error (1.61-r0)
+(  3/104) Installing libgcrypt (1.12.2-r0)
+(  4/104) Installing gcr-base (3.41.2-r2)
+(  5/104) Installing gcr (3.41.2-r2)
+(  6/104) Installing libcap-ng (0.8.5-r2)
+(  7/104) Installing gnome-keyring (50.0-r0)
+(  8/104) Installing linux-pam (1.7.1-r2)
+(  9/104) Installing gnome-keyring-pam (50.0-r0)
+( 10/104) Installing libudfread (1.2.0-r1)
+( 11/104) Installing libbluray (1.4.0-r0)
+( 12/104) Installing gcr4-base (4.4.0.1-r1)
+( 13/104) Installing libfyaml (0.9.5-r1)
+( 14/104) Installing libxmlb (0.3.27-r0)
+( 15/104) Installing appstream (1.1.2-r0)
+  Executing appstream-1.1.2-r0.post-install
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.850: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.851: Metadata file '/usr/share/applications/xfce4-session-logout.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.851: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.851: Metadata file '/usr/share/applications/thunar-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.852: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.852: Metadata file '/usr/share/applications/thunar.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.853: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.853: Metadata file '/usr/share/applications/xfce4-terminal.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.853: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.854: Metadata file '/usr/share/applications/xfce-backdrop-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.854: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.854: Metadata file '/usr/share/applications/xfce4-terminal-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.854: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.855: Metadata file '/usr/share/applications/thunar-bulk-rename.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.855: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.855: Metadata file '/usr/share/applications/xfce-session-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.855: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.856: Metadata file '/usr/share/applications/xfwm4-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.856: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.856: Metadata file '/usr/share/applications/xfwm4-tweaks-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.856: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.857: Metadata file '/usr/share/applications/xfwm4-workspace-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.857: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.857: Metadata file '/usr/share/applications/panel-desktop-handler.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.858: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.858: Metadata file '/usr/share/applications/panel-preferences.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.858: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.858: Metadata file '/usr/share/applications/xfce4-about.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.859: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.859: Metadata file '/usr/share/applications/xfce-mouse-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.859: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.859: Metadata file '/usr/share/applications/xfce-settings-manager.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.859: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.860: Metadata file '/usr/share/applications/xfce-ui-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.860: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.860: Metadata file '/usr/share/applications/xfce-keyboard-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.860: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.861: Metadata file '/usr/share/applications/xfce4-mail-reader.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.861: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.861: Metadata file '/usr/share/applications/xfce4-color-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.861: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.862: Metadata file '/usr/share/applications/xfce4-file-manager.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.862: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.862: Metadata file '/usr/share/applications/xfce4-accessibility-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.863: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.863: Metadata file '/usr/share/applications/gcr-viewer.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.863: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.864: Metadata file '/usr/share/applications/gcr-prompter.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.864: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.864: Metadata file '/usr/share/applications/xfce-display-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.864: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.865: Metadata file '/usr/share/applications/xfce4-mime-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.865: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.865: Metadata file '/usr/share/applications/xfce4-terminal-emulator.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.865: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.866: Metadata file '/usr/share/applications/xfce4-web-browser.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.866: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.866: Metadata file '/usr/share/applications/xfce4-settings-editor.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.866: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.867: Metadata file '/usr/share/applications/xfce-wmtweaks-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.867: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.867: Metadata file '/usr/share/applications/xfce-wm-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.867: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.868: Metadata file '/usr/share/applications/xfce-workspaces-settings.desktop' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.871: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.871: Metadata file '/usr/share/metainfo/org.freedesktop.appstream.cli.metainfo.xml' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.871: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.871: Metadata file '/usr/share/metainfo/org.freedesktop.appstream.compose.metainfo.xml' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.872: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * 
+  * ** (appstreamcli:28748): WARNING **: 07:11:13.872: Metadata file '/usr/share/metainfo/org.xfce.thunar.appdata.xml' does not exist.
+  * 
+  * (appstreamcli:28748): GLib-GIO-CRITICAL **: 07:11:13.876: g_local_file_query_exists: faccessat doesn't support supplied flags
+  * Segmentation fault
+( 16/104) Installing graphene (1.10.8-r5)
+( 17/104) Installing tzdata (2026f-r0)
+( 18/104) Installing libxv (1.0.13-r0)
+( 19/104) Installing alsa-lib (1.2.15.3-r0)
+( 20/104) Installing cdparanoia-libs (10.2-r14)
+( 21/104) Installing gstreamer (1.28.3-r0)
+( 22/104) Installing gstreamer-ptp-helper (1.28.3-r0)
+( 23/104) Installing libogg (1.3.6-r0)
+( 24/104) Installing opus (1.6.1-r0)
+( 25/104) Installing orc (0.4.41-r0)
+( 26/104) Installing libtheora (1.2.0-r1)
+( 27/104) Installing libvorbis (1.3.7-r2)
+( 28/104) Installing gst-plugins-base (1.28.3-r0)
+( 29/104) Installing openexr-libiex (3.4.15-r0)
+( 30/104) Installing imath (3.2.2-r1)
+( 31/104) Installing openexr-libilmthread (3.4.15-r0)
+( 32/104) Installing libdeflate (1.25-r0)
+( 33/104) Installing openexr-libopenexrcore (3.4.15-r0)
+( 34/104) Installing openexr-libopenexr (3.4.15-r0)
+( 35/104) Installing libgomp (15.2.0-r5)
+( 36/104) Installing soundtouch (2.4.1-r0)
+( 37/104) Installing libSvtAv1Enc (4.1.0-r0)
+( 38/104) Installing aom-libs (3.14.1-r0)
+( 39/104) Installing libunibreak (6.1-r0)
+( 40/104) Installing libass (0.17.4-r1)
+( 41/104) Installing libraw1394 (2.1.2-r5)
+( 42/104) Installing libusb (1.0.30-r0)
+( 43/104) Installing libdc1394 (2.2.7-r0)
+( 44/104) Installing libde265 (1.1.3-r0)
+( 45/104) Installing tslib (1.24-r0)
+( 46/104) Installing directfb (1.7.7-r8)
+( 47/104) Installing libdvdcss (1.4.3-r0)
+( 48/104) Installing libdvdread (6.1.3-r2)
+( 49/104) Installing libdvdnav (6.1.1-r1)
+( 50/104) Installing faac (1.31.1-r0)
+( 51/104) Installing faad2-libs (2.11.2-r0)
+( 52/104) Installing fdk-aac (2.0.2-r4)
+( 53/104) Installing flite (2.2-r6)
+( 54/104) Installing libfreeaptx (0.2.2-r0)
+( 55/104) Installing gsm (1.0.23-r0)
+( 56/104) Installing libldac (2.0.2.3-r1)
+( 57/104) Installing libmodplug (0.8.9.0-r3)
+( 58/104) Installing neon (0.36.0-r0)
+( 59/104) Installing openal-soft-libs (1.25.2-r0)
+( 60/104) Installing openh264 (2.6.0-r0)
+( 61/104) Installing openjpeg (2.5.4-r2)
+( 62/104) Installing librtmp (2.4_git20190330-r5)
+( 63/104) Installing sbc (2.1-r0)
+( 64/104) Installing libflac (1.4.3-r2)
+( 65/104) Installing lame-libs (3.100-r5)
+( 66/104) Installing mpg123-libs (1.33.5-r0)
+( 67/104) Installing libsndfile (1.2.2-r2)
+( 68/104) Installing libjpeg-turbo (3.1.3-r0)
+( 69/104) Installing libsharpyuv (1.6.0-r0)
+( 70/104) Installing libwebp (1.6.0-r0)
+( 71/104) Installing tiff (4.7.2-r0)
+( 72/104) Installing spandsp (0.0.6-r5)
+( 73/104) Installing libsrt (1.5.3-r1)
+( 74/104) Installing libsrtp (2.7.0-r0)
+( 75/104) Installing libva (2.23.0-r0)
+( 76/104) Installing vo-aacenc (0.1.3-r3)
+( 77/104) Installing vo-amrwbenc (0.1.3-r3)
+( 78/104) Installing vulkan-loader (1.4.347-r0)
+( 79/104) Installing libwebpmux (1.6.0-r0)
+( 80/104) Installing numactl (2.0.19-r0)
+( 81/104) Installing x265-libs (4.1-r0)
+( 82/104) Installing libxkbcommon-x11 (1.13.1-r0)
+( 83/104) Installing libzbar (0.23.93-r2)
+( 84/104) Installing gst-plugins-bad (1.28.3-r0)
+( 85/104) Installing harfbuzz-subset (13.2.1-r0)
+( 86/104) Installing gtk4.0 (4.22.4-r0)
+( 87/104) Installing libadwaita (1.9.2-r0)
+( 88/104) Installing json-glib (1.10.8-r0)
+( 89/104) Installing keyutils-libs (1.6.3-r4)
+( 90/104) Installing krb5-conf (1.0-r2)
+( 91/104) Installing libcom_err (1.47.4-r0)
+( 92/104) Installing libverto (0.3.2-r2)
+( 93/104) Installing krb5-libs (1.22.3-r0)
+( 94/104) Installing duktape-libs (2.7.0-r3)
+( 95/104) Installing libproxy (0.5.12-r0)
+( 96/104) Installing glib-networking (2.80.1-r2)
+( 97/104) Installing sqlite-libs (3.53.4-r0)
+( 98/104) Installing libsoup3 (3.6.6-r0)
+( 99/104) Installing rest1 (0.9.1-r1)
+(100/104) Installing libsecret (0.21.7-r0)
+(101/104) Installing gnome-online-accounts (3.58.1-r0)
+(102/104) Installing msgraph (0.3.4-r0)
+(103/104) Installing udisks2-libs (2.11.0-r2)
+(104/104) Installing gvfs (1.60.1-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing glib-2.88.1-r1.trigger
+Executing shared-mime-info-2.4-r7.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+Executing gvfs-1.60.1-r0.trigger
+Executing desktop-file-utils-0.28-r0.trigger
+OK: 492.6 MiB in 295 packages
+
+Running `apk del --root /MutantLinux/rootfs glycin-loaders` at 2026-11-18 07:14:41
+apk-tools 3.0.9-r0, compiled for aarch64.
+OK: 492.6 MiB in 295 packages
+
+Running `apk del --root /MutantLinux/rootfs glycin-loaders` at 2026-11-18 07:15:51
+apk-tools 3.0.9-r0, compiled for aarch64.
+OK: 492.6 MiB in 295 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache xfwm4-themes` at 2026-11-18 07:27:33
+apk-tools 3.0.9-r0, compiled for aarch64.
+(1/1) Installing xfwm4-themes (4.10.0-r1)
+OK: 496.0 MiB in 296 packages
+
+Running `apk del --root /MutantLinux/rootfs xfce4-session xfce4-panel xfce4-settings xfdesktop xfwm4 thunar` at 2026-11-18 07:40:19
+apk-tools 3.0.9-r0, compiled for aarch64.
+World updated, but the following packages are not removed due to:
+  xfwm4: xfwm4-themes
+( 1/25) Purging dbus-daemon-launch-helper (1.16.2-r2)
+( 2/25) Purging xfce4-session (4.20.2-r0)
+( 3/25) Purging iceauth (1.0.11-r0)
+( 4/25) Purging dbus-x11 (1.16.2-r2)
+( 5/25) Purging dbus (1.16.2-r2)
+( 6/25) Purging xfce4-settings (4.20.4-r0)
+( 7/25) Purging xfdesktop (4.20.1-r0)
+( 8/25) Purging yaml (0.2.5-r2)
+( 9/25) Purging thunar (4.20.8-r0)
+(10/25) Purging exo (4.20.0-r0)
+(11/25) Purging desktop-file-utils (0.28-r0)
+(12/25) Purging exo-libs (4.20.0-r0)
+(13/25) Purging garcon (4.20.0-r0)
+(14/25) Purging libcolord (1.4.8-r4)
+(15/25) Purging libxfce4windowing (4.20.6-r0)
+(16/25) Purging libdisplay-info (0.3.0-r0)
+(17/25) Purging libexif (0.6.26-r0)
+(18/25) Purging procps-ng (4.0.6-r0)
+(19/25) Purging libncursesw (6.6_p20260516-r0)
+(20/25) Purging ncurses-terminfo-base (6.6_p20260516-r0)
+(21/25) Purging libnotify (0.8.8-r0)
+(22/25) Purging libproc2 (4.0.6-r0)
+(23/25) Purging libxfce4panel (4.20.7-r0)
+(24/25) Purging libxklavier (5.4-r8)
+(25/25) Purging upower (1.91.0-r2)
+Executing busybox-1.37.0-r31.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+OK: 481.2 MiB in 271 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache openbox lxpanel pcmanfm lxterminal lxsession lxappearance adwaita-icon-theme ttf-dejavu` at 2026-11-18 07:40:22
+apk-tools 3.0.9-r0, compiled for aarch64.
+ERROR: unable to select packages:
+  lxappearance (no such package):
+    required by: world[lxappearance]
+  lxpanel (no such package):
+    required by: world[lxpanel]
+
+Running `apk add --root /MutantLinux/rootfs --no-cache openbox tint2 pcmanfm lxterminal dbus adwaita-icon-theme ttf-dejavu` at 2026-11-18 07:41:01
+apk-tools 3.0.9-r0, compiled for aarch64.
+( 1/24) Installing dbus (1.16.2-r2)
+  Executing dbus-1.16.2-r2.pre-install
+  Executing dbus-1.16.2-r2.post-install
+( 2/24) Installing dbus-daemon-launch-helper (1.16.2-r2)
+( 3/24) Installing lxterminal (0.4.0-r2)
+( 4/24) Installing giflib (5.2.2-r2)
+( 5/24) Installing libheif-dav1d (1.23.7-r0)
+( 6/24) Installing libheif-libde265 (1.23.7-r0)
+( 7/24) Installing libheif (1.23.7-r0)
+  Executing libheif-1.23.7-r0.post-install
+  * 
+  * libheif installs only basic HEIC/HEVC and AVIF/AV1 *decoders* by default.
+  * If you want to encode (edit) HEIC and AVIF images, you may need to install
+  * libheif-x265 and libheif-rav1e (or libheif-aom), respectively. You can also
+  * install libheif-plugins-all to get all encoders and decoders.
+  * 
+( 8/24) Installing libheif-jpeg (1.23.7-r0)
+( 9/24) Installing libheif-svtenc (1.23.7-r0)
+(10/24) Installing libheif-aom (1.23.7-r0)
+(11/24) Installing libheif-openjpeg (1.23.7-r0)
+(12/24) Installing libheif-x265 (1.23.7-r0)
+(13/24) Installing libheif-openh264 (1.23.7-r0)
+(14/24) Installing libid3tag (0.16.3-r0)
+(15/24) Installing libwebpdemux (1.6.0-r0)
+(16/24) Installing imlib2 (1.12.6-r0)
+(17/24) Installing openbox-libs (3.6.1-r8)
+(18/24) Installing openbox (3.6.1-r8)
+(19/24) Installing libexif (0.6.26-r0)
+(20/24) Installing libfm-extra (1.3.2-r1)
+(21/24) Installing menu-cache (1.1.0-r1)
+(22/24) Installing libfm (1.4.0-r0)
+(23/24) Installing pcmanfm (1.3.2-r2)
+(24/24) Installing tint2 (17.1.3-r1)
+Executing busybox-1.37.0-r31.trigger
+Executing shared-mime-info-2.4-r7.trigger
+Executing dbus-1.16.2-r2.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+OK: 491.2 MiB in 295 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache shared-mime-info gvfs` at 2026-11-18 07:56:51
+apk-tools 3.0.9-r0, compiled for aarch64.
+OK: 491.2 MiB in 295 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache mesa-dri-gallium mesa-egl mesa-gl xf86-video-fbdev xf86-video-nouveau xf86-video-amdgpu xf86-video-ati libdrm eudev` at 2026-11-18 08:13:02
+apk-tools 3.0.9-r0, compiled for aarch64.
+(1/8) Installing udev-init-scripts (35-r1)
+(2/8) Installing kmod-libs (34.2-r1)
+(3/8) Installing eudev (3.2.14-r6)
+(4/8) Installing mesa-dri-gallium (26.1.6-r0)
+(5/8) Installing libinput-udev (1.31.3-r0)
+(6/8) Installing xf86-video-amdgpu (23.0.0-r3)
+(7/8) Installing xf86-video-ati (22.0.0-r3)
+(8/8) Installing xf86-video-nouveau (1.0.18-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing eudev-3.2.14-r6.trigger
+OK: 493.4 MiB in 303 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache alsa-utils alsa-plugins-pulse pipewire wireplumber pipewire-pulse pavucontrol` at 2026-11-18 09:37:50
+apk-tools 3.0.9-r0, compiled for aarch64.
+( 1/49) Installing libasyncns (0.8-r5)
+( 2/49) Installing libltdl (2.6.0-r1)
+( 3/49) Installing soxr (0.1.3-r7)
+( 4/49) Installing speexdsp (1.2.1-r2)
+( 5/49) Installing tdb-libs (1.4.15-r1)
+( 6/49) Installing libpulse (17.0-r7)
+( 7/49) Installing alsa-plugins-pulse (1.2.12-r2)
+( 8/49) Installing ncurses-terminfo-base (6.6_p20260516-r0)
+  Installing file to etc/terminfo/v/vt200.apk-new
+( 9/49) Installing libncursesw (6.6_p20260516-r0)
+(10/49) Installing dialog (1.3.20260107-r1)
+(11/49) Installing alsa-ucm-conf (1.2.16.1-r0)
+(12/49) Installing fftw-single-libs (3.3.11-r0)
+(13/49) Installing libformw (6.6_p20260516-r0)
+(14/49) Installing libmenuw (6.6_p20260516-r0)
+(15/49) Installing libpanelw (6.6_p20260516-r0)
+(16/49) Installing alsa-utils (1.2.15.2-r1)
+(17/49) Installing alsa-utils-udev (1.2.15.2-r1)
+(18/49) Installing sound-theme-freedesktop (0.8-r2)
+(19/49) Installing libcanberra (0.30-r12)
+(20/49) Installing libcanberra-gstreamer (0.30-r12)
+(21/49) Installing libsigc++3 (3.8.1-r0)
+(22/49) Installing glibmm (2.86.0-r0)
+(23/49) Installing cairomm (1.18.1-r0)
+(24/49) Installing pangomm (2.56.1-r0)
+(25/49) Installing gtkmm4 (4.22.0-r0)
+(26/49) Installing libpulse-mainloop-glib (17.0-r7)
+(27/49) Installing pavucontrol (6.2-r0)
+(28/49) Installing libpisp (1.5.0-r0)
+(29/49) Installing libcamera-ipa (0.7.1-r1)
+(30/49) Installing libunwind (1.8.3-r0)
+(31/49) Installing yaml (0.2.5-r2)
+(32/49) Installing libyuv (0.0.1928-r0)
+(33/49) Installing libcamera (0.7.1-r1)
+(34/49) Installing libuv (1.52.1-r0)
+(35/49) Installing roc-toolkit-libs (0.4.0-r1)
+(36/49) Installing abseil-cpp-raw-logging-internal (20250814.1-r0)
+(37/49) Installing abseil-cpp-strings-internal (20250814.1-r0)
+(38/49) Installing abseil-cpp-strings (20250814.1-r0)
+(39/49) Installing webrtc-audio-processing-2 (2.1-r1)
+(40/49) Installing pipewire-libs (1.6.8-r4)
+(41/49) Installing pipewire (1.6.8-r4)
+  Executing pipewire-1.6.8-r4.post-install
+  * 
+  * The /usr/libexec/pipewire-launcher script will be removed in the future to replace it with OpenRC user-services.
+  * 
+(42/49) Installing pipewire-udev (1.6.8-r4)
+(43/49) Installing lua5.4-libs (5.4.8-r0)
+(44/49) Installing wireplumber-libs (0.5.15-r0)
+(45/49) Installing wireplumber (0.5.15-r0)
+(46/49) Installing gst-plugin-pipewire (1.6.8-r4)
+(47/49) Installing pulseaudio-utils (17.0-r7)
+(48/49) Installing pipewire-pulse (1.6.8-r4)
+(49/49) Installing libcanberra-pulse (0.30-r12)
+Executing busybox-1.37.0-r31.trigger
+Executing eudev-3.2.14-r6.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+OK: 533.4 MiB in 352 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache xterm` at 2026-11-18 10:24:00
+apk-tools 3.0.9-r0, compiled for aarch64.
+(1/3) Installing libxpm (3.5.20-r0)
+(2/3) Installing libxaw (1.0.16-r1)
+(3/3) Installing xterm (410-r0)
+Executing busybox-1.37.0-r31.trigger
+OK: 534.8 MiB in 355 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache breeze-icons` at 2026-11-18 10:25:16
+apk-tools 3.0.9-r0, compiled for aarch64.
+( 1/17) Installing libb2 (0.98.1-r3)
+( 2/17) Installing double-conversion (3.4.0-r0)
+( 3/17) Installing libpcre2-16 (10.49-r0)
+( 4/17) Installing qt6-qtbase (6.11.1-r0)
+( 5/17) Installing libmagic (5.47-r2)
+( 6/17) Installing file (5.47-r2)
+( 7/17) Installing xprop (1.2.8-r0)
+( 8/17) Installing xset (1.2.5-r1)
+( 9/17) Installing xdg-utils (1.2.1-r1)
+(10/17) Installing qt6-qtbase-wayland (6.11.1-r0)
+(11/17) Installing xcb-util-image (0.4.1-r0)
+(12/17) Installing xcb-util-renderutil (0.3.10-r0)
+(13/17) Installing xcb-util-cursor (0.1.5-r0)
+(14/17) Installing xcb-util-wm (0.4.2-r0)
+(15/17) Installing xcb-util-keysyms (0.4.1-r0)
+(16/17) Installing qt6-qtbase-x11 (6.11.1-r0)
+(17/17) Installing breeze-icons (6.26.0-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+OK: 669.3 MiB in 372 packages
+
+Running `apk add --root /MutantLinux/rootfs --no-cache plasma-desktop konsole dolphin breeze-icons breeze qt6-qtwayland` at 2026-11-18 10:30:08
+apk-tools 3.0.9-r0, compiled for aarch64.
+(  1/328) Purging icu-data-en (78.1-r0)
+(  2/328) Installing icu-data-full (78.1-r0)
+(  3/328) Installing qt5-qtbase (5.15.18_git20251101-r0)
+(  4/328) Installing qt5-qtbase-x11 (5.15.18_git20251101-r0)
+(  5/328) Installing qt5-qtdeclarative (5.15.18_git20251107-r0)
+(  6/328) Installing kconfig5 (5.116.0-r1)
+(  7/328) Installing kcoreaddons5 (5.116.0-r1)
+(  8/328) Installing polkit-qt5 (0.201.1-r1)
+(  9/328) Installing kauth5 (5.116.0-r0)
+( 10/328) Installing kcodecs5 (5.116.0-r0)
+( 11/328) Installing wayland-libs-server (1.25.0-r0)
+( 12/328) Installing qt5-qtwayland (5.15.18_git20251101-r0)
+( 13/328) Installing qt5-qtx11extras (5.15.18_git20250330-r0)
+( 14/328) Installing kguiaddons5 (5.116.0-r0)
+( 15/328) Installing ki18n5 (5.116.0-r1)
+( 16/328) Installing kwidgetsaddons5 (5.116.0-r0)
+( 17/328) Installing kconfigwidgets5 (5.116.0-r0)
+( 18/328) Installing karchive5 (5.116.0-r0)
+( 19/328) Installing qt5-qtsvg (5.15.18_git20251101-r0)
+( 20/328) Installing kiconthemes5 (5.116.0-r0)
+( 21/328) Installing qt5-qtgraphicaleffects (5.15.18_git20250330-r0)
+( 22/328) Installing qt5-qtquickcontrols2 (5.15.18_git20251101-r0)
+( 23/328) Installing kirigami2-libs (5.116.0-r1)
+( 24/328) Installing kirigami2 (5.116.0-r1)
+( 25/328) Installing attica5 (5.116.0-r0)
+( 26/328) Installing kcompletion5 (5.116.0-r0)
+( 27/328) Installing kitemviews5 (5.116.0-r0)
+( 28/328) Installing kjobwidgets5 (5.116.0-r0)
+( 29/328) Installing kcrash5 (5.116.0-r0)
+( 30/328) Installing kdbusaddons5 (5.116.0-r0)
+( 31/328) Installing kwindowsystem5 (5.116.0-r0)
+( 32/328) Installing kglobalaccel5 (5.116.0-r0)
+( 33/328) Installing kxmlgui5 (5.116.0-r0)
+( 34/328) Installing kbookmarks5 (5.116.0-r0)
+( 35/328) Installing libxml2-utils (2.13.9-r2)
+( 36/328) Installing docbook-xml (4.5-r10)
+  Executing docbook-xml-4.5-r10.post-install
+( 37/328) Installing libxslt (1.1.43-r4)
+( 38/328) Installing docbook-xsl-ns (1.79.2-r13)
+  Executing docbook-xsl-ns-1.79.2-r13.post-install
+( 39/328) Installing docbook-xsl-nons (1.79.2-r13)
+  Executing docbook-xsl-nons-1.79.2-r13.post-install
+( 40/328) Installing docbook-xsl (1.79.2-r13)
+( 41/328) Installing kdoctools5 (5.116.0-r0)
+( 42/328) Installing knotifications5 (5.116.0-r2)
+( 43/328) Installing kservice5 (5.116.0-r0)
+( 44/328) Installing solid5-libs (5.116.0-r0)
+( 45/328) Installing libhunspell (1.7.3-r0)
+( 46/328) Installing readline (8.3.3-r1)
+( 47/328) Installing hunspell (1.7.3-r0)
+( 48/328) Installing sonnet5 (5.116.0-r0)
+( 49/328) Installing ktextwidgets5 (5.116.0-r1)
+( 50/328) Installing kio5 (5.116.0-r0)
+( 51/328) Installing kpackage5 (5.116.0-r0)
+( 52/328) Installing syndication5 (5.116.0-r0)
+( 53/328) Installing knewstuff5 (5.116.0-r0)
+( 54/328) Installing frameworkintegration5 (5.116.0-r0)
+( 55/328) Installing qt6-qtsvg (6.11.1-r0)
+( 56/328) Installing qt6-qtdeclarative (6.11.1-r0)
+( 57/328) Installing qt6-qtwayland (6.11.1-r0)
+( 58/328) Installing kconfig (6.26.0-r0)
+( 59/328) Installing kguiaddons (6.26.0-r0)
+( 60/328) Installing iso-codes-lang (4.20.1-r0)
+( 61/328) Installing ki18n (6.26.0-r0)
+( 62/328) Installing kcolorscheme (6.26.0-r0)
+( 63/328) Installing kcoreaddons (6.26.0-r0)
+( 64/328) Installing kde-default-icon-theme (6.26.0-r0)
+( 65/328) Installing karchive (6.26.0-r0)
+( 66/328) Installing kwidgetsaddons (6.26.0-r0)
+( 67/328) Installing kiconthemes (6.26.0-r0)
+( 68/328) Installing kcodecs (6.26.0-r0)
+( 69/328) Installing kconfigwidgets (6.26.0-r0)
+( 70/328) Installing kitemviews (6.26.0-r0)
+( 71/328) Installing kcrash (6.26.0-r0)
+( 72/328) Installing kdbusaddons (6.26.0-r0)
+( 73/328) Installing kservice (6.26.0-r0)
+( 74/328) Installing kded (6.26.0-r0)
+( 75/328) Installing kbookmarks (6.26.0-r0)
+( 76/328) Installing kcompletion (6.26.0-r0)
+( 77/328) Installing kdoctools (6.26.0-r0)
+( 78/328) Installing knotifications (6.26.0-r0)
+( 79/328) Installing kjobwidgets (6.26.0-r0)
+( 80/328) Installing libplist (2.7.0-r1)
+( 81/328) Installing libimobiledevice-glue (1.3.2-r0)
+( 82/328) Installing libusbmuxd (2.1.1-r0)
+( 83/328) Installing libimobiledevice (1.4.0-r0)
+( 84/328) Installing solid-libs (6.26.0-r0)
+( 85/328) Installing kwindowsystem (6.26.0-r0)
+( 86/328) Installing kio (6.26.0-r0)
+( 87/328) Installing kglobalaccel (6.26.0-r0)
+( 88/328) Installing kxmlgui (6.26.0-r0)
+( 89/328) Installing kcmutils (6.26.0-r0)
+( 90/328) Installing kirigami-libs (6.26.0-r0)
+( 91/328) Installing kirigami (6.26.0-r0)
+( 92/328) Installing sonnet (6.26.0-r0)
+( 93/328) Installing qqc2-desktop-style (6.26.0-r0)
+( 94/328) Installing attica (6.26.0-r0)
+( 95/328) Installing kpackage (6.26.0-r0)
+( 96/328) Installing syndication (6.26.0-r0)
+( 97/328) Installing knewstuff (6.26.0-r0)
+( 98/328) Installing frameworkintegration (6.26.0-r0)
+( 99/328) Installing kdecoration (6.6.6-r0)
+(100/328) Installing breeze (6.6.6-r0)
+(101/328) Installing breeze-cursors (6.6.6-r0)
+(102/328) Installing breeze-wallpapers (6.6.6-r0)
+(103/328) Installing acl-libs (2.3.2-r1)
+(104/328) Installing libatasmart (0.19-r4)
+(105/328) Installing mpfr4 (4.2.2-r0)
+(106/328) Installing libbytesize (2.12-r1)
+(107/328) Installing device-mapper-libs (2.03.35-r3)
+(108/328) Installing json-c (0.18-r1)
+(109/328) Installing cryptsetup-libs (2.8.6-r0)
+(110/328) Installing e2fsprogs-libs (1.47.4-r0)
+(111/328) Installing libfdisk (2.42.3-r1)
+(112/328) Installing ndctl-libs (80-r1)
+(113/328) Installing nspr (4.38.2-r0)
+(114/328) Installing nss (3.133-r0)
+(115/328) Installing libnvme (1.16.2-r0)
+(116/328) Installing parted (3.7-r0)
+(117/328) Installing libassuan (3.0.2-r0)
+(118/328) Installing pinentry (1.3.2-r0)
+  Executing pinentry-1.3.2-r0.post-install
+(119/328) Installing gnupg-gpgconf (2.4.9-r1)
+(120/328) Installing libksba (1.7.0-r0)
+(121/328) Installing gdbm (1.26-r0)
+(122/328) Installing libsasl (2.1.28-r9)
+(123/328) Installing libldap (2.6.15-r0)
+(124/328) Installing npth (1.8-r0)
+(125/328) Installing gnupg-dirmngr (2.4.9-r1)
+(126/328) Installing gnupg-keyboxd (2.4.9-r1)
+(127/328) Installing gpg (2.4.9-r1)
+(128/328) Installing gpg-agent (2.4.9-r1)
+(129/328) Installing gpgsm (2.4.9-r1)
+(130/328) Installing gpgme (2.0.1-r1)
+(131/328) Installing volume_key (0.3.12-r9)
+(132/328) Installing libblockdev (3.4.0-r1)
+(133/328) Installing udisks2 (2.11.0-r2)
+(134/328) Installing kdsoap (2.3.0-r0)
+(135/328) Installing kdsoap-ws-discovery-client (0.4.0-r0)
+(136/328) Installing inih (62-r0)
+(137/328) Installing inih-inireader (62-r0)
+(138/328) Installing exiv2-libs (0.28.9-r0)
+(139/328) Installing libkexiv2 (26.04.2-r0)
+(140/328) Installing libdaemon (0.14-r6)
+(141/328) Installing libevent (2.1.13-r0)
+(142/328) Installing avahi (0.9_rc4-r0)
+  Executing avahi-0.9_rc4-r0.pre-install
+(143/328) Installing kdnssd (6.26.0-r0)
+(144/328) Installing syntax-highlighting (6.26.0-r0)
+(145/328) Installing plasma-activities-libs (6.6.6-r0)
+(146/328) Installing plasma-activities-stats (6.6.6-r0)
+(147/328) Installing libmtp (1.1.22-r1)
+(148/328) Installing talloc (2.4.4-r1)
+(149/328) Installing tevent (0.17.1-r1)
+(150/328) Installing samba-util-libs (4.23.8-r0)
+(151/328) Installing lmdb (0.9.35-r0)
+(152/328) Installing ldb (4.23.8-r0)
+(153/328) Installing libwbclient (4.23.8-r0)
+(154/328) Installing libauth-samba (4.23.8-r0)
+(155/328) Installing samba-client-libs (4.23.8-r0)
+(156/328) Installing jansson (2.15.0-r0)
+(157/328) Installing popt (1.19-r4)
+(158/328) Installing samba-libs (4.23.8-r0)
+(159/328) Installing libsmbclient (4.23.8-r0)
+(160/328) Installing libssh (0.12.2-r0)
+(161/328) Installing libtag (2.2.1-r0)
+(162/328) Installing kio-extras (26.04.2-r0)
+(163/328) Installing libvdpau (1.5-r4)
+(164/328) Installing ffmpeg-libavutil (8.1.3-r0)
+(165/328) Installing libhwy (1.3.0-r0)
+(166/328) Installing libjxl (0.11.2-r1)
+(167/328) Installing rav1e-libs (0.8.1-r0)
+(168/328) Installing ffmpeg-libswresample (8.1.3-r0)
+(169/328) Installing libvpx (1.15.2-r1)
+(170/328) Installing x264-libs (0.164.3108-r1)
+(171/328) Installing xvidcore (1.3.7-r2)
+(172/328) Installing ffmpeg-libavcodec (8.1.3-r0)
+(173/328) Installing libopenmpt (0.8.10-r0)
+(174/328) Installing cjson (1.7.19-r1)
+(175/328) Installing mbedtls3 (3.6.8-r0)
+(176/328) Installing librist (0.2.15-r0)
+(177/328) Installing libsodium (1.0.22-r0)
+(178/328) Installing libzmq (4.3.5-r2)
+(179/328) Installing ffmpeg-libavformat (8.1.3-r0)
+(180/328) Installing kfilemetadata (6.26.0-r0)
+(181/328) Installing baloo-libs (6.26.0-r0)
+(182/328) Installing baloo-widgets (26.04.2-r0)
+(183/328) Installing kparts (6.26.0-r0)
+(184/328) Installing qt6-qtmultimedia (6.11.1-r0)
+(185/328) Installing glslang-libs (1.4.341.0-r0)
+(186/328) Installing shaderc (2026.1-r0)
+(187/328) Installing ffmpeg-libswscale (8.1.3-r0)
+(188/328) Installing qt6-qtmultimedia-ffmpeg (6.11.1-r0)
+(189/328) Installing qt6-qtspeech (6.11.1-r0)
+(190/328) Installing ktextwidgets (6.26.0-r0)
+(191/328) Installing kuserfeedback (6.26.0-r0)
+(192/328) Installing musl-fts (1.2.7-r7)
+(193/328) Installing dolphin (26.04.2-r0)
+(194/328) Installing device-mapper (2.03.35-r3)
+(195/328) Installing device-mapper-udev (2.03.35-r3)
+  Executing device-mapper-udev-2.03.35-r3.post-install
+(196/328) Installing libmtp-udev (1.1.22-r1)
+(197/328) Installing knotifyconfig (6.26.0-r0)
+(198/328) Installing kpty (6.26.0-r0)
+(199/328) Installing konsole (26.04.2-r0)
+(200/328) Installing libheif-ffmpeg (1.23.7-r0)
+(201/328) Installing libheif-x264 (1.23.7-r0)
+(202/328) Installing libheif-rav1e (1.23.7-r0)
+(203/328) Installing accountsservice (23.13.9-r3)
+(204/328) Installing font-noto-emoji (2.051-r0)
+(205/328) Installing kirigami-addons (1.12.0-r0)
+(206/328) Installing libgusb (0.4.9-r1)
+(207/328) Installing libfprint (1.94.9-r1)
+(208/328) Installing libfprint-udev (1.94.9-r1)
+(209/328) Installing fprintd (1.94.5-r1)
+(210/328) Installing basu (0.2.1-r2)
+(211/328) Installing fprintd-pam (1.94.5-r1)
+(212/328) Installing qt6-qtbase-sqlite (6.11.1-r0)
+(213/328) Installing kactivitymanagerd (6.6.6-r0)
+(214/328) Installing kdesu (6.26.0-r0)
+(215/328) Installing kde-cli-tools (6.6.6-r0)
+(216/328) Installing ksvg (6.26.0-r0)
+(217/328) Installing qt6-qttools-libs (6.11.1-r0)
+(218/328) Installing aurorae (6.6.6-r0)
+(219/328) Installing hwdata-usb (0.408-r0)
+(220/328) Installing hwdata-pnp (0.408-r0)
+(221/328) Installing hwdata-net (0.408-r0)
+(222/328) Installing hwdata (0.408-r0)
+(223/328) Installing eudev-hwids (3.2.14-r6)
+(224/328) Installing libtirpc-conf (1.3.5-r1)
+(225/328) Installing libtirpc-nokrb (1.3.5-r1)
+(226/328) Installing xwayland (24.1.15-r0)
+(227/328) Installing polkit-qt6 (0.201.1-r1)
+(228/328) Installing kauth (6.26.0-r0)
+(229/328) Installing kidletime (6.26.0-r0)
+(230/328) Installing kglobalacceld (6.6.6-r0)
+(231/328) Installing kholidays (6.26.0-r0)
+(232/328) Installing qt6-qtpositioning (6.11.1-r0)
+(233/328) Installing knighttime (6.6.6-r0)
+(234/328) Installing shadow (4.18.0-r1)
+(235/328) Installing elogind-common (255.24-r0)
+(236/328) Installing busctl (255.24-r0)
+(237/328) Installing elogind (255.24-r0)
+(238/328) Installing libkscreen (6.6.6-r0)
+(239/328) Installing layer-shell-qt (6.6.6-r0)
+(240/328) Installing libplasma (6.6.6-r0)
+(241/328) Installing kscreenlocker (6.6.6-r0)
+(242/328) Installing kwayland (6.6.6-r0)
+(243/328) Installing libdisplay-info (0.3.0-r0)
+(244/328) Installing libeis (1.5.0-r0)
+(245/328) Installing libelogind (255.24-r0)
+(246/328) Installing libqaccessibilityclient (0.6.0-r0)
+(247/328) Installing kwin (6.6.6-r0)
+(248/328) Installing kitemmodels (6.26.0-r0)
+(249/328) Installing krunner (6.26.0-r0)
+(250/328) Installing milou (6.6.6-r0)
+(251/328) Installing font-hack (3.003-r5)
+(252/328) Installing font-noto-common (2026.11.01-r0)
+(253/328) Installing font-noto-math (2026.11.01-r0)
+(254/328) Installing font-noto-symbols (2026.11.01-r0)
+(255/328) Installing font-noto (2026.11.01-r0)
+(256/328) Installing qqc2-breeze-style (6.6.6-r0)
+(257/328) Installing xdg-desktop-portal (1.21.2-r0)
+(258/328) Installing fuse-common (3.18.3-r0)
+(259/328) Installing fuse3-libs (3.18.3-r0)
+(260/328) Installing fuse3 (3.18.3-r0)
+(261/328) Installing fuse3-udev (3.18.3-r0)
+(262/328) Installing xdg-document-portal (1.21.2-r0)
+(263/328) Installing kstatusnotifieritem (6.26.0-r0)
+(264/328) Installing xdg-desktop-portal-kde (6.6.6-r0)
+(265/328) Installing plasma-integration (6.6.6-r0)
+(266/328) Installing llvm21-libs (21.1.8-r1)
+(267/328) Installing clang21-libs (21.1.8-r3)
+(268/328) Installing clang21-headers (21.1.8-r3)
+(269/328) Installing clang21-libclang (21.1.8-r3)
+(270/328) Installing qt6-qttools (6.11.1-r0)
+(271/328) Installing libgnome-desktop-3 (44.5-r0)
+(272/328) Installing xdg-desktop-portal-gtk (1.15.3-r1)
+(273/328) Installing appstream-qt (1.1.2-r0)
+(274/328) Installing kdeclarative (6.26.0-r0)
+(275/328) Installing libnm (1.52.2-r0)
+(276/328) Installing libndp (1.9-r1)
+(277/328) Installing networkmanager (1.52.2-r0)
+  Executing networkmanager-1.52.2-r0.pre-install
+  Executing networkmanager-1.52.2-r0.post-install
+  * 
+  * To modify system network connections without the root password, add your user
+  * account to the 'plugdev' group.
+  * 
+  * If you use wifi, bluetooth, ppp, wwan (mobile broadband), adsl or ovs (Open
+  * vSwitch), install the corresponding plugin: apk add networkmanager-<name>.
+  * 
+  * If you use NetworkManager features which require dnsmasq, you need to install
+  * dnsmasq support: apk add networkmanager-dnsmasq
+  * 
+(278/328) Installing networkmanager-qt (6.26.0-r0)
+(279/328) Installing libeditorconfig (0.12.11-r0)
+(280/328) Installing ktexteditor (6.26.0-r0)
+(281/328) Installing qt6-qtshadertools (6.11.1-r0)
+(282/328) Installing qt6-qt5compat (6.11.1-r0)
+(283/328) Installing libqca-qt6 (2.3.10-r0)
+(284/328) Installing kwallet (6.26.0-r0)
+(285/328) Installing libnl3 (3.11.0-r0)
+(286/328) Installing libpcap (1.10.7-r0)
+(287/328) Installing lm-sensors-libs (3.6.0-r5)
+(288/328) Installing libksysguard (6.6.6-r0)
+(289/328) Installing plasma-workspace-libs (6.6.6-r0)
+(290/328) Installing libqalculate (5.11.0-r0)
+(291/328) Installing plasma-workspace (6.6.6-r0)
+(292/328) Installing kunitconversion (6.26.0-r0)
+(293/328) Installing plasma5support (6.6.6-r0)
+(294/328) Installing qt6-qtlocation (6.11.1-r0)
+(295/328) Installing setxkbmap (1.3.5-r0)
+(296/328) Installing xdg-user-dirs (0.20-r0)
+(297/328) Installing sdl3 (3.4.10-r0)
+(298/328) Installing sdl2-compat (2.32.68-r0)
+(299/328) Installing libaccounts-glib (1.27-r0)
+(300/328) Installing libaccounts-qt6 (1.17-r2)
+(301/328) Installing dconf (0.49.0-r1)
+(302/328) Installing mpdecimal (4.0.1-r0)
+(303/328) Installing python3 (3.14.10-r1)
+(304/328) Installing python3-pycache-pyc0 (3.14.10-r1)
+(305/328) Installing pyc (3.14.10-r1)
+(306/328) Installing py3-gobject3-pyc (3.56.3-r0)
+(307/328) Installing ibus-pyc (1.5.35-r0)
+(308/328) Installing python3-pyc (3.14.10-r1)
+(309/328) Installing py3-gobject3 (3.56.3-r0)
+(310/328) Installing py3-gobject3-atspi (2.60.5-r0)
+(311/328) Installing py3-gobject3-atspi-pyc (2.60.5-r0)
+(312/328) Installing libdbusmenu-glib (16.04.0-r6)
+(313/328) Installing libdbusmenu-gtk3 (16.04.0-r6)
+(314/328) Installing libnotify (0.8.8-r0)
+(315/328) Installing ibus (1.5.35-r0)
+  Executing ibus-1.5.35-r0.post-install
+(316/328) Installing ibus-gtk3 (1.5.35-r0)
+(317/328) Installing ibus-gtk4 (1.5.35-r0)
+(318/328) Installing signond (8.62_git20231124-r0)
+(319/328) Installing accounts-qml-module (0.7_git20231028-r0)
+(320/328) Installing qt6-qtwebchannel (6.11.1-r0)
+(321/328) Installing minizip (1.3.2-r1)
+(322/328) Installing snappy (1.2.2-r0)
+(323/328) Installing qt6-qtwebengine (6.11.1-r3)
+(324/328) Installing signon-ui (0.18_git20231016-r1)
+(325/328) Installing kaccounts-integration (26.04.2-r0)
+(326/328) Installing libwacom (2.17.0-r1)
+  Executing libwacom-2.17.0-r1.post-install
+(327/328) Installing libwacom-udev (2.17.0-r1)
+(328/328) Installing plasma-desktop (6.6.6-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing fontconfig-2.17.1-r1.trigger
+Executing glib-2.88.1-r1.trigger
+Executing shared-mime-info-2.4-r7.trigger
+Executing gtk+3.0-3.24.52-r0.trigger
+Executing dbus-1.16.2-r2.trigger
+Executing eudev-3.2.14-r6.trigger
+Executing gtk-update-icon-cache-3.24.52-r0.trigger
+Executing eudev-hwids-3.2.14-r6.trigger
+Executing mkfontscale-1.2.4-r0.trigger
+OK: 1932.8 MiB in 698 packages

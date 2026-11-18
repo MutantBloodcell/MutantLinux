@@ -1,0 +1,16 @@
+#!/bin/sh
+case "$1" in
+    gui)
+        echo "1" > /etc/mutant-mode
+        echo "Default mode set to GUI. Launching MutantDE..."
+        sleep 1
+        exec /usr/bin/mutant-gui
+        ;;
+    cli)
+        echo "2" > /etc/mutant-mode
+        echo "Default mode set to CLI."
+        ;;
+    *)
+        echo "Usage: mutant-mode [gui|cli]"
+        ;;
+esac

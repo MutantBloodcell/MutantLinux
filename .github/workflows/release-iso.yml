@@ -1,0 +1,46 @@
+name: Build & Publish MutantLinux ISO
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout MutantLinux
+        uses: actions/checkout@v4
+
+      - name: Install ISO Build Tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq cpio pigz xorriso dosfstools mtools
+
+      - name: Build MutantLinux-arm64.iso
+        run: |
+          mkdir -p iso/boot
+          (cd rootfs && find . -print0 | cpio --null -o --format=newc --owner=0:0 2>/dev/null | pigz -6 > ../iso/boot/initramfs.img)
+          cp kernel-bin/vmlinuz-mutant iso/boot/
+          dd if=/dev/zero of=iso/efiboot.img bs=1M count=96 status=none
+          mkfs.vfat iso/efiboot.img >/dev/null
+          mmd -i iso/efiboot.img ::/EFI ::/EFI/BOOT
+          mcopy -i iso/efiboot.img kernel-bin/BOOTAA64.EFI ::/EFI/BOOT/
+          xorriso -as mkisofs \
+            -o MutantLinux-arm64.iso \
+            -V "MUTANTLINUX" \
+            -e efiboot.img \
+            -no-emul-boot \
+            -append_partition 2 0xef iso/efiboot.img \
+            iso/
+
+      - name: Publish ISO to GitHub Release v1.0
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0
+          name: MutantLinux 1.0 ARM64
+          body: Automated build of MutantLinux 1.0 ARM64 with KDE Plasma, mutantd, and web-connected mutant-ai-fixer.
+          files: MutantLinux-arm64.iso

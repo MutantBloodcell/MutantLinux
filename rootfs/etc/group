@@ -1,0 +1,16 @@
+root:x:0:
+wheel:x:10:root
+shadow:x:42:
+messagebus:x:102:
+tty:x:44:
+dialout:x:73:
+kmem:x:22:
+input:x:47:
+video:x:52:
+audio:x:53:
+lp:x:83:
+disk:x:35:
+cdrom:x:66:
+pipewire:x:100:
+avahi:x:86:avahi
+plugdev:x:101:

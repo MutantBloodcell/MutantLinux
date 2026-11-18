@@ -1,0 +1,57 @@
+#!/bin/sh
+CONF="/etc/X11/xorg.conf.d/20-auto-gpu.conf"
+mkdir -p /etc/X11/xorg.conf.d /var/log/mutantd
+rm -f /etc/X11/xorg.conf.d/20-gpu-universal.conf /etc/X11/xorg.conf.d/20-display.conf
+
+if [ -e /dev/dri/card0 ]; then
+    DRV_NAME=$(basename "$(readlink -f /sys/class/drm/card0/device/driver 2>/dev/null)" 2>/dev/null)
+    case "$DRV_NAME" in
+        amdgpu|nouveau|panfrost|lima|etnaviv|msm|i915|xe)
+            cat << 'XEOF' > "$CONF"
+Section "Device"
+    Identifier "AutoGPU"
+    Driver "modesetting"
+    Option "SWCursor" "true"
+EndSection
+XEOF
+            ;;
+        *)
+            cat << 'XEOF' > "$CONF"
+Section "Module"
+    Disable "glamoregl"
+EndSection
+Section "Device"
+    Identifier "AutoGPU"
+    Driver "modesetting"
+    Option "AccelMethod" "none"
+    Option "SWCursor" "true"
+EndSection
+XEOF
+            ;;
+    esac
+    echo "[hwdetect] DRM GPU active ($DRV_NAME)" >> /var/log/mutantd/hwdetect.log
+elif [ -e /dev/fb0 ]; then
+    cat << 'XEOF' > "$CONF"
+Section "Module"
+    Disable "glx"
+    Disable "glamoregl"
+EndSection
+Section "Device"
+    Identifier "AutoGPU"
+    Driver "fbdev"
+    Option "fbdev" "/dev/fb0"
+    Option "SWCursor" "true"
+EndSection
+XEOF
+    echo "[hwdetect] FBDEV fallback active" >> /var/log/mutantd/hwdetect.log
+fi
+
+if command -v amixer >/dev/null 2>&1; then
+    for CARD in /proc/asound/card[0-9]*; do
+        [ -d "$CARD" ] || continue
+        CID=$(basename "$CARD" | sed 's/card//')
+        amixer -c "$CID" sset Master 85% unmute >/dev/null 2>&1
+        amixer -c "$CID" sset PCM 85% unmute >/dev/null 2>&1
+        echo "[hwdetect] Unmuted ALSA card $CID" >> /var/log/mutantd/hwdetect.log
+    done
+fi

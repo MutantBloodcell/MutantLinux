@@ -1,0 +1,44 @@
+#!/bin/sh
+STATE_DIR="/run/mutantd/ttylog"
+mkdir -p "$STATE_DIR"
+
+# Initialize tty3 header
+{
+    clear
+    echo -e "\033[41;37m  MUTANTLINUX LIVE ERROR CONSOLE (Ctrl+Alt+F3)  \033[0m"
+    echo "Monitoring Xorg, MutantDE, and mutantd services..."
+    echo "Press Ctrl+Alt+F1 for GUI | Ctrl+Alt+F2 for Terminal"
+    echo "---------------------------------------------------"
+} > /dev/tty3 2>/dev/null
+
+while true; do
+    for LOGFILE in /var/log/mutantde.log /var/log/Xorg.0.log /var/log/mutantd/*.log; do
+        [ -f "$LOGFILE" ] || continue
+        BASE=$(basename "$LOGFILE")
+        LAST_FILE="$STATE_DIR/${BASE}.count"
+
+        # Match errors, warnings, or crashes
+        MATCHES=$(grep -iE "(\(EE\)|error|critical|segfault|fatal|cannot open|failed|bail out)" "$LOGFILE")
+        [ -z "$MATCHES" ] && continue
+
+        CUR_LINES=$(printf '%s\n' "$MATCHES" | wc -l)
+        OLD_LINES=$(cat "$LAST_FILE" 2>/dev/null || echo 0)
+
+        if [ "$CUR_LINES" -gt "$OLD_LINES" ]; then
+            NEW_COUNT=$((CUR_LINES - OLD_LINES))
+            NEW_ERRS=$(printf '%s\n' "$MATCHES" | tail -n "$NEW_COUNT")
+            echo "$CUR_LINES" > "$LAST_FILE"
+
+            TS=$(date +"%H:%M:%S")
+            {
+                echo -e "\033[1;31m[$TS] [$BASE]\033[0m"
+                printf '%s\n' "$NEW_ERRS"
+                echo ""
+            } > /dev/tty3 2>/dev/null
+
+            # Also print a single compact alert line on tty2 (Ctrl+Alt+F2)
+            printf '\r\033[1;33m[mutantd %s] New error in %s (See Ctrl+Alt+F3)\033[0m\n' "$TS" "$BASE" > /dev/tty2 2>/dev/null
+        fi
+    done
+    sleep 2
+done

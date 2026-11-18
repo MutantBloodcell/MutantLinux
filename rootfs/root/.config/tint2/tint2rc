@@ -1,0 +1,25 @@
+rounded = 0
+border_width = 1
+background_color = #1e293b 100
+border_color = #38bdf8 100
+
+panel_items = TSC
+panel_size = 100% 34
+panel_margin = 0 0
+panel_padding = 6 4 6
+panel_background_id = 1
+panel_position = bottom center horizontal
+panel_layer = top
+panel_monitor = all
+
+taskbar_mode = single_desktop
+taskbar_padding = 4 2 4
+task_text = 1
+task_centered = 1
+task_font = DejaVu Sans 10
+task_font_color = #f8fafc 100
+
+time1_format = %H:%M
+time1_font = DejaVu Sans Bold 10
+clock_font_color = #00e676 100
+clock_padding = 8 4

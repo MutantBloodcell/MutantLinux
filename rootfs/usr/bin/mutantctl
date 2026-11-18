@@ -1,0 +1,103 @@
+#!/bin/sh
+RUN_DIR="/run/mutantd"
+SYS_DIR="/etc/mutantd/system"
+ENA_DIR="/etc/mutantd/enabled"
+LOG_DIR="/var/log/mutantd"
+
+mkdir -p "$RUN_DIR" "$SYS_DIR" "$ENA_DIR" "$LOG_DIR"
+
+parse_unit() {
+    grep -E "^${2}=" "$1" | head -n 1 | cut -d'=' -f2-
+}
+
+SVC="${2%.service}"
+UNIT="$SYS_DIR/${SVC}.service"
+PIDFILE="$RUN_DIR/${SVC}.pid"
+
+case "$1" in
+    start)
+        [ ! -f "$UNIT" ] && echo "Unit ${SVC}.service not found." && exit 1
+        rm -f "$RUN_DIR/${SVC}.stopped"
+        if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+            echo "${SVC}.service is already active (PID $(cat "$PIDFILE"))."
+            exit 0
+        fi
+        EXEC_CMD=$(parse_unit "$UNIT" "ExecStart")
+        RESTART=$(parse_unit "$UNIT" "Restart")
+        (
+            while true; do
+                $EXEC_CMD >> "$LOG_DIR/${SVC}.log" 2>&1 &
+                CPID=$!
+                echo "$CPID" > "$PIDFILE"
+                wait "$CPID"
+                rm -f "$PIDFILE"
+                [ "$RESTART" != "always" ] && break
+                [ -f "$RUN_DIR/${SVC}.stopped" ] && break
+                sleep 1
+            done
+        ) &
+        sleep 0.3
+        echo "Started ${SVC}.service."
+        ;;
+    stop)
+        touch "$RUN_DIR/${SVC}.stopped"
+        if [ -f "$PIDFILE" ]; then
+            PID=$(cat "$PIDFILE")
+            kill "$PID" 2>/dev/null
+            rm -f "$PIDFILE"
+            echo "Stopped ${SVC}.service."
+        else
+            echo "${SVC}.service is not running."
+        fi
+        ;;
+    restart)
+        "$0" stop "$SVC"
+        sleep 0.5
+        "$0" start "$SVC"
+        ;;
+    enable)
+        [ ! -f "$UNIT" ] && echo "Unit ${SVC}.service not found." && exit 1
+        ln -sf "$UNIT" "$ENA_DIR/${SVC}.service"
+        echo "Enabled ${SVC}.service."
+        ;;
+    disable)
+        rm -f "$ENA_DIR/${SVC}.service"
+        echo "Disabled ${SVC}.service."
+        ;;
+    status)
+        if [ -z "$SVC" ]; then
+            "$0" list
+            exit 0
+        fi
+        DESC=$(parse_unit "$UNIT" "Description")
+        echo "● ${SVC}.service - ${DESC:-MutantLinux Service}"
+        if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+            echo "   Active: active (running) | PID: $(cat "$PIDFILE")"
+        else
+            echo "   Active: inactive (dead)"
+        fi
+        [ -f "$LOG_DIR/${SVC}.log" ] && tail -n 5 "$LOG_DIR/${SVC}.log"
+        ;;
+    list)
+        echo "UNIT                      LOAD     ACTIVE"
+        for U in "$SYS_DIR"/*.service; do
+            [ -e "$U" ] || continue
+            N=$(basename "$U" .service)
+            if [ -f "$RUN_DIR/${N}.pid" ] && kill -0 "$(cat "$RUN_DIR/${N}.pid")" 2>/dev/null; then
+                STATE="active (running)"
+            else
+                STATE="inactive (dead)"
+            fi
+            printf "%-25s loaded   %s\n" "${N}.service" "$STATE"
+        done
+        ;;
+    *)
+        echo "mutantctl - MutantLinux Service Control"
+        echo "Usage: mutantctl [start|stop|restart|enable|disable|status|list] <service>"
+        ;;
+esac
+
+# Quick log viewer helper if invoked with 'logs'
+if [ "$1" = "logs" ]; then
+    grep -iE "(\(EE\)|error|critical|segfault|fatal|cannot open|failed|bail out)" /var/log/mutantde.log /var/log/Xorg.0.log /var/log/mutantd/*.log 2>/dev/null | tail -n 25
+fi

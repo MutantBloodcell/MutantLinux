@@ -1,0 +1,56 @@
+#!/bin/sh
+# MutantLinux Service Manager & Init Supervisor (mutantd v1.0)
+
+RUN_DIR="/run/mutantd"
+SYS_DIR="/etc/mutantd/system"
+ENA_DIR="/etc/mutantd/enabled"
+LOG_DIR="/var/log/mutantd"
+
+mkdir -p "$RUN_DIR" "$SYS_DIR" "$ENA_DIR" "$LOG_DIR"
+
+parse_unit() {
+    UNIT_FILE="$1"
+    KEY="$2"
+    grep -E "^${KEY}=" "$UNIT_FILE" | head -n 1 | cut -d'=' -f2-
+}
+
+start_unit() {
+    SVC="$1"
+    UNIT="$SYS_DIR/${SVC}.service"
+    [ ! -f "$UNIT" ] && return 1
+
+    PIDFILE="$RUN_DIR/${SVC}.pid"
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        return 0
+    fi
+
+    EXEC_CMD=$(parse_unit "$UNIT" "ExecStart")
+    RESTART=$(parse_unit "$UNIT" "Restart")
+    [ -z "$EXEC_CMD" ] && return 1
+
+    (
+        while true; do
+            $EXEC_CMD >> "$LOG_DIR/${SVC}.log" 2>&1 &
+            CHILD_PID=$!
+            echo "$CHILD_PID" > "$PIDFILE"
+            wait "$CHILD_PID"
+            rm -f "$PIDFILE"
+            [ "$RESTART" != "always" ] && break
+            [ -f "$RUN_DIR/${SVC}.stopped" ] && break
+            sleep 1
+        done
+    ) &
+}
+
+# Start all enabled units
+for LINK in "$ENA_DIR"/*.service; do
+    [ -e "$LINK" ] || continue
+    NAME=$(basename "$LINK" .service)
+    rm -f "$RUN_DIR/${NAME}.stopped"
+    start_unit "$NAME"
+done
+
+# Supervisor heartbeat loop
+while true; do
+    sleep 5
+done
