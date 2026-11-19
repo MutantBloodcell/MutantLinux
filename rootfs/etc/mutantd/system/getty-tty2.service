@@ -1,0 +1,5 @@
+[Unit]
+Description=Interactive Console on tty2
+[Service]
+ExecStart=/sbin/getty -L tty2 115200 vt100
+Restart=always

@@ -1,0 +1,83 @@
+#!/bin/sh
+# MutantLinux Bare-Metal & VM Hardware Auto-Detection and Resource Allocator
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+mkdir -p /etc/X11/xorg.conf.d /var/log/mutantd /run/mutantd
+
+# 1. Detect CPU Cores & Tune Kernel Scheduler / Governor
+CPU_CORES=$(nproc 2>/dev/null || grep -c '^processor' /proc/cpuinfo 2>/dev/null || echo 1)
+for GOV in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+    [ -w "$GOV" ] && echo "ondemand" > "$GOV" 2>/dev/null
+done
+
+# 2. Detect Bare-Metal Physical RAM & Allocate Dynamic ZRAM Swap (50% of RAM)
+TOTAL_KB=$(awk '/MemTotal:/ {print $2}' /proc/meminfo 2>/dev/null || echo 1048576)
+TOTAL_MB=$((TOTAL_KB / 1024))
+ZRAM_MB=$((TOTAL_MB / 2))
+[ "$ZRAM_MB" -lt 256 ] && ZRAM_MB=256
+[ "$ZRAM_MB" -gt 4096 ] && ZRAM_MB=4096
+
+modprobe zram 2>/dev/null || true
+if [ -e /sys/block/zram0/disksize ] && ! grep -q "/dev/zram0" /proc/swaps 2>/dev/null; then
+    echo "${ZRAM_MB}M" > /sys/block/zram0/disksize 2>/dev/null
+    mkswap /dev/zram0 >/dev/null 2>&1 && swapon -p 100 /dev/zram0 >/dev/null 2>&1 || true
+fi
+
+# Tune VM dirty page ratios based on detected physical RAM
+if [ "$TOTAL_MB" -ge 4096 ]; then
+    sysctl -w vm.swappiness=20 vm.dirty_ratio=20 vm.dirty_background_ratio=10 >/dev/null 2>&1
+else
+    sysctl -w vm.swappiness=60 vm.dirty_ratio=15 vm.dirty_background_ratio=5 >/dev/null 2>&1
+fi
+
+# 3. Auto-Detect Bare-Metal DRM GPU (/dev/dri/card0) vs Legacy Framebuffer (/dev/fb0)
+if [ -e /dev/dri/card0 ]; then
+    cat << 'XORG_DRM' > /etc/X11/xorg.conf.d/10-mutant-gpu.conf
+Section "Device"
+    Identifier "MutantGPU"
+    Driver "modesetting"
+    Option "AccelMethod" "none"
+EndSection
+XORG_DRM
+    GPU_MODE="DRM modesetting (/dev/dri/card0)"
+elif [ -e /dev/fb0 ]; then
+    cat << 'XORG_FB' > /etc/X11/xorg.conf.d/10-mutant-gpu.conf
+Section "Device"
+    Identifier "MutantGPU"
+    Driver "fbdev"
+    Option "fbdev" "/dev/fb0"
+EndSection
+XORG_FB
+    GPU_MODE="Framebuffer (/dev/fb0)"
+else
+    GPU_MODE="Headless / Virtual"
+fi
+
+# 4. Auto-Detect All Bare-Metal Ethernet & Wi-Fi Interfaces
+NET_LIST=""
+for IFACE_PATH in /sys/class/net/*; do
+    IFACE=$(basename "$IFACE_PATH")
+    [ "$IFACE" = "lo" ] && continue
+    ip link set "$IFACE" up 2>/dev/null
+    NET_LIST="${NET_LIST} ${IFACE}"
+    if [ ! -d "${IFACE_PATH}/wireless" ]; then
+        udhcpc -i "$IFACE" -s /tmp/udhcpc.script -b -q >/dev/null 2>&1 &
+    fi
+done
+
+# 5. Auto-Detect Audio Cards & Unmute Output
+for CARD in /proc/asound/card*; do
+    [ -e "$CARD" ] || continue
+    amixer sset Master 85% unmute >/dev/null 2>&1 || true
+    amixer sset PCM 85% unmute >/dev/null 2>&1 || true
+done
+
+# Save hardware profile summary for MutantDE & mutant-sysinfo
+cat << INFO > /run/mutantd/hardware.profile
+CPU_CORES=${CPU_CORES}
+TOTAL_RAM_MB=${TOTAL_MB}
+ZRAM_SWAP_MB=${ZRAM_MB}
+GPU_DRIVER=${GPU_MODE}
+NET_INTERFACES=${NET_LIST:-none}
+INFO

@@ -1,0 +1,40 @@
+#!/bin/sh
+# Smart MutantLinux .mbin Packager & Converter (Native ELF / .deb / .exe)
+
+IN_FILE="$1"
+OUT_MBIN="$2"
+
+if [ -z "$IN_FILE" ] || [ -z "$OUT_MBIN" ]; then
+    echo "Usage: mutant-mkbin <arm64-binary | app.deb | app.exe> <output.mbin>"
+    exit 1
+fi
+
+if [ ! -f "$IN_FILE" ]; then
+    echo "Error: Input file '$IN_FILE' not found."
+    exit 1
+fi
+
+MAGIC_4=$(dd if="$IN_FILE" bs=4 count=1 2>/dev/null)
+MAGIC_2=$(dd if="$IN_FILE" bs=2 count=1 2>/dev/null)
+
+if [ "$MAGIC_4" = "MBIN" ]; then
+    echo "Already a valid .mbin file."
+    cp -f "$IN_FILE" "$OUT_MBIN"
+elif [ "$MAGIC_4" = "!<ar" ] || [ "${IN_FILE##*.}" = "deb" ]; then
+    printf 'MBIN\x02\x00\x00\x00' > "$OUT_MBIN"
+    cat "$IN_FILE" >> "$OUT_MBIN"
+    echo "Converted Ubuntu/Debian .deb into type-2 .mbin container: $OUT_MBIN"
+elif [ "$MAGIC_2" = "MZ" ] || [ "${IN_FILE##*.}" = "exe" ] || [ "${IN_FILE##*.}" = "EXE" ]; then
+    printf 'MBIN\x03\x00\x00\x00' > "$OUT_MBIN"
+    cat "$IN_FILE" >> "$OUT_MBIN"
+    echo "Converted Windows .exe into type-3 .mbin container: $OUT_MBIN"
+elif [ "$MAGIC_4" = "$(printf '\x7fELF')" ]; then
+    printf 'MBIN\x01\x00\x00\x00' > "$OUT_MBIN"
+    cat "$IN_FILE" >> "$OUT_MBIN"
+    echo "Packaged native ARM64 ELF into type-1 .mbin executable: $OUT_MBIN"
+else
+    echo "Error: Unsupported input format (must be ARM64 ELF, .deb, or .exe)."
+    exit 1
+fi
+
+chmod 755 "$OUT_MBIN"

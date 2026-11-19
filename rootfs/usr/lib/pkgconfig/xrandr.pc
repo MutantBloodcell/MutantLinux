@@ -1,0 +1,12 @@
+prefix=/usr
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+Name: Xrandr
+Description: X RandR Library
+URL: https://gitlab.freedesktop.org/xorg/lib/libxrandr/
+Version: 1.5.5
+Requires: xproto, randrproto >= 1.5
+Requires.private: xext, xextproto, xrender, renderproto, x11 >=  1.6
+Libs: -L${libdir} -lXrandr
+Cflags: -I${includedir}

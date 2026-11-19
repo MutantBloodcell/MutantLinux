@@ -1,0 +1,2052 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml-stylesheet type="text/xml" href="params.xsl"?>
+<!-- vim: set ai tw=80 ts=3 sw=3: -->
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "
+              http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY FDL SYSTEM "fdl-appendix.xml">
+<!ENTITY FDLlink "<link linkend='fdl'>included</link>">
+]>
+<!-- =============Document Header ============================= -->
+<book id="index" lang="hu">
+  <bookinfo>
+    <title>GTK-Doc kézikönyv</title>
+    <edition>1.24.1</edition>
+    <abstract role="description"><para>Felhasználói kézikönyv fejlesztők számára a GTK-Doc használatára vonatkozó utasításokkal.</para></abstract>
+    <authorgroup>
+      <author><firstname>Chris</firstname> <surname>Lyttle</surname> <affiliation> <address> <email>chris@wilddev.net</email> </address> </affiliation></author>
+      <author><firstname>Dan</firstname> <surname>Mueth</surname> <affiliation> <address> <email>d-mueth@uchicago.edu</email> </address> </affiliation></author>
+      <author><firstname>Stefan</firstname> <surname>Sauer (Kost)</surname> <affiliation> <address> <email>ensonic@users.sf.net</email> </address> </affiliation></author>
+    </authorgroup>
+    <publisher role="maintainer"><publishername>GTK-Doc projekt</publishername> <address><email>gtk-doc-list@gnome.org</email></address></publisher>
+    <copyright><year>2000, 2005</year> <holder>Dan Mueth és Chris Lyttle</holder></copyright>
+    <copyright><year>2007-2019</year> <holder>Stefan Sauer (Kost)</holder></copyright>
+
+    <!-- translators: uncomment this:
+    <copyright>
+      <year>2000</year>
+      <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
+    -->
+
+    <legalnotice>
+      <para>Engedélyt adunk Önnek a jelen dokumentum sokszorosítására, terjesztésére és/vagy módosítására a Free Software Foundation által kiadott <citetitle>GNU Free Documentation License</citetitle> 1.2-es, vagy bármely azt követő verziójának feltételei alapján. Nincs Nem Változtatható szakasz, nincs Címlapszöveg, nincs Hátlapszöveg. A jelen licenc egy példányát <link linkend="fdl">mellékelve</link> találja.</para>
+      <para>A vállalatok által termékeik és szolgáltatásaik megkülönböztetésére használt nevek közül sokan védjegyként vannak bejegyezve. Ahol ezek a nevek megjelennek a GNOME dokumentációban, és a GNOME dokumentációs projekt tagjainak tudomásuk van ezekről a védjegyekről, ott a nevek nagybetűvel vagy nagy kezdőbetűvel vannak kiírva.</para>
+    </legalnotice>
+
+    <revhistory>
+      <revision><revnumber>1.33.0</revnumber> <date>2020. október 1.</date> <authorinitials>mc</authorinitials> <revremark>gtk4 verzió</revremark></revision>
+      <revision><revnumber>1.32.1</revnumber> <date>2019. augusztus 15.</date> <authorinitials>ss</authorinitials> <revremark>fejlesztői verzió</revremark></revision>
+      <revision><revnumber>1.32</revnumber> <date>2019. augusztus 15.</date> <authorinitials>ss</authorinitials> <revremark>gyorsjavítási kiadás</revremark></revision>
+      <revision><revnumber>1.31</revnumber> <date>2019. augusztus 5.</date> <authorinitials>ss</authorinitials> <revremark>újratervezések és jobb tesztlefedettség</revremark></revision>
+      <revision><revnumber>1.30</revnumber> <date>2019. május 8.</date> <authorinitials>ss</authorinitials> <revremark>jobb tesztlefedettség</revremark></revision>
+      <revision><revnumber>1.29</revnumber> <date>2018. augusztus 28.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások</revremark></revision>
+      <revision><revnumber>1.28</revnumber> <date>2018. március 24.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások</revremark></revision>
+      <revision><revnumber>1.27</revnumber> <date>2017. december 7.</date> <authorinitials>ss</authorinitials> <revremark>a Pythonra történő átírás finomhangolása</revremark></revision>
+      <revision><revnumber>1.26</revnumber> <date>2017. augusztus 11.</date> <authorinitials>ss</authorinitials> <revremark>az összes eszköz átírása Perl és Bash nyelvekről Pythonra</revremark></revision>
+      <revision><revnumber>1.25</revnumber> <date>2016. március 21.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások, teszttisztítások</revremark></revision>
+      <revision><revnumber>1.24</revnumber> <date>2015. május 29.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítás</revremark></revision>
+      <revision><revnumber>1.23</revnumber> <date>2015. május 17.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítás</revremark></revision>
+      <revision><revnumber>1.22</revnumber> <date>2015. május 7.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások, elavult funkciók kidobása</revremark></revision>
+      <revision><revnumber>1.21</revnumber> <date>2014. július 17.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások, elavult funkciók kidobása</revremark></revision>
+      <revision><revnumber>1.20</revnumber> <date>2014. február 16.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások, Markdown-támogatás, stílusjavítások</revremark></revision>
+      <revision><revnumber>1.19</revnumber> <date>2013. június 5.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások</revremark></revision>
+      <revision><revnumber>1.18</revnumber> <date>2011. szeptember 14.</date> <authorinitials>ss</authorinitials> <revremark>hibajavítások, gyorsítások, Markdown-támogatás</revremark></revision>
+      <revision><revnumber>1.17</revnumber> <date>2011. február 26.</date> <authorinitials>sk</authorinitials> <revremark>sürgős hibajavító frissítés</revremark></revision>
+      <revision><revnumber>1.16</revnumber> <date>2011. január 14.</date> <authorinitials>sk</authorinitials> <revremark>hibajavítások, elrendezési továbbfejlesztések</revremark></revision>
+      <revision><revnumber>1.15</revnumber> <date>2010. május 21.</date> <authorinitials>sk</authorinitials> <revremark>hibajavítások és regressziójavítások</revremark></revision>
+      <revision><revnumber>1.14</revnumber> <date>2010. március 28.</date> <authorinitials>sk</authorinitials> <revremark>hibajavítások és teljesítményjavítások</revremark></revision>
+      <revision><revnumber>1.13</revnumber> <date>2009. december 18.</date> <authorinitials>sk</authorinitials> <revremark>törött forráscsomag-frissítés</revremark></revision>
+      <revision><revnumber>1.12</revnumber> <date>2009. december 18.</date> <authorinitials>sk</authorinitials> <revremark>új eszközfunkciók és hibajavítások</revremark></revision>
+      <revision><revnumber>1.11</revnumber> <date>2008. november 16.</date> <authorinitials>mal</authorinitials> <revremark>GNOME doc-utils költöztetés</revremark></revision>
+    </revhistory>
+
+  
+    <othercredit class="translator">
+      <personname>
+        <firstname>Úr Balázs</firstname>
+      </personname>
+      <email>ur dot balazs at fsf dot hu</email>
+    </othercredit>
+    <copyright>
+      
+        <year>2023</year>
+      
+        <year>2024.</year>
+      
+      <holder>Úr Balázs</holder>
+    </copyright>
+  </bookinfo>
+
+  <!-- ======== Chapter 1: Introduction ======================== -->
+
+  <chapter id="introduction">
+    <title>Bevezetés</title>
+
+    <para>Ez a fejezet bemutatja a GTK-Doc dokumentációs eszközt, és áttekintést ad arról, hogy mi is ez, és hogyan használják.</para>
+
+    <sect1 id="whatisgtkdoc">
+      <title>Mi a GTK-Doc?</title>
+
+      <para>A GTK-Doc a C kód dokumentálására szolgál. Általában programkönyvtárak nyilvános API-jának dokumentálására használják, mint például a GTK+ és a GNOME programkönyvtárak. De használható az alkalmazás kódjának dokumentálására is.</para>
+    </sect1>
+
+    <sect1 id="howdoesgtkdocwork">
+      <title>Hogyan működik a GTK-Doc?</title>
+
+      <para>A GTK-Doc úgy működik, hogy a függvényeknek a forrásfájlokban elhelyezett, különlegesen formázott megjegyzésblokkokban lévő dokumentációját vagy a GTK-Doc által használt sablonfájlokhoz hozzáadott dokumentációját használja (azonban vegye figyelembe, hogy a GTK-Doc csak a fejlécfájlokban deklarált függvényeket dokumentálja; statikus függvényekhez nem készít kimenetet).</para>
+
+      <para>A GTK-Doc számos Python-parancsfájlból áll, amelyek mindegyike más-más lépést hajt végre a folyamatban.</para>
+
+      <para>A folyamat 5 fő lépésből áll:</para>
+
+      <orderedlist>
+
+        <listitem>
+          <para><guilabel>A dokumentáció megírása.</guilabel> A szerző kitölti a forrásfájlokat minden egyes függvény, makró, struktúra, unió és egyéb szerkezetek dokumentációjával.</para>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>Információgyűjtés a kódról.</guilabel> A <application>gtkdoc-scan</application> átvizsgálja a kód fejlécfájljait függvények, makrók, felsorolások, struktúrák és uniók deklarációit keresve. Létrehozza a deklarációk listáját tartalmazó <filename>&lt;modul&gt;-decl-list.txt</filename> fájlt, és szakaszokba helyezi azokat aszerint, hogy melyik fejlécfájlban vannak. Az első futáskor ez a fájl a <filename>&lt;modul&gt;-sections.txt</filename> fájlba lesz másolva. A szerző átrendezheti a szakaszokat és az azokon belüli deklarációk sorrendjét, hogy a kívánt végső sorrendet állítsa elő. A második fájl, amelyet előállít, a <filename>&lt;modul&gt;-decl.txt</filename>. Ez a fájl tartalmazza az átvilágító által talált összes deklarációt. Ha valamilyen oknál fogva valaki azt szeretné, hogy néhány szimbólum megjelenjen a dokumentációban, ahol a teljes deklarációt nem találja meg az átvizsgáló, vagy a deklarációnak másképp kellene megjelennie, akkor a <filename>&lt;modul&gt;-decl.txt</filename> fájlban lévőhöz hasonló entitásokat helyezhet el a <filename>&lt;modul&gt;-overrides.txt</filename> fájlba.</para>
+         <para>A <application>gtkdoc-scangobj</application> arra is használható, hogy dinamikusan lekérdezzen egy programkönyvtárat az általa exportált GObject alosztályokról. Információt tárol az egyes objektumok osztályhierarchiában elfoglalt pozíciójáról, valamint az általa biztosított GObject-tulajdonságokról és szignálokról.</para>
+         <para>A <application>gtkdoc-scanobj</application> függvényt nem szabad többé használni. Régebben volt rá szükség, amikor a GObject még GtkObject volt a gtk+-on belül.</para>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>Az XML és a HTML/PDF előállítása.</guilabel> A <application>gtkdoc-mkdb</application> átalakítja a sablonfájlokat XML-fájlokká az <filename class="directory">xml/</filename> alkönyvtárban. Ha a forráskód tartalmaz dokumentációt a függvényekről a különleges megjegyzésblokkok használatával, akkor az beolvasztásra kerül ide. Ha nem használnak tmpl-fájlokat, akkor csak a forrásokból és a betekintési adatokból olvassa be a dokumentációt.</para>
+          <para>A <application>gtkdoc-mkhtml</application> átalakítja az XML-fájlokat HTML-fájlokká a <filename class="directory">html/</filename> alkönyvtárban. Hasonlóképpen a <application>gtkdoc-mkpdf</application> átalakítja az XML-fájlokat <filename>&lt;csomag&gt;.pdf</filename> nevű PDF-dokumentummá.</para>
+          <para>Az <filename class="directory">xml/</filename> és a <filename class="directory">html/</filename> könyvtárakban lévő fájlok mindig felülírásra kerülnek. Soha sem szabad közvetlenül szerkeszteni azokat.</para>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>A dokumentumok közötti kereszthivatkozások javítása.</guilabel> A HTML-fájlok telepítése után a <application>gtkdoc-fixxref</application> futtatható a különálló dokumentumok közötti kereszthivatkozások javításához. Például a GTK+ dokumentáció számos kereszthivatkozást tartalmaz a GLib kézikönyvben dokumentált típusokra. A terjesztésre szánt forráscsomag létrehozásakor a <application>gtkdoc-rebase</application> az összes külső hivatkozást webes hivatkozásokká alakítja. A terjesztett (előre előállított) dokumentumok telepítésekor ugyanez az alkalmazás megpróbálja a hivatkozásokat visszaalakítani helyi hivatkozásokká (ahová az adott dokumentumok telepítve vannak).</para>
+        </listitem>
+      </orderedlist>
+
+    </sect1>
+
+    <sect1 id="gettinggtkdoc">
+      <title>A GTK-Doc beszerzése</title>
+
+      <sect2 id="requirements">
+        <title>Követelmények</title>
+        <para><guilabel>python 2/3</guilabel> – a fő parancsfájlok Python nyelven lettek írva.</para>
+        <para><guilabel>xsltproc</guilabel> – az XSLT-feldolgozó a libxslt csomagból, <ulink url="http://xmlsoft.org/XSLT/" type="http">xmlsoft.org/XSLT/</ulink></para>
+        <para><guilabel>docbook-xsl</guilabel> – a Docbook XSL-stíluslapjai, <ulink url="http://sourceforge.net/projects/docbook/files/docbook-xsl/" type="http">sourceforge.net/projects/docbook/files/docbook-xsl</ulink></para>
+        <para>A <guilabel>source-highlight</guilabel>, <guilabel>highlight</guilabel> vagy <guilabel>vim</guilabel> egyike – nem kötelező – a példák szintaxis-kiemeléséhez van használva</para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="aboutgtkdoc">
+      <title>A GTK-Doc története</title>
+
+      <para>Történetileg a GTK-Doc programot arra használták, hogy sablonfájlokat állítsanak elő a forráskódból. Ezeket a sablonfájlokat a fejlesztők használhatták az API-dokumentáció bevitelére. Ez a megközelítés meglehetősen kényelmetlen volt, mivel az előállított fájlokat verziókövetés alatt kellett tartani. A GTK-Doc 1.9 óta lehetővé vált, hogy az összes API-információ forrásmegjegyzésekbe kerüljön, ami elavulttá tette a sablontámogatást. Az 1.26-os verzióban a sablontámogatás eltávolításra került.</para>
+
+      <para>(JAVÍTS KI)</para>
+
+      <para>(szerzők, weboldalak, levelezőlista, licenc, jövőbeli tervek, összehasonlítás más, hasonló rendszerekkel)</para>
+
+    </sect1>
+
+    <sect1 id="aboutthismanual">
+      <title>Erről a kézikönyvről</title>
+
+      <para>(JAVÍTS KI)</para>
+
+      <para>(kinek szánják, hol lehet hozzájutni, licenc)</para>
+
+    </sect1>
+
+  </chapter>
+
+  <chapter id="settingup">
+    <title>Projekt beállítása</title>
+
+    <para>Ez a fejezet azokat a lépéseket írja le, amelyek a GTK-Doc projektbe való integrálásához szükségesek. A GTK-Doc projektbe való integrálása a következő lépéseket tartalmazza:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>A könyvtárszerkezet előkészítése és a GTK-Doc dokumentációhoz szükséges beállítási fájlok létrehozása (nézze meg a <link linkend="settingup_docfiles">Dokumentációvázlat beállítása</link> szakaszt).</para>
+      </listitem>
+      <listitem>
+        <para>Az összeállítási rendszer beállítása a dokumentáció összeállításához a GTK-Doc eszközök használatával. Több összeállítási rendszer is támogatott, ebben a kézikönyvben azt mutatjuk be, hogy hogyan integrálható a GTK-Doc az <link linkend="settingup_autotools">Autotools</link>, a <link linkend="settingup_cmake">CMake</link> és az <link linkend="settingup_plain_makefiles">egyszerű Makefile</link> megoldásokkal.</para>
+      </listitem>
+      <listitem>
+        <para>GTK-Doc specifikus fájlok hozzáadása a verziókövetéshez és annak eldöntése, hogy mely fájlokat kell figyelmen kívül hagyni (nézze meg az <link linkend="settingup_vcs">Integráció verziókövető rendszerekkel</link> szakaszt).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>A következő szakaszok azt feltételezik, hogy egy <code>meep</code> nevű projekten dolgozunk. Ez a projekt két csomagot (vagy modult) tartalmaz, egy <code>libmeep</code> nevű programkönyvtárat és egy <code>meeper</code> nevű végfelhasználói alkalmazást.</para>
+
+    <sect1 id="settingup_docfiles">
+      <title>Dokumentációvázlat beállítása</title>
+
+      <para>Általános gyakorlat, hogy a dokumentáció a <code>docs</code> nevű mappába kerül a legfelső szintű projektkönyvtáron belül. Általában különbséget teszünk a fejlesztőknek szánt <emphasis>hivatkozási dokumentáció</emphasis> és a végfelhasználóknak szánt <emphasis>felhasználói kézikönyv</emphasis> között. Megint csak az a gyakorlat, hogy mindkettőhöz külön mappák tartoznak. A hivatkozási dokumentációt általában a <code>reference</code> nevű mappába, a végfelhasználói kézikönyvet pedig a <code>help</code> nevű mappába tesszük. A fenti gyakorlat szerint a <code>libmeep</code> csomagunk dokumentációja a következő helyre kerülne: <code>docs/reference/libmeep</code>. A csak egy programkönyvtárat vagy alkalmazást tartalmazó csomagok esetében a dokumentációt közvetlenül a <code>docs/reference</code> mappában is elhelyezhetjük. Nem kötelező a fenti gyakorlatot használni, de ha más könyvtárszerkezet használatát választja, akkor a könyvtárszerkezetnek megfelelően kell beállítania az összeállítási rendszer beállításait.</para>
+
+      <para>A következő szakaszokban olyan könyvtárszerkezetet feltételezünk a <emphasis>meep</emphasis> projektünkhöz, amely a fenti gyakorlatokat használja. <example>
+          <title>A <emphasis>meep</emphasis> projekt könyvtárszerkezeti példája</title>
+          <programlisting>
+meep/
+  docs/
+    reference/  # hivatkozási dokumentáció
+      libmeep/
+      meeper/
+    help/       # elhagyható: felhasználói kézikönyv
+      meeper/
+  src/
+    libmeep/
+    meeper/
+</programlisting>
+        </example></para>
+    </sect1>
+
+    <sect1 id="settingup_autotools">
+      <title>Integráció az Autotools programmal</title>
+      <para>A GTK-Doc integrálása egy autotools alapú összeállítási rendszerbe a következő lépéseket igényli:</para>
+      <itemizedlist>
+        <listitem>
+          <para>Győződjön meg arról, hogy a <application>gtkdocize</application> egyszer lefusson a <filename>configure</filename> parancsfájl előtt. Ha egy <filename>autogen.sh</filename> parancsfájl is jelen van, akkor állítsa be úgy, hogy ellenőrizze a GTK-Doc eszközt, és adjon hozzá egy <application>gtkdocize</application> hívást.</para>
+
+          <para>A <application>gtkdocize</application> fő célja, hogy elkészítse az összeállítási rendszerhez elérhető <filename>gtk-doc.make</filename> Makefile-t és <filename>gtk-doc.m4</filename> makródefiníciós fájlt a projektbe történő másolással vagy a projekthez történő kapcsolással.</para>
+        </listitem>
+        <listitem>
+          <para>Adja hozzá a szükséges <application>autoconf</application> makrókat a <filename>configure.ac</filename> fájlhoz, hogy engedélyezze a GTK-Doc eszközt az összeállítási rendszerben a GTK-Doc beállításainak az előállított <filename>configure</filename> parancsfájl általi engedélyezéséhez.</para>
+          <para>Többek között a <code>--enable-gtk-doc</code> kapcsoló regisztrálásával a <filename>configure</filename> parancsfájlban.</para>
+        </listitem>
+        <listitem>
+          <para>Hozzon létre egy <application>automake</application> parancsfájlt a projekt minden egyes alkalmazásához vagy programkönyvtárához. Az ebben a dokumentációban használt példában ez a lépés mind a <code>meeper</code> alkalmazásra, mind a <code>libmeep</code> programkönyvtárra vonatkozik.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>A következő szakaszokban a fenti lépéseket fordított sorrendben hajtjuk végre. Az <application>automake</application> parancsfájlokkal kezdjük, és folytatjuk a munkát a <filename>configure.ac</filename> és <filename>autogen.sh</filename> parancsfájlokig. Ezután megmutatjuk, hogyan engedélyezzük a GTK-Doc használatát az összeállítási rendszerben, és hogyan állítsuk össze a dokumentációt.</para>
+
+      <sect2 id="settingup_automake">
+        <title>Integráció az automake programmal</title>
+
+        <para>Először másolja át a <filename>Makefile.am</filename> fájlt a <ulink url="https://gitlab.gnome.org/GNOME/gtk-doc/raw/master/examples/Makefile.am">gtkdoc-sources</ulink> <filename class="directory">examples</filename> alkönyvtárából a projektje hivatkozási dokumentációs könyvtárába (például <filename class="directory">docs/reference/&lt;csomag&gt;</filename>). Egy helyi másolatnak az <filename>/usr/share/doc/gtk-doc-tools/examples/Makefile.am</filename> alatt kell elérhetőnek lennie. Ha több csomagja van, akkor ezt ismételje meg mindegyiknél.</para>
+
+        <note>
+          <simpara>Ne felejtsen el hozzáadni minden <filename>Makefile.am</filename> fájlt az <function>AC_CONFIG_FILES</function> makróhoz a <filename>configure.ac</filename> fájlban. A <filename>docs/reference/libmeep/Makefile.am</filename> esetén a <filename>docs/reference/libmeep/Makefile</filename> bejegyzést kell hozzáadnia az <function>AC_CONFIG_FILES</function> makróhoz.</simpara>
+        </note>
+
+        <example>
+          <title>Könyvtárszerkezeti példa a <filename>Makefile.am</filename> fájlokkal</title>
+          <programlisting>
+meep/
+  docs/
+    reference/  # hivatkozási dokumentáció
+      libmeep/
+        Makefile.am
+      meeper/
+        Makefile.am
+    help/       # elhagyható: felhasználói kézikönyv
+      meeper/
+  src/
+    libmeep/
+    meeper/
+</programlisting>
+        </example>
+
+        <para>Ezután személyre kell szabnia a lemásolt Makefile-okat, és meg kell adnia a különböző paraméterek értékeit az egyes <filename>Makefile.am</filename> fájlokban. Az összes beállítás fölött található egy megjegyzés, amely leírja a céljukat és a beállítás személyre szabását. A legtöbb beállítás arra szolgál, hogy további jelzőket adjon azokhoz az eszközökhöz, amelyekre vonatkozik. Minden eszköz rendelkezik egy <option>&lt;ESZKÖZNÉV&gt;_OPTIONS</option> formájú változóval (például a <application>gtkdoc-mkhtml</application> eszköznek van egy <code>MKHTML_OPTIONS</code> nevű kapcsolója). Az összes eszköz támogatja a <option>--help</option> kapcsolót a támogatott kapcsolók felsorolásához.</para>
+
+        <para>A következő lista a legfontosabb kapcsolókat ismerteti. További kapcsolókért nézze meg a <filename>Makefile.am</filename> példát. <itemizedlist>
+            <listitem>
+              <para>A <option>DOC_MODULE</option> a dokumentálandó csomag nevének megadására szolgál (például <code>meeper</code> vagy <code>libmeep</code>).</para>
+            </listitem>
+            <listitem>
+              <para>A <option>DOC_SOURCE_DIR</option> a forráskönyvtár helyének megadására szolgál, amelyben a GTK-Doc az API dokumentációját keresi. Ez általában a <code>DOC_SOURCE_DIR=$(top_srcdir)/src</code> vagy annak a könyvtárnak az alkönyvtára.</para>
+            </listitem>
+
+            <listitem>
+              <para>A <option>HFILE_GLOB</option> és <option>CFILE_GLOB</option> a függőségekhez használatos. Mindkét kapcsoló egy fájl globot vár (például <code>HFILE_GLOB=$(top_srcdir)/src/*.c</code>). A dokumentáció újra összeállításra kerül, ha bármelyik illeszkedő fájl megváltozik.</para>
+            </listitem>
+
+            <listitem>
+              <para>Az <option>EXTRA_HFILES</option> lehetővé teszi az API-dokumentáció keresésekor a további beágyazandó fejlécfájlok megadását, amelyek nem találhatók meg a <code>DOC_SOURCE_DIR</code> alatt (például <code> EXTRA_HFILES=$(top_srcdir}/contrib/extra.h</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para>Az <option>IGNORE_HFILES</option> lehetővé teszi a figyelmen kívül hagyandó fejlécfájlok vagy könyvtárak megadását az API-dokumentáció keresésekor. Használja a fájl vagy könyvtár alapnevét (például <code>IGNORE_HFILES=gtkdebug.h gtkintl.h személyes_kód_mappa</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para>A <option>HTML_IMAGES</option> lehetővé teszi az olyan képfájlok megadását, amelyek az előállított dokumentáció <filename>html/</filename> könyvtárába lesznek másolva. Ha az API-dokumentáció tartalmaz képeket, akkor azokat is hozzá kell adni ehhez a kapcsolóhoz (például <code>HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para>A <option>content_files</option> lehetővé teszi a további fájlok megadását, amelyeket a <code>$(DOC_MAIN_SGML_FILE)</code> beágyaz (például <code>content_files=running.xml building.xml changes-2.0.xml</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para>Az <option>expand_content_files</option> lehetővé teszi azoknak a fájloknak a megadását, ahol a <emphasis>gtk-doc rövidítések</emphasis> – mint például a <code>#GtkWidget</code> – ki vannak bővítve (például <code>expand_content_files=running.xml</code>).</para>
+            </listitem>
+          </itemizedlist></para>
+
+      </sect2>
+
+      <sect2 id="settingup_autoconf">
+        <title>Integráció az autoconf programmal</title>
+
+        <para>Az <application>autoconf</application> programmal való integráció nagyon egyszerű, és egy kötelező, valamint egy további választható (de ajánlott) lépést tartalmaz. Az első lépés a <function>GTK_DOC_CHECK</function> makró hozzáadása a <filename>configure.ac</filename> parancsfájljához. Ez számos beállítási kapcsolót regisztrál a GTK-Doc engedélyezéséhez, és lehetővé teszi a <application>gtkdocize</application> alapértelmezett argumentumainak beállítását.</para>
+
+        <warning>
+          <simpara>Győződjön meg arról, hogy a <code>GTK_DOC_CHECK</code> makró ne legyen behúzva. A makrónak a sor elején kell kezdődnie, és nem kezdődhet üres karakterekkel.</simpara>
+        </warning>
+
+        <para>A második lépés az <code>AC_CONFIG_MACRO_DIR(m4)</code> hozzáadása a <filename>configure.ac</filename> parancsfájljához. Ez nem kötelező, de segít a <application>gtkdocize</application> eszköznek abban, hogy azt a makródefiníciót (például <filename>gtk-doc.m4</filename>), amely a <function>GTK_DOC_CHECK</function> makrót tartalmazza, automatikusan a projektje makrókönyvtárába másolja. Enélkül előfordulhat, hogy a GTK_DOC_CHECK makrót nem találja meg, és kifejezetten meg kell mondania az <application>aclocal</application> eszköznek, hogy hol találja meg a makródefiníciós fájlt.</para>
+
+        <para>
+          <example><title>Minimális integráció az autoconf programmal</title>
+            <programlisting>
+# ajánlott: az m4 könyvtár beállítása
+AC_CONFIG_MACRO_DIR(m4)
+# elhagyható: a gtk-doc regisztrálása a configure fájlban
+GTK_DOC_CHECK([1.28])
+</programlisting>
+          </example>
+        </para>
+
+        <para>A fenti példa működik, de minden fejlesztőtől megköveteli a gtk-doc telepítését. Jobb megoldás, ha a dokumentáció összeállítását nem tesszük kötelezővé, ahogy a következő példában látható: <example>
+            <title>Integráció a választható gtk-doc függőséggel</title>
+            <programlisting>
+m4_ifdef([GTK_DOC_CHECK], [
+# ajánlott: az m4 könyvtár beállítása
+AC_CONFIG_MACRO_DIR(m4)
+# elhagyható: a gtk-doc regisztrálása a configure fájlban
+GTK_DOC_CHECK([1.28])
+],[
+AM_CONDITIONAL([ENABLE_GTK_DOC], false)
+])
+</programlisting>
+          </example></para>
+
+        <para>Az első argumentum a GTK-Doc verziójának ellenőrzésére szolgál a beállításkor. A második, nem kötelező argumentumot a <application>gtkdocize</application> használja. A <symbol>GTK_DOC_CHECK</symbol> makró számos beállítási kapcsolót is hozzáad:</para>
+
+        <orderedlist>
+          <listitem><para>--with-html-dir=PATH : útvonal a telepített dokumentációkhoz</para></listitem>
+          <listitem><para>--enable-gtk-doc : a gtk-doc használata a dokumentáció összeállításához [alapértelmezett=nem]</para></listitem>
+          <listitem><para>--enable-gtk-doc-html : dokumentáció összeállítása HTML formátumban [alapértelmezett=igen]</para></listitem>
+          <listitem><para>--enable-gtk-doc-pdf : dokumentáció összeállítása PDF formátumban [alapértelmezett=nem]</para></listitem>
+        </orderedlist>
+
+        <important>
+          <para>A GTK-Doc alapértelmezetten le van tiltva! Ne felejtse el átadni az <option>--enable-gtk-doc</option> kapcsolót a következő <filename>configure</filename> futtatásához. Egyébként előre előállított dokumentáció kerül telepítésre (aminek a felhasználók számára van értelme, de a fejlesztők számára nincs).</para>
+        </important>
+
+        <para>Miután a <filename>configure.ac</filename> fájl összes módosítása megtörtént, frissítse a <filename>configure</filename> fájlt. Ezt az <code>autogen.sh</code> újbóli futtatásával lehet megtenni.</para>
+      </sect2>
+
+      <sect2 id="settingup_autogen">
+        <title>Integráció az autogen programmal</title>
+
+        <para>A legtöbb projekt rendelkezik <filename>autogen.sh</filename> parancsfájllal az összeállítási infrastruktúra beállításához, miután a projektet lekérték egy verziókövető rendszerből (például git vagy svn). A GTK-Doc egy <application>gtkdocize</application> nevű parancsfájllal érkezik, amely arra használható, hogy a GTK-Doc számára szükséges fájlokat a forráskönyvtárba másolja.</para>
+
+        <para>Ezt az autoreconf, autoheader, automake vagy autoconf előtt kell futtatni.</para>
+
+        <para>
+          <example><title>A gtkdocize futtatása az autogen.sh fájlból</title>
+            <programlisting>
+gtkdocize || exit 1
+</programlisting>
+          </example>
+        </para>
+
+        <para>
+          <example>
+            <title>A gtkdocize feltételes futtatása az autogen.sh fájlból</title>
+            <programlisting>
+GTKDOCIZE=$(which gtkdocize 2&gt;/dev/null)
+if test $? -ne 0; then
+  echo "Nem található gtk-doc támogatás. Nem állítható össze a dokumentáció."
+else
+  $GTKDOCIZE || exit 1
+fi
+</programlisting>
+          </example>
+        </para>
+
+        <para>A <application>gtkdocize</application> futtatásakor átmásolja a <filename>gtk-doc.make</filename> fájlt a projektje gyökerébe (vagy a <option>--docdir</option> kapcsolóval megadott bármely könyvtárba).</para>
+
+        <para>A <application>gtkdocize</application> átnézi a <filename>configure.ac</filename> parancsfájlt a <function>GTK_DOC_CHECK</function> makrót keresve. A <function>GTK_DOC_CHECK</function> makró használható további argumentumok átadásához a <application>gtkdocize</application> parancsfájl számára. A második paraméter a <function>GTK_DOC_CHECK</function> makróban.</para>
+
+        <para>Másik lehetőségként további argumentumok is átadhatók a <application>gtkdocize</application> makrónak a <function>GTKDOCIZE_FLAGS</function> környezeti változón keresztül, vagy közvetlenül megadva azokat a <application>gtkdocize</application> számára az <filename>autogen.sh</filename> fájlban.</para>
+
+      </sect2>
+
+      <sect2 id="settingup_firstrun">
+        <title>A GTK-Doc végrehajtása az összeállítási rendszerből</title>
+
+        <para>Az előző lépések után itt az ideje az összeállítás futtatásának. Először az <filename>autogen.sh</filename> ismételt futtatása szükséges. Ha ez a parancsfájl futtatja a configure fájlt, akkor adja meg neki az <option>--enable-gtk-doc</option> kapcsolót. Ellenkező esetben futtassa kézzel a <filename>configure</filename> fájlt utólag ezzel a kapcsolóval.</para>
+        <para>A make első futtatása számos további fájlt állít elő a dokumentációs könyvtárakban. A legfontosabbak a következők: <filename>&lt;csomag&gt;.types</filename>, <filename>&lt;csomag&gt;-docs.xml</filename> (régebben .sgml), <filename>&lt;csomag&gt;-sections.txt</filename>.</para>
+        <para>
+          <example><title>A dokumentáció összeállításának futtatása</title>
+            <programlisting>
+./autogen.sh --enable-gtk-doc
+make
+</programlisting>
+          </example>
+        </para>
+
+        <para>Most nyissa meg a böngészőjével a <filename>docs/reference/&lt;csomag&gt;/index.html</filename> fájlt. Ezzel a kezdeti beállítással csak egy nagyon egyszerű dokumentumot fog látni. A következő fejezetben megtanítjuk, hogyan adhat API-dokumentációt a kódjához a különleges megjegyzésblokkok segítségével. A fejezet ezt követően bemutatja a <link linkend="metafiles">további fájlokat</link>, és megmutatja, hogyan szerkesztheti a <link linkend="metafiles_master">mestersablont</link>, hogy további fejezeteket és szakaszokat adjon a dokumentációs fájljaihoz.</para>
+
+      </sect2>
+
+    </sect1>
+
+    <sect1 id="settingup_cmake">
+      <title>Integráció a CMake összeállítási rendszerekkel</title>
+
+      <para>A GTK-Doc mostantól biztosít egy <filename>GtkDocConfig.cmake</filename> modult (és a megfelelő <filename>GtkDocConfigVersion.cmake</filename> modult). Ez biztosít egy <literal>gtk_doc_add_module</literal> parancsot, amelyet beállíthat a <filename>CMakeLists.txt</filename> fájlban.</para>
+
+      <para>A következő példa azt mutatja be, hogy hogyan kell használni ezt a parancsot. <example><title>Példa a GTK-Doc CMake-ből való használatára</title>
+          <programlisting>
+find_package(GtkDoc 1.25 REQUIRED)
+
+# A doc-libmeep cél létrehozása.
+gtk_doc_add_module(
+   libmeep ${CMAKE_SOURCE_DIR}/libmeep
+      XML meep-docs.xml
+      LIBRARIES libmeep
+)
+
+# A doc-libmeep összeállítása az alapértelmezett cél részeként. Enélkül
+# kifejezetten futtatni kellene valami olyasmit, mint a „make doc-libmeep”
+# a dokumentáció összeállításához.add_custom_target(documentation ALL DEPENDS doc-libmeep)
+
+# A dokumentáció telepítése (ez azt feltételezi, hogy a GNUInstallDirs CMake
+# modulját használja a CMAKE_INSTALL_DOCDIR változó helyes beállításához).
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/libmeep/html
+        DESTINATION ${CMAKE_INSTALL_DOCDIR})
+</programlisting>
+        </example></para>
+    </sect1>
+
+    <sect1 id="settingup_plain_makefiles">
+      <title>Integráció egyszerű makefile-okkal vagy egyéb összeállítási rendszerekkel</title>
+
+      <para>Abban az esetben, ha valaki nem szeretné az automake és ezáltal a <filename>gtk-doc.mak</filename> használatát, akkor a gtkdoc eszközöket a megfelelő sorrendben kell meghívni a saját makefile-okban (vagy más összeállítási eszközökben).</para>
+
+      <para>
+        <example><title>Dokumentáció összeállítási lépései</title>
+          <programlisting>
+DOC_MODULE=meep
+// források megváltoztak
+gtkdoc-scan --module=$(DOC_MODULE) &lt;source-dir&gt;
+gtkdoc-scangobj --module=$(DOC_MODULE)
+gtkdoc-mkdb --module=$(DOC_MODULE) --output-format=xml --source-dir=&lt;source-dir&gt;
+// XML-fájlok megváltoztak
+mkdir html
+cd html &amp;&amp; gtkdoc-mkhtml $(DOC_MODULE) ../meep-docs.xml
+gtkdoc-fixxref --module=$(DOC_MODULE) --module-dir=html
+</programlisting>
+        </example>
+      </para>
+
+      <para>Meg kell nézni a <filename>Makefile.am</filename> és a <filename>gtk-doc.mak</filename> fájlokat a szükséges további kapcsolók kiválasztásához.</para>
+    </sect1>
+
+    <sect1 id="settingup_vcs">
+      <title>Integráció verziókövető rendszerekkel</title>
+
+      <para>Ökölszabályként a szerkesztett fájloknak kell verziókövetés alá kerülniük. Tipikus projektek esetén ezek a következő fájlok: <filename>&lt;csomag&gt;.types</filename>, <filename>&lt;csomag&gt;-docs.xml</filename> (régebben .sgml), <filename>&lt;csomag&gt;-sections.txt</filename>, <filename>Makefile.am</filename>.</para>
+      <para>Az <filename>xml/</filename> és a <filename>html/</filename> könyvtárakban lévő fájlok nem kerülhetnek verziókövetés alá. A <filename>.stamp</filename> fájlok egyikének sem kellene.</para>
+    </sect1>
+
+  </chapter>
+
+  <chapter id="documenting">
+    <title>A kód dokumentálása</title>
+
+    <para>A GTK-Doc a forráskód különleges szintaxisú megjegyzéseit használja a kód dokumentációjához. Továbbá információkat szerez a projekt szerkezetéről más forrásokból. A következő szakaszban minden információt megtalál a megjegyzések szintaxisáról.</para>
+
+    <para>A GTK-Doc átvizsgáló a C fejlécek többségét jól tudja kezelni. Abban az esetben, ha az átvizsgálótól olyan figyelmeztetések érkeznek, amelyek különleges esetnek tűnnek, a GTK-Doc eszköznek jelezni lehet, hogy hagyja ki azokat. <example><title>GTK-Doc megjegyzésblokk</title>
+        <programlisting>
+#ifndef __GTK_DOC_IGNORE__
+/* feldolgozhatatlan kód itt */
+#endif
+</programlisting>
+      </example></para>
+
+    <note>
+      <title>Korlátozások</title>
+      <para>Ne feledje, hogy a GTK-Doc az <code>#ifndef(__GTK_DOC_IGNORE__)</code> megadást támogatja, de az <code>#if !defined(__GTK_DOC_IGNORE__)</code> vagy egyéb kombinációkat nem.</para>
+    </note>
+
+    <!--  -->
+
+    <sect1 id="documenting_syntax">
+      <title>Dokumentációs megjegyzések</title>
+
+      <para>Egy további „*” karakterrel kezdődő többsoros megjegyzés olyan dokumentációs blokkot jelöl, amelyet a GTK-Doc eszközök feldolgoznak. <example><title>GTK-Doc megjegyzésblokk</title>
+          <programlisting>
+/**
+ * azonosító:
+ * dokumentáció ...
+ */
+</programlisting>
+        </example></para>
+
+      <para>Az „azonosító” egy sorban tartalmazza annak az elemnek a nevét, amelyhez a megjegyzés kapcsolódik. A szintaxis az elemtől függően némileg eltér. (TEENDŐ: az azonosítókat megjelenítő táblázat hozzáadása)</para>
+
+      <para>A „dokumentáció” blokk szintén különbözik az egyes szimbólumtípusoknál. A paramétereket kapó szimbólumtípusoknál, mint például a függvények vagy makrók, a paraméter leírása az első, amit egy üres sor követ (csak egy „*”). Ezután következik a részletes leírás. Az összes olyan sor (a programlistákon és a CDATA szakaszokon kívül), amely csak „ *” karaktereket (üres helyet és csillagot) tartalmaz, bekezdéstörésekké lesznek átalakítva. Ha nem szeretne bekezdéstörést, akkor változtassa át „ * ” karaktersorozatra (üres hely, csillag, üres hely, üres hely). Ez hasznos az előformázott szövegnél (kódlistáknál).</para>
+
+      <tip>
+        <para>A kód dokumentálásakor két szempontot kell leírni: <itemizedlist>
+             <listitem>
+               <para>Mi ez: egy osztály vagy funkció neve néha félrevezető lehet a más háttérrel érkezők számára.</para>
+             </listitem>
+             <listitem>
+               <para>Mit csinál: mondja el a gyakori használatot, helyezze kapcsolatba a többi API-val.</para>
+             </listitem>
+           </itemizedlist></para>
+      </tip>
+
+      <para>A hiperszöveg egyik előnye az egyszerű szöveggel szemben az, hogy a dokumentumban hivatkozások is lehetnek. Egy hivatkozás megfelelő jelölésének megírása azonban fárasztó lehet. A GTK-Doc számos hasznos rövidítéssel segít ebben. <itemizedlist>
+          <listitem>
+            <para>Használja a függvény() jelölést az olyan függvényekre vagy makrókra való hivatkozáshoz, amelyek argumentumokat fogadnak el.</para>
+          </listitem>
+          <listitem>
+            <para>Használja a @paraméter jelölést a paraméterekre való hivatkozáshoz. Akkor is használja, ha más függvények paramétereire hivatkozik, amelyek a leírtakhoz kapcsolódnak.</para>
+          </listitem>
+          <listitem>
+            <para>Használja a %konstans jelölést egy konstansra való hivatkozáshoz, például %G_TRAVERSE_LEAFS.</para>
+          </listitem>
+          <listitem>
+            <para>Használja a #szimbólum jelölést más típusú szimbólumokra, például struktúrákra, felsorolásokra és olyan makrókra, amelyek nem fogadnak el argumentumokat.</para>
+          </listitem>
+          <listitem>
+            <para>Használja az #Objektum::szignál jelölést egy GObject szignálra való hivatkozáshoz.</para>
+          </listitem>
+          <listitem>
+            <para>Használja az #Objektum:tulajdonság jelölést egy GObject tulajdonságra való hivatkozáshoz.</para>
+          </listitem>
+          <listitem>
+            <para>Használja a #Struktúra.mező jelölést egy struktúrán belüli mezőre való hivatkozáshoz, és a #GObjectClass.foo_bar() jelölést egy virtuális metódusra való hivatkozáshoz.</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <tip>
+        <para>Ha különleges karaktereket („&lt;”, „&gt;”, „(”, „)”, „@”, „%” vagy „#”) kell használnia a dokumentációban anélkül, hogy a GTK-Doc megváltoztatná azokat, használhatja az XML-entitásukat („&amp;lt;”, „&amp;gt;”, „&amp;lpar;”, „&amp;rpar;”, „&amp;commat;”, „&amp;percnt;” vagy „&amp;num;”) a fentieknek megfelelően vagy elfedheti azokat egy visszafelé mutató perjellel („\”).</para>
+      </tip>
+
+      <para>A DocBook többre is képes a hivatkozásoknál. Lehetnek benne listák, példák, címsorok és képek is. Az 1.20-as verziótól kezdve az előnyben részesített mód a <ulink url="http://daringfireball.net/projects/markdown/">Markdown</ulink> nevű alapvető szövegformázási szintaxis egy részhalmazának használata. A régebbi GTK-Doc verziókban minden olyan dokumentáció, amely Markdown formátumot tartalmaz, úgy lesz megjelenítve, ahogy van. Például a listaelemek kötőjellel kezdődő sorokként jelennek meg.</para>
+
+      <para>Míg a Markdown most előnyben részesített, mindkettőt lehet vegyesen használni. Az egyik korlátozás az, hogy a DocBook XML használható a Markdown jelölésen belül, de a Markdown a DocBook XML-en belül nem támogatott.</para>
+
+      <para>Ha a régebbi GTK-Doc kiadásokban további formázási támogatásra volt szüksége, akkor engedélyeznie kellett a DocBook XML címkék használatát a dokumentációs megjegyzéseken belül úgy, hogy <option>--xml-mode</option> (vagy <option>--sgml-mode</option>) kapcsolókat tett az <symbol>MKDB_OPTIONS</symbol> változóba a <filename>Makefile.am</filename> fájlon belül.</para>
+
+      <para>
+        <example><title>GTK-Doc megjegyzésblokk Markdown használatával</title>
+          <programlisting>
+/**
+ * azonosító:
+ *
+ * dokumentációs bekezdés ...
+ *
+ * # Alcímsor #
+ *
+ * ## Második alcímsor
+ *
+ * # Alcímsor hivatkozási horgonnyal # {#heading-two}
+ *
+ * további dokumentáció:
+ *
+ * - Első listaelem
+ *
+ *   Bekezdés a listaelemen belül.
+ *
+ * - Második listaelem
+ *
+ * 1. számozott listaelem
+ *
+ * 2. egy másik számozott listaelem
+ *
+ * Még egy bekezdés. [Hivatkozás a GNOME webhelyére](http://www.gnome.org/)
+ *
+ * ![egy beágyazott kép](plot-result.png)
+ *
+ * [Hivatkozás a fenti címsorhorgonyra][heading-two]
+ *
+ * Egy C nyelven írt példa:
+ * |[&lt;!-- language="C" --&gt;
+ * GtkWidget *label = gtk_label_new ("Gyönyörű!");
+ * ]|
+ */
+</programlisting>
+        </example>
+      </para>
+
+      <para>További példák találhatók a támogatott Markdown-címkékre a <ulink url="https://wiki.gnome.org/Projects/GTK/DocumentationSyntax/Markdown">GTK dokumentáció Markdown-szintaxis hivatkozásában</ulink>.</para>
+
+      <tip>
+        <para>Mint már korábban említettük, a GTK-Doc a nyilvános API dokumentálására szolgál. Így statikus szimbólumokhoz nem lehet dokumentációt írni. Mindazonáltal jó, ha ezeket a szimbólumokat is ellátjuk megjegyzéssel. Ez segít más fejlesztőknek megérteni a kódot. Ezért azt javasoljuk, hogy ezeket normál megjegyzésekkel dokumentálja (a második „*” nélkül az első sorban). Ha később a függvényt nyilvánossá kell tenni, akkor csak annyit kell elvégezni, hogy a egy újabb „*” karaktert kell hozzáadni a megjegyzésblokkhoz, és a megfelelő helyre be kell illeszteni a szimbólum nevét a „sections” fájljában.</para>
+      </tip>
+    </sect1>
+
+    <sect1 id="documenting_sections">
+      <title>Szakaszok dokumentálása</title>
+
+      <para>A dokumentáció minden egyes szakasza egy-egy osztályról vagy modulról tartalmaz információt. Az összetevő bemutatásához írhatunk szakaszblokkot. A rövid leírást a tartalomjegyzéken belül is használják. Egyik @mező használata sem kötelező.</para>
+
+      <para>
+        <example><title>Szakasz megjegyzésblokkja</title>
+          <programlisting>
+/**
+ * SECTION:meepapp
+ * @short_description: az alkalmazás osztálya
+ * @title: Meep alkalmazás
+ * @section_id:
+ * @see_also: #MeepSettings
+ * @stability: Stable
+ * @include: meep/app.h
+ * @image: application.png
+ *
+ * Az alkalmazás osztálya kezeli a ...
+ */
+</programlisting>
+        </example>
+      </para>
+
+      <variablelist>
+        <varlistentry>
+          <term>SECTION:&lt;név&gt;</term>
+          <listitem>
+            <para>A név összekapcsolja a szakasz dokumentációját a <filename>&lt;csomag&gt;-sections.txt</filename> fájl megfelelő részével. Az itt megadott névnek meg kell egyeznie a &lt;FILE&gt; címkével a <filename>&lt;csomag&gt;-sections.txt</filename> fájlban.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@short_description</term>
+          <listitem>
+            <para>A szakasz egysoros leírása, amely később a hivatkozás után jelenik meg a tartalomjegyzékben és a szakasz oldalának tetején.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@title</term>
+          <listitem>
+            <para>A szakasz címe alapértelmezetten a SECTION deklarációból származó &lt;név&gt;. Ez felülírható a @title mezővel.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@section_id</term>
+          <listitem>
+            <para>Felülírja a cím szakaszazonosítóként való használatát. A GObject objektumoknál a &lt;title&gt; lesz szakaszazonosítóként használva, más szakaszoknál pedig a &lt;MODUL&gt;-&lt;cím&gt;.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@see_also</term>
+          <listitem>
+            <para>A szakaszhoz kapcsolódó szimbólumok listája.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@stability</term>
+          <listitem>
+            <para>Az API stabilitási szintjének nem hivatalos leírása. Javasoljuk a következő kifejezések egyikének használatát: <itemizedlist>
+                <listitem>
+                  <para>Stable – A stabil interfész célja, hogy lehetővé tegye tetszőleges harmadik fél számára, hogy alkalmazásokat fejlesszen ezekre az interfészekre, kiadja azokat, és bízzon abban, hogy azok a termék minden kisebb kiadásán futni fognak (az interfész bevezetését követő, de ugyanazon fő kiadáson belül). Még egy fő kiadásnál is elvárható, hogy az inkompatibilis változtatások ritkák legyenek, és hogy erős indoklással rendelkezzenek.</para>
+                </listitem>
+                <listitem>
+                  <para>Unstable – Az instabil interfészek kísérleti vagy átmeneti jellegűek. Általában arra használják azokat, hogy külső fejlesztőknek korai hozzáférést biztosítsanak új vagy gyorsan változó technológiához, vagy hogy átmeneti megoldást nyújtsanak egy olyan problémára, amelyre általánosabb megoldást várnak. Sem a forrás-, sem a bináris kompatibilitás tekintetében nem állítanak semmit az egyik kisebb kiadásról a másikra.</para>
+                </listitem>
+                <listitem>
+                  <para>Private – Egy olyan interfész, amely a GNOME rendszerben használható, de nincs dokumentálva a végfelhasználók számára. Az ilyen függvényeket csak meghatározott és dokumentált módon szabad használni.</para>
+                </listitem>
+                <listitem>
+                  <para>Internal – Egy olyan interfész, amely egy modul belső része, és nem igényel végfelhasználói dokumentációt. A dokumentálatlan függvények belsőnek tekintendők.</para>
+                </listitem>
+              </itemizedlist></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@include</term>
+          <listitem>
+            <para>Az <literal>#include</literal> fájlok, amelyeket a szakasz összefoglalójában kell megjeleníteni (vesszővel elválasztott lista), felülírva a <link linkend="metafiles_sections">szakaszfájlból</link> vagy a parancssorból származó globális értéket. Ez az elem nem kötelező.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@image</term>
+          <listitem>
+            <para>Az a kép, amelyet a hivatkozási oldal tetején kell megjeleníteni ebben a szakaszban. Ez gyakran valamilyen diagram lesz, amely az osztály vizuális megjelenését vagy más osztályokkal való kapcsolatát szemlélteti. Ez az elem nem kötelező.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <tip>
+        <para>A felesleges újrafordítás elkerülése érdekében a dokumentáció változtatásai után tegye a szakasz dokumentációit a C-forrásba, ahol csak lehetséges.</para>
+      </tip>
+
+    </sect1>
+
+    <sect1 id="documenting_symbols">
+      <title>Szimbólumok dokumentálása</title>
+
+      <para>Minden szimbólum (függvény, makró, struktúra, felsorolás, szignál és tulajdonság) külön blokkban van dokumentálva. A blokkot célszerű a szimbólumok definíciójához közel elhelyezni, hogy könnyen szinkronban lehessen tartani őket. Így a függvényeket általában a C-forrásban, a makrókat, struktúrákat és felsorolásokat pedig a fejlécfájlban dokumentálják.</para>
+
+      <sect2><title>Általános címkék</title>
+
+        <para>Verziózási információkat adhat az összes dokumentációs elemhez, hogy megmondja, mikor lett egy API bevezetve, vagy mikor vált elavulttá.</para>
+
+        <variablelist><title>Verziózási címkék</title>
+          <varlistentry><term>Since:</term>
+            <listitem>
+              <para>Annak leírása, hogy a kód melyik verziója óta érhető el az API.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>Deprecated:</term>
+            <listitem>
+              <para>Olyan bekezdés, amely azt jelzi, hogy ezt a funkciót nem szabad tovább használni. A leírásnak az új API-ra kell irányítania az olvasót.</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+
+        <para>Az összes dokumentációs elemhez stabilitási információt is adhat annak feltüntetéséhez, hogy az API stabilitása garantált-e hozzájuk a projekt összes jövőbeli kisebb kiadásában.</para>
+
+        <para>Az összes dokumentációs elem alapértelmezett stabilitási szintje beállítható a <option>--default-stability</option> argumentum <application>gtkdoc-mkdb</application> részére történő átadásával, az alábbi értékek egyikével.</para>
+
+        <variablelist><title>Stabilitási címkék</title>
+          <varlistentry><term>Stability: Stable</term>
+            <listitem>
+              <para>Az elem megjelölése stabilként. Ez olyan nyilvános API-kra vonatkozik, amelyek garantáltan stabilak maradnak a projekt összes jövőbeli kisebb kiadásában.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>Stability: Unstable</term>
+            <listitem>
+              <para>Az elem megjelölése instabilként. Ez olyan nyilvános API-kra vonatkozik, amelyeket előzetesként adnak ki a stabilizálás előtt.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>Stability: Private</term>
+            <listitem>
+              <para>Az elem megjelölése privátként. Ez olyan interfészekre vonatkozik, amelyeket szorosan összekapcsolt modulok használhatnak, de tetszőleges harmadik felek nem.</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+
+        <example><title>Általános címkék</title>
+          <programlisting>
+/**
+ * foo_get_bar:
+ * @foo: valamilyen izé
+ *
+ * Visszaadja a @foo bigyóját.
+ *
+ * Returns: @foo' bigyója
+ *
+ * Since: 2.6
+ * Deprecated: 2.12: Használja a foo_baz_get_bar() függvényt helyette.
+ */
+Bar *
+foo_get_bar(Foo *foo)
+{
+...
+</programlisting>
+        </example>
+      </sect2>
+
+      <sect2><title>Magyarázó jegyzetek</title>
+
+        <para>A dokumentációs blokkok tartalmazhatnak magyarázó megjegyzés címkéket. Ezek a címkék a jelentésüket leíró buboréksúgókkal lesznek megjelenítve. A címkéket a GObject Introspection használja a nyelvi kötődések előállításához. A támogatott címkék részletes listája megtalálható a <ulink url="https://gi.readthedocs.io/en/latest/annotations/giannotations.html" type="http">GObject Introspection dokumentációjában</ulink>.</para>
+
+        <example><title>Magyarázó jegyzetek</title>
+          <programlisting>
+/**
+ * foo_get_bar: (megjegyzés)
+ * @foo: (megjegyzés): valamilyen izé
+ *
+ * Visszaadja a @foo bigyóját.
+ *
+ * Returns: (megjegyzés): a @foo bigyója
+ */
+...
+/**
+ * foo_set_bar_using_the_frobnicator: (megjegyzés) (másik megjegyzés)
+ *                                    (és még egy megjegyzés)
+ * @foo: (megjegyzés) (másik megjegyzés): valamilyen izé
+ *
+ * Beállítja a bigyót a @foo izén.
+ */
+</programlisting>
+        </example>
+      </sect2>
+
+      <sect2><title>Függvény megjegyzésblokkja</title>
+
+        <para>Ne felejtse el a következőket: <itemizedlist>
+            <listitem>
+              <para>Dokumentálja, hogy a visszaadott objektumokat, listákat, karakterláncokat stb. fel kell-e szabadítani, meg kell-e szüntetni a hivatkozásukat, illetve ki kell-e adni.</para>
+            </listitem>
+            <listitem>
+              <para>Dokumentálja, hogy a paraméterek lehetnek-e NULL értékűek, és mi történjen, ha azok.</para>
+            </listitem>
+            <listitem>
+              <para>Említse meg az érdekes elő- és utófeltételeket, ahol szükséges.</para>
+            </listitem>
+          </itemizedlist></para>
+
+        <para>A GTK-Doc azt feltételezi, hogy az összes „_” karakterrel kezdődő szimbólum (makró, függvény) privát. Úgy kezeli őket, mint a statikus függvényeket.</para>
+
+        <example><title>Függvény megjegyzésblokkja</title>
+          <programlisting>
+/**
+ * függvénynév:
+ * @par1: az 1. paraméter leírása. Ez kiterjedhet több
+ * sorra is.
+ * @par2: a 2. paraméter leírása.
+ * @...: %NULL-ra végződő bigyólisták.
+ *
+ * A függvény leírása kerül ide. A @par1 használatával hivatkozhat a
+ * paraméterekre, így azok a kimeneten kiemelve jelennek meg. Használhatja
+ * továbbá a %konstans jelzőt konstansok esetén, a függvény_neve2() jelzőt
+ * függvények esetén és a #GtkWidget jelzőt más deklarációkra mutató
+ * hivatkozások esetén (amelyek máshol lehetnek dokumentálva).
+ *
+ * Returns: egy egész szám.
+ *
+ * Since: 2.2
+ * Deprecated: 2.18: Használja az egyéb_függvény() függvényt helyette.
+ */
+</programlisting>
+        </example>
+
+        <variablelist><title>A függvény címkéi</title>
+          <varlistentry><term>Returns:</term>
+            <listitem>
+              <para>A visszaadott eredményt leíró bekezdés.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>@...:</term>
+            <listitem>
+              <para>Abban az esetben, ha a függvénynek változó argumentumai vannak, akkor ezt a címkét kell használnia (a @Varargs: történelmi okokból szintén működik).</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+
+      </sect2>
+
+      <sect2><title>Tulajdonság megjegyzésblokkja</title>
+
+        <example><title>Tulajdonság megjegyzésblokkja</title>
+          <programlisting>
+/**
+ * ValamilyenElem:valamilyen-tulajdonság:
+ *
+ * Itt dokumentálhat egy tulajdonságot.
+ */
+g_object_class_install_property (object_class, PROP_SOME_PROPERTY, ...);
+</programlisting>
+        </example>
+
+      </sect2>
+
+      <sect2><title>Szignál megjegyzésblokkja</title>
+
+        <para>Ne felejtse el a következőket: <itemizedlist>
+            <listitem>
+              <para>Dokumentálja, hogy a szignál mikor kerül kibocsátásra, és hogy más szignálok előtt vagy után kerül-e kibocsátásra.</para>
+            </listitem>
+            <listitem>
+              <para>Dokumentálja, hogy mit tehet egy alkalmazás a szignál kezelőjében.</para>
+            </listitem>
+          </itemizedlist></para>
+
+        <example><title>Szignál megjegyzésblokkja</title>
+          <programlisting>
+/**
+ * FooWidget::foobarized:
+ * @widget: a kütyü, amely fogadta a szignált
+ * @foo: valamilyen izé
+ * @bar: valamilyen bigyó
+ *
+ * A ::foobarized szignál minden alkalommal kibocsátásra kerül, ha valaki
+ * megpróbálja megizélni a @widget kütyüt.
+ */
+foo_signals[FOOBARIZED] =
+  g_signal_new ("foobarized",
+                ...
+</programlisting>
+        </example>
+
+      </sect2>
+
+      <sect2><title>Struktúra megjegyzésblokkja</title>
+        <example><title>Struktúra megjegyzésblokkja</title>
+          <programlisting>
+/**
+ * FooWidget:
+ * @bar: valamilyen #gboolean
+ *
+ * Ez a valaha volt legjobb kütyü.
+ */
+typedef struct _FooWidget {
+  GtkWidget parent_instance;
+
+  gboolean bar;
+} FooWidget;
+</programlisting>
+        </example>
+
+        <para>Használja a <code>/*&lt; private &gt;*/</code> jelölést azon privát struktúramezők előtt, amelyeket el szeretne rejteni. Használja a <code>/*&lt; public &gt;*/</code> jelölést a fordított viselkedésért.</para>
+
+        <para>Ha az első mező „g_iface”, „parent_instance” vagy „parent_class”, akkor az automatikusan privátnak minősül, és nem kell megemlíteni a megjegyzésblokkban.</para>
+
+        <para>A struktúrák megjegyzésblokkjai GObjectek és GObjectClassok esetében is használhatók. Általában jó ötlet egy osztályhoz megjegyzésblokkot hozzáadni, ha van virtuális metódusa (mivel így lehet dokumentálni). Magához a GObjecthez használhatjuk a kapcsolódó szakaszok dokumentációit, a példánystruktúrához külön blokkot kell létrehozni, ami akkor hasznos, ha a példánynak nyilvános mezői vannak. Ennek egyik hátránya, hogy ez két azonos nevű indexbejegyzést hoz létre (a struktúra és a szakasz).</para>
+
+      </sect2>
+
+      <sect2><title>Felsorolás megjegyzésblokkja</title>
+        <example><title>Felsorolás megjegyzésblokkja</title>
+          <programlisting>
+/**
+ * Something:
+ * @SOMETHING_FOO: valamilyen izé
+ * @SOMETHING_BAR: valamilyen bigyó
+ *
+ * A dologhoz használt felsorolásértékek a dolog meghatározásához.
+ */
+typedef enum {
+  SOMETHING_FOO,
+  SOMETHING_BAR,
+  /*&lt; private &gt;*/
+  SOMETHING_COUNT
+} Something;
+</programlisting>
+        </example>
+
+        <para>Használja a <code>/*&lt; private &gt;*/</code> jelölést azon privát felsorolásértékek előtt, amelyeket el szeretne rejteni. Használja a <code>/*&lt; public &gt;*/</code> jelölést a fordított viselkedésért.</para>
+
+      </sect2>
+    </sect1>
+
+
+    <sect1 id="documenting_inline_program">
+      <title>Beágyazott program dokumentációja</title>
+      <para>Dokumentálhat programokat és a parancssori interfészüket beágyazott dokumentáció használatával.</para>
+
+      <variablelist>
+      <title>Címkék</title>
+
+      <varlistentry><term>PROGRAM</term>
+
+      <listitem>
+      <para>Meghatározza egy program dokumentációjának kezdetét.</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@short_description:</term>
+      <listitem>
+      <para>Meghatározza a program rövid leírását (nem kötelező).</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@synopsis:</term>
+      <listitem>
+      <para>Meghatározza az argumentumokat vagy az argumentumok listáját, amelyeket a program elfogadhat (nem kötelező).</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@see_also:</term>
+      <listitem>
+      <para>Lásd még a kézikönyvoldal szakaszát (nem kötelező).</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@arg:</term>
+      <listitem>
+      <para>A programnak átadott argumentumok és leírásaik (nem kötelező).</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>Leírás:</term>
+      <listitem>
+      <para>A program hosszabb leírása.</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>Returns:</term>
+      <listitem>
+      <para>Annak megadása, hogy a program milyen értékeket ad vissza (nem kötelező).</para>
+      </listitem>
+      </varlistentry>
+
+      </variablelist>
+
+      <sect2>
+        <title>Példa egy program dokumentációjára.</title>
+        <example><title>Program dokumentációs blokkja</title>
+        <programlisting>
+/**
+ * PROGRAM:test-program
+ * @short_description: Egy tesztprogram
+ * @synopsis: test-program [*KAPCSOLÓK*...] --arg1 *arg* *FÁJL*
+ * @see_also: test(1)
+ * @--arg1 *arg*: az arg1 beállítása *arg* értékre
+ * @--arg2 *arg*: az arg2 beállítása *arg* értékre
+ * @-v, --version: A verziószám kiírása
+ * @-h, --help: A súgóüzenet kiírása
+ *
+ * A program hosszú leírása.
+ *
+ * Returns: Siker esetén nulla, sikertelenség esetén nem nulla
+ */
+int main(int argc, char *argv[])
+{
+	return 0;
+}
+</programlisting>
+        </example>
+
+      </sect2>
+    </sect1>
+
+    <sect1 id="documenting_docbook">
+      <title>Hasznos DocBook-címkék</title>
+
+      <para>Íme néhány DocBook-címke, amelyek a leghasznosabbak a kód dokumentálásakor.</para>
+
+      <para>A GTK dokumentációjának egy másik szakaszára való hivatkozáshoz: <informalexample>
+          <programlisting>
+&lt;link linkend="glib-Hash-Tables"&gt;Hasítótáblák&lt;/link&gt;
+</programlisting>
+        </informalexample> A hivatkozás vége az SGML/XML azonosítója annak az oldalnak a legfelső elemén, amelyre hivatkozni kíván. A legtöbb oldal esetében ez jelenleg a („gtk”, „gdk”, „glib”) rész, majd az oldal címe („Hasítótáblák”). A felületi elemek esetében ez csak az osztály neve. A szóközök és az aláhúzások az SGML/XML-nek való megfelelés érdekében „-” karakterre vannak átalakítva.</para>
+
+      <para>Egy külső függvényre, például egy szabványos C függvényre való hivatkozáshoz: <informalexample>
+          <programlisting>
+&lt;function&gt;...&lt;/function&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Példakód beillesztéséhez: <informalexample>
+          <programlisting>
+&lt;example&gt;
+  &lt;title&gt;Egy GHashTable használata.&lt;/title&gt;
+  &lt;programlisting language="C"&gt;
+      ...
+  &lt;/programlisting&gt;
+&lt;/example&gt;
+</programlisting>
+        </informalexample> vagy esetleg ez, a nagyon rövid kódrészletekhez, amelyeknek nincs szükségük címre: <informalexample>
+          <programlisting>
+&lt;informalexample&gt;
+  &lt;programlisting language="C"&gt;
+  ...
+  &lt;/programlisting&gt;
+&lt;/informalexample&gt;
+</programlisting>
+        </informalexample> Mindkét esetben a language attribútum elhagyható, és a szintaxiskiemelő motornak (pygments a HTML kimenethez) szolgál segítségül. Ez utóbbihoz a GTK-Doc egy rövidítést is támogat: <informalexample>
+          <programlisting>
+|[&lt;!-- language="C" --&gt;
+  ...
+]|
+</programlisting>
+        </informalexample></para>
+
+      <para>Felsorolásos listák beillesztéséhez: <informalexample>
+          <programlisting>
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;
+      ...
+    &lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;
+      ...
+    &lt;/para&gt;
+  &lt;/listitem&gt;
+&lt;/itemizedlist&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>A szövegből kiemelkedő megjegyzés beillesztéséhez: <informalexample>
+          <programlisting>
+&lt;note&gt;
+  &lt;para&gt;
+    Győződjön meg arról, hogy használat után felszabadította-e az adatokat.
+  &lt;/para&gt;
+&lt;/note&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Egy típusra való hivatkozáshoz: <informalexample>
+          <programlisting>
+&lt;type&gt;unsigned char&lt;/type&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Egy külső (nem a GTK dokumentációban ismertetett) struktúrára való hivatkozáshoz: <informalexample>
+          <programlisting>
+&lt;structname&gt;XFontStruct&lt;/structname&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Egy struktúra mezőjére való hivatkozáshoz: <informalexample>
+          <programlisting>
+&lt;structfield&gt;len&lt;/structfield&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Egy osztálynévre való hivatkozáshoz esetleg használhatjuk a következőt: <informalexample>
+          <programlisting>
+&lt;classname&gt;GtkWidget&lt;/classname&gt;
+</programlisting>
+        </informalexample> de valószínűleg a #GtkWidget lesz használva helyette (hogy automatikusan létrehozzon egy hivatkozást a GtkWidget oldalára – nézze meg a <link linkend="documenting_syntax">rövidítéseket</link>).</para>
+
+      <para>A szöveg hangsúlyozásához: <informalexample>
+          <programlisting>
+&lt;emphasis&gt;Ez fontos&lt;/emphasis&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Fájlnevekhez használja ezt: <informalexample>
+          <programlisting>
+&lt;filename&gt;/home/user/documents&lt;/filename&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Billentyűkre való hivatkozáshoz használja ezt: <informalexample>
+          <programlisting>
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;L&lt;/keycap&gt;&lt;/keycombo&gt;
+</programlisting>
+        </informalexample></para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="metafiles">
+    <title>A további fájlok kitöltése</title>
+
+    <para>Van néhány további fájl, amelyeket a forráskód beágyazott megjegyzéseivel együtt kell karbantartani: <filename>&lt;csomag&gt;.types</filename>, <filename>&lt;csomag&gt;-docs.xml</filename> (régebben .sgml), <filename>&lt;csomag&gt;-sections.txt</filename>.</para>
+
+    <sect1 id="metafiles_types">
+      <title>A típusok fájl szerkesztése</title>
+
+      <para>Ha a könyvtár vagy az alkalmazás GObjecteket tartalmaz, akkor a dokumentációban meg szeretné jeleníteni a szignálokat, argumentumokat, paramétereket és a hierarchiában elfoglalt helyüket. Mindössze annyit kell tennie, hogy felsorolja a <function>xxx_get_type</function> függvényeket az include-jaikkal együtt a <filename>&lt;csomag&gt;.types</filename> fájlon belül.</para>
+
+      <para>
+        <example><title>Példa a &lt;csomag&gt;.types-fájlra</title>
+          <programlisting>
+#include &lt;gtk/gtk.h&gt;
+
+gtk_accel_label_get_type
+gtk_adjustment_get_type
+gtk_alignment_get_type
+gtk_arrow_get_type
+</programlisting>
+        </example>
+      </para>
+
+      <para>A GTK-Doc 1.8 óta az <application>gtkdoc-scan</application> képes előállítani ezt a listát Önnek. Csak adja hozzá a „--rebuild-types” kapcsolót a SCAN_OPTIONS értékeihez a <filename>Makefile.am</filename> fájlban. Ha ezt a megközelítést használja, akkor nem kell terjesztenie a típusok fájlt, és nem is kell verziókövetés alatt tartania.</para>
+
+    </sect1>
+
+    <sect1 id="metafiles_master">
+      <title>A mesterdokumentum szerkesztése</title>
+
+      <para>A GTK-Doc DocBook SGML/XML formátumú dokumentációt készít. A beágyazott forrásmegjegyzések feldolgozásakor a GTK-Doc eszközei osztályonként vagy modulonként egy dokumentációs oldalt állítanak elő külön fájlként. A mesterdokumentum tartalmazza ezeket, és sorrendbe helyezi őket.</para>
+
+      <para>Noha a GTK-Doc létrehoz egy sablon mesterdokumentumot Önnek, a későbbi futtatások nem nyúlnak hozzá újra. Ez azt jelenti, hogy szabadon szerkesztheti a dokumentációt. Ez magában foglalja az oldalak csoportosítását és a további oldalak hozzáadását. A GTK-Doc mostantól rendelkezik egy tesztcsomaggal, ahol a mesterdokumentum is újra létrejön a semmiből. Jó ötlet erre időről-időre ránézni és észrevenni, hogy vannak-e újdonságok, amik bevezetésre kerültek.</para>
+
+      <tip>
+        <para>Ne hozzon létre oktatóanyagokat külön dokumentumként. Csak írjon további fejezeteket. A programkönyvtára oktatóanyagának az API-dokumentációba való közvetlen beágyazásának az az előnye, hogy könnyen összekapcsolható az oktatóanyag a szimbólum dokumentációjával. Emellett nagyobb az esélye annak, hogy az oktatóanyag a programkönyvtárral együtt kap frissítéseket.</para>
+      </tip>
+
+      <para>Mik azok a dolgok, amelyeket a mesterdokumentumon belül meg kell változtatni? Kezdetnek csak egy keveset. Van ott néhány helykitöltő (szögletes zárójelben lévő szöveg), amelyekre vigyázni kell.</para>
+
+      <para>
+        <example><title>Mesterdokumentum fejléce</title>
+          <programlisting>
+&lt;bookinfo&gt;
+  &lt;title&gt;MODULENAME hivatkozási kézikönyv&lt;/title&gt;
+  &lt;releaseinfo&gt;
+    MODULENAME [VERSION]
+    A dokumentáció legfrissebb változata megtalálható a
+    &lt;ulink role="online-location" url="http://[SERVER]/MODULENAME/index.html"&gt;http://[SERVER]/MODULENAME/&lt;/ulink&gt; internetes oldalon.
+  &lt;/releaseinfo&gt;
+&lt;/bookinfo&gt;
+
+&lt;chapter&gt;
+  &lt;title&gt;[Cím beszúrása ide]&lt;/title&gt;
+</programlisting>
+        </example>
+      </para>
+
+      <para>Ezenkívül néhány választható elem is létrehozásra kerül megjegyzésekkel ellátott formában. Ezeket áttekintheti, és tetszés szerint engedélyezheti.</para>
+
+      <para>
+        <example><title>Választható rész a mesterdokumentumban</title>
+          <programlisting>
+  &lt;!-- engedélyezze ezt, ha GObject Introspection megjegyzéseket használ
+  &lt;xi:include href="xml/annotation-glossary.xml"&gt;&lt;xi:fallback /&gt;&lt;/xi:include&gt;
+  --&gt;
+</programlisting>
+        </example>
+      </para>
+
+      <para>Végül új szakaszt kell hozzáadni, amikor bevezet egyet. A <link linkend="modernizing-gtk-doc-1-16">gtkdoc-check</link> eszköz emlékeztetni fogja az újonnan előállított XML-fájlokra, amelyek még nem szerepelnek a dokumentációban.</para>
+
+      <para>
+        <example><title>Előállított szakaszok beágyazása</title>
+          <programlisting>
+  &lt;chapter&gt;
+    &lt;title&gt;Az én programkönyvtáram&lt;/title&gt;
+      &lt;xi:include href="xml/object.xml"/&gt;
+      ...
+</programlisting>
+        </example>
+      </para>
+
+    </sect1>
+
+    <sect1 id="metafiles_sections">
+      <title>A szakaszfájl szerkesztése</title>
+
+      <para>A szakaszfájl a GTK-Doc által kiírt dokumentáció rendszerezésére szolgál. Itt adhatjuk meg, hogy melyik szimbólum melyik modulhoz vagy osztályhoz tartozik, és szabályozhatjuk a láthatóságot (publikus vagy privát).</para>
+
+      <para>A szakaszfájl egy egyszerű szöveges fájl, címkékkel elválasztott szakaszokkal. Az üres sorok figyelmen kívül maradnak, és a „#” karakterrel kezdődő sorok megjegyzésként vannak kezelve.</para>
+
+      <note>
+        <para>Noha a címkék miatt a fájl XML-nek tűnik, nem az. Ne zárja le a címkéket, mint például a &lt;SUBSECTION&gt; címkét.</para>
+      </note>
+
+      <para>
+        <example><title>Előállított szakaszok beágyazása</title>
+          <programlisting>
+&lt;INCLUDE&gt;libmeep/meep.h&lt;/INCLUDE&gt;
+
+&lt;SECTION&gt;
+&lt;FILE&gt;meepapp&lt;/FILE&gt;
+&lt;TITLE&gt;MeepApp&lt;/TITLE&gt;
+MeepApp
+&lt;SUBSECTION Standard&gt;
+MEEP_APP
+...
+MeepAppClass
+meep_app_get_type
+&lt;/SECTION&gt;
+</programlisting>
+        </example>
+      </para>
+
+      <para>A &lt;FILE&gt; ... &lt;/FILE&gt; címke a fájl nevének megadására szolgál, utótag nélkül. Például a „&lt;FILE&gt;gnome-config&lt;/FILE&gt;” használata azt eredményezi, hogy a szakaszdeklarációk kiírásra kerülnek a <filename>tmpl/gnome-config.sgml</filename> sablonfájlban, amely az <filename>xml/gnome-config.xml</filename> vagy az <filename>xml/gnome-config.sgml</filename> DocBook XML-fájlra lesz átalakítva. (A HTML-fájl neve a modul nevén és a szakasz címén alapul, vagy GObjectek esetén a GObjectek osztálynevén alapul kisbetűssé alakítva).</para>
+
+      <para>A &lt;TITLE&gt; ... &lt;/TITLE&gt; címke a szakasz címének megadására szolgál. Ez csak a sablonok (ha használjuk) kezdeti létrehozása előtt hasznos, mivel a sablonfájlban beállított cím felülírja ezt. Ha valaki a forrásokban is használja a SECTION megjegyzést, akkor ez elavult.</para>
+
+      <para>Csoportosíthatja a szakaszban lévő elemeket a &lt;SUBSECTION&gt; címke használatával. Jelenleg üres sort ír ki az alfejezetek között az összefoglaló szakaszban. Használhatja a &lt;SUBSECTION Standard&gt; címkét is a szabványos GObject deklarációkhoz (például az olyan függvényekhez, mint a g_object_get_type és az olyan makrókhoz, mint a G_OBJECT(), G_IS_OBJECT() stb.). Jelenleg ezek kimaradnak a dokumentációból. Használhatja a &lt;SUBSECTION Private&gt; címkét is a privát deklarációkhoz, amelyek nem kerülnek kiírásra (ez egy praktikus módja annak, hogy elkerülje a nem használt deklarációkról szóló figyelmeztető üzeneteket). Ha a programkönyvtára olyan privát típusokat tartalmaz, amelyeket nem szeretne, hogy megjelenjenek az objektumhierarchiában és a megvalósított vagy szükséges interfészek listájában, adja őket egy Private alszakaszhoz. A GObject és GObjectClass típusú struktúrák publikus vagy a Standard szakaszba helyezése attól függ, hogy vannak-e publikus bejegyzéseik (változók, virtuális metódusok).</para>
+
+      <para>Használhatja az &lt;INCLUDE&gt; ... &lt;/INCLUDE&gt; jelölést is az #include fájlok megadásához, amelyek az összefoglaló szakaszokban jelennek meg. Az #include fájlok vesszővel elválasztott listáját tartalmazza, szögletes zárójelek nélkül. Ha bármelyik szakaszon kívül állítja be, akkor a fájl végéig az összes szakaszra vonatkozik. Ha egy szakaszon belül állítja be, akkor csak arra a szakaszra vonatkozik.</para>
+
+    </sect1>
+
+  </chapter>
+
+  <chapter id="reports">
+    <title>Az eredmény ellenőrzése</title>
+
+    <para>A GTK-Doc futtatása jelentésfájlokat állít elő a dokumentációs könyvtáron belül. Az előállított fájlok neve: <filename>&lt;csomag&gt;-undocumented.txt</filename>, <filename>&lt;csomag&gt;-undeclared.txt</filename> és <filename>&lt;csomag&gt;-unused.txt</filename>. Ezek mind egyszerű szöveges fájlok, amelyek könnyen megtekinthetők és utólagosan feldolgozhatók.</para>
+
+    <para>A <filename>&lt;csomag&gt;-undocumented.txt</filename> fájl a dokumentáció lefedettségének összefoglalójával kezdődik. Alatta két, üres sorokkal elválasztott szakasz található. Az első szakasz a dokumentálatlan vagy hiányos szimbólumokat sorolja fel. A második szakasz ugyanezt teszi a szakaszok dokumentációira. A hiányos bejegyzések azok, amelyeknek van dokumentációja, de ahol például új paraméter került hozzáadásra.</para>
+
+    <para>A <filename>&lt;csomag&gt;-undeclared.txt</filename> fájl a <filename>&lt;csomag&gt;-sections.txt</filename> fájlban megadott, de a forrásokban nem található szimbólumokat sorolja fel. Ellenőrizze, hogy nem kerültek-e eltávolításra, vagy nincsenek-e hibásan írva.</para>
+
+    <para>A <filename>&lt;csomag&gt;-unused.txt</filename> fájl azokat a szimbólumneveket sorolja fel, ahol a GTK-Doc átvizsgáló talált dokumentációt, de nem tudja, hova tegye azt. Ez azt jelenti, hogy a szimbólum még nem lett hozzáadva a <filename>&lt;csomag&gt;-sections.txt</filename> fájlhoz.</para>
+
+    <tip>
+      <para>Engedélyezze vagy adja hozzá a <option>TESTS=$(GTKDOC_CHECK)</option> sort a Makefile.am fájlhoz. Ha legalább GTK-Doc 1.9 van telepítve, akkor ez józansági ellenőrzéseket futtat a <command>make check</command> futtatása során.</para>
+    </tip>
+
+    <para>A forráskód-átvizsgáló által előállított fájlokat is megnézhetjük: <filename>&lt;csomag&gt;-decl-list.txt</filename> és <filename>&lt;csomag&gt;-decl.txt</filename>. Az elsőt össze lehet hasonlítani a szakaszfájllal, ha az kézzel van karbantartva. A második a fejlécekből származó összes deklarációt sorolja fel. Ha egy szimbólum hiányzik, akkor ellenőrizhetjük, hogy ez a fájl tartalmazza-e.</para>
+
+    <para>Ha a projekt GObject-alapú, akkor az objektum-átvizsgáló által előállított fájlokat is megnézhetjük: <filename>&lt;csomag&gt;.args.txt</filename>, <filename>&lt;csomag&gt;.hierarchy.txt</filename>, <filename>&lt;csomag&gt;.interfaces.txt</filename>, <filename>&lt;csomag&gt;.prerequisites.txt</filename> és <filename>&lt;csomag&gt;.signals.txt</filename>. Ha ezek bármelyikéből hiányoznak szimbólumok, akkor a <command>GTK_DOC_KEEP_INTERMEDIATE=1 make</command> futtatásával megkérhetjük a GTK-Doc eszközt arra, hogy tartsa meg a köztes átvizsgálási fájlt a további elemzéshez.</para>
+  </chapter>
+
+  <chapter id="modernizing">
+    <title>A dokumentáció korszerűsítése</title>
+
+    <para>A GTK-Doc már jó ideje létezik. Ebben a részben felsoroljuk az új funkciókat a verzióval együtt, amióta elérhetők.</para>
+
+    <sect1 id="modernizing-gtk-doc-1-9">
+      <title>GTK-Doc 1.9</title>
+
+      <para>Ha SGML helyett XML-t használunk, a mesterdokumentumot <filename>&lt;csomag&gt;-docs.xml</filename> néven is elnevezhetjük.</para>
+
+      <para>Ez a verzió támogatja a <option>SCAN_OPTIONS=--rebuild-sections</option> kapcsolót a <filename>Makefile.am</filename> fájlban. Ha ez engedélyezve van, akkor a <filename>&lt;csomag&gt;-sections.txt</filename> fájl automatikusan előállításra kerül, és eltávolítható a verziókövető rendszerből. Ez csak olyan projekteknél működik jól, amelyek rendkívül szabályos szerkezettel rendelkeznek (például minden .{c,h} pár új szakaszt hoz létre). Ha valaki egy ehhez közeli projektet szervez, egy kézzel karbantartott szakaszfájl frissítése olyan egyszerű lehet, mint a <code>meld &lt;csomag&gt;-decl-list.txt &lt;csomag&gt;-sections.txt</code> kód futtatása.</para>
+
+      <para>Az 1.8-as verzió már bevezette a szintaxist a szakaszok forrásokban történő dokumentálásához a <filename class="directory">tmpl</filename> alatti különálló fájlok helyett. Ez a verzió olyan kapcsolókat ad hozzá, amelyekkel az egész dokumentációs modult át lehet kapcsolni úgy, hogy egyáltalán ne használja a további sablon-összeállítási lépést. Ehhez a <option>--flavour no-tmpl</option> kapcsolót kell használni a <filename>configure.ac</filename> fájlban. Ha még nincs <filename class="directory">tmpl</filename> könyvtár lekérve a forráskövető rendszerében, és még nem lett átváltva, akkor csak adja hozzá a jelzőt a <filename>configure.ac</filename> fájlhoz, és már kész is van.</para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-10">
+      <title>GTK-Doc 1.10</title>
+
+      <para>Ez a verzió támogatja a <option>SCAN_OPTIONS=--rebuild-types</option> kapcsolót a <filename>Makefile.am</filename> fájlban. Ha ez engedélyezve van, akkor a <filename>&lt;csomag&gt;.types</filename> fájl automatikusan előállításra kerül, és eltávolítható a verziókövető rendszerből. A funkció használatakor fontos, hogy az <varname>IGNORE_HFILES</varname> is be legyen állítva a <filename>Makefile.am</filename> fájlban a feltételesen összeállított kódhoz.</para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-16">
+      <title>GTK-Doc 1.16</title>
+
+      <para>Ez a verzió egy új, gtkdoc-check nevű eszközt tartalmaz. Ez az eszköz képes lefuttatni egy sor józansági ellenőrzést a dokumentáción. Az engedélyezéshez hozzá kell adni ezeket a sorokat a <filename>Makefile.am</filename> fájl végéhez. <example><title>A gtkdoc-check engedélyezése</title>
+          <programlisting>
+if ENABLE_GTK_DOC
+TESTS_ENVIRONMENT = \
+  DOC_MODULE=$(DOC_MODULE) DOC_MAIN_SGML_FILE=$(DOC_MAIN_SGML_FILE) \
+  SRCDIR=$(abs_srcdir) BUILDDIR=$(abs_builddir)
+TESTS = $(GTKDOC_CHECK)
+endif
+</programlisting>
+        </example></para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-20">
+      <title>GTK-Doc 1.20</title>
+
+      <para>Az 1.18-as verzió hozott némi kezdeti Markdown-támogatást. A Markdown használata a dokumentációs megjegyzésekben kevésbé tolakodó, mint a DocBook XML írása. Ez a verzió sokat javít ezen, és sokkal több stílust ad hozzá. A <link linkend="documenting_syntax">megjegyzés szintaxisát</link> magyarázó szakasz minden részletet tartalmaz.</para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-25">
+      <title>GTK-Doc 1.25</title>
+
+      <para>Az ezzel a verzióval szállított makefile-ok létrehoznak egy entitásfájlt az <filename>xml/gtkdocentities.ent</filename> fájlban, amely például a package_name és package_version entitásokat tartalmazza. Ezt használhatja például a fő XML-fájlban, hogy elkerülje a verziószám kézi megadását. Az alábbiakban egy példa azt mutatja be, hogy az entitásfájl hogyan kerül a mestersablonba, és hogyan kell használni az entitásokat. Az entitások az összes előállított fájlban is használhatók, a GTK-Doc ugyanazt az XML-fejlécet fogja használni az előállított XML-fájlokban. <example><title>Előre előállított entitások használata</title>
+          <programlisting>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  &lt;!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'"&gt;
+  &lt;!ENTITY % gtkdocentities SYSTEM "xml/gtkdocentities.ent"&gt;
+  %gtkdocentities;
+]&gt;
+&lt;book id="index" xmlns:xi="http://www.w3.org/2003/XInclude"&gt;
+  &lt;bookinfo&gt;
+    &lt;title&gt;&amp;package_name; hivatkozási kézikönyv&lt;/title&gt;
+    &lt;releaseinfo&gt;
+      for &amp;package_string;.
+      A dokumentáció legfrissebb változata megtalálható a
+    &lt;ulink role="online-location" url="http://[SERVER]/&amp;package_name;/index.html"&gt;http://[SERVER]/&amp;package_name;/&lt;/ulink&gt; internetes oldalon.
+    &lt;/releaseinfo&gt;
+  &lt;/bookinfo&gt;
+</programlisting>
+        </example></para>
+    </sect1>
+  </chapter>
+
+  <chapter id="documenting-others">
+    <title>Egyéb interfészek dokumentálása</title>
+
+    <para>Eddig a GTK-Doc eszközt használtuk a kód API-jának dokumentálásához. A következő szakaszok javaslatokat tartalmaznak arra vonatkozóan, hogy az eszközök hogyan használhatók egyéb interfészek dokumentálásához is.</para>
+
+    <sect1 id="commandline-interfaces">
+      <title>Parancssori kapcsolók és kézikönyvoldalak</title>
+
+      <para>Mivel kézikönyvoldalakat is elő lehet állítani egy DocBook-hivatkozási bejegyzéshez, jó ötletnek tűnik, hogy erre a célra használjuk. Így az interfész a hivatkozás része lesz, a kézikönyvoldalt pedig ingyen megkapjuk.</para>
+
+      <sect2 id="commandline-interfaces-file">
+        <title>Az eszköz dokumentálása</title>
+
+        <para>Hozzon létre eszközönként egy hivatkozásibejegyzés-fájlt. A <link linkend="settingup_docfiles">példánkat</link> követve elnevezhetjük <filename>meep/docs/reference/meeper/meep.xml</filename> néven. A használandó XML-címkék megtekinthetők az XML alkönyvtárban lévő előállított fájlban, valamint példák is találhatók például a glib csomagban.</para>
+      </sect2>
+
+      <sect2 id="commandline-interfaces-configure">
+        <title>A további beállítás-ellenőrzés hozzáadása</title>
+
+        <para>
+          <example><title>További beállítás-ellenőrzések</title>
+            <programlisting>
+AC_ARG_ENABLE(man,
+              [AC_HELP_STRING([--enable-man],
+                              [regenerate man pages from Docbook [default=no]])],enable_man=yes,
+              enable_man=no)
+
+AC_PATH_PROG([XSLTPROC], [xsltproc])
+AM_CONDITIONAL(ENABLE_MAN, test x$enable_man != xno)
+</programlisting>
+          </example>
+        </para>
+      </sect2>
+
+      <sect2 id="commandline-interfaces-make">
+        <title>A további makefile-szabályok hozzáadása</title>
+
+        <para>
+          <example><title>További beállítás-ellenőrzések</title>
+            <programlisting>
+man_MANS = \
+       meeper.1
+
+if ENABLE_GTK_DOC
+if ENABLE_MAN
+
+%.1 : %.xml
+        @XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $&lt;
+
+endif
+endif
+
+BUILT_EXTRA_DIST = $(man_MANS)
+EXTRA_DIST += meep.xml
+</programlisting>
+          </example>
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="dbus-interfaces">
+      <title>DBus interfészek</title>
+
+      <para>(JAVÍTS KI: http://hal.freedesktop.org/docs/DeviceKit/DeviceKit.html, http://cgit.freedesktop.org/DeviceKit/DeviceKit/tree/doc/dbus)</para>
+    </sect1>
+
+  </chapter>
+
+  <chapter id="faq">
+    <title>Gyakran ismételt kérdések</title>
+
+    <segmentedlist>
+      <?dbhtml list-presentation="list"?>
+      <segtitle>Kérdés</segtitle>
+      <segtitle>Válasz</segtitle>
+      <seglistitem>
+        <seg>Nincs osztályhierarchia.</seg>
+        <seg>Az objektumok <function>xxx_get_type()</function> függvénye nem került be a <filename>&lt;csomag&gt;.types</filename> fájlba.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Még mindig nincs osztályhierarchia.</seg>
+        <seg>Hiányzó vagy hibás elnevezés a <filename>&lt;csomag&gt;-sections.txt</filename> fájlban (nézze meg a <ulink url="http://mail.gnome.org/archives/gtk-doc-list/2003-October/msg00006.html">magyarázatot</ulink>).</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>A fenébe, még mindig nincs osztályhierarchiám.</seg>
+        <seg>Az objektum neve (a példánystruktúra neve, például <type>GtkWidget</type>) a normál szakasz része (ne tegye ezt a Standard vagy Private alszakaszokba)?</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Nincs szimbólumindex.</seg>
+        <seg>A <filename>&lt;csomag&gt;-docs.{xml,sgml}</filename> tartalmaz olyan indexet, amely xi:include-olja az előállított indexet?</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>A szimbólumok nem kapcsolódnak a dokumentumszakaszukhoz.</seg>
+        <seg>A doc-comment a megfelelő jelölést használja (hozzáadott #, % vagy () jelölőket)? Ellenőrizze, hogy a gtkdoc-fixxref figyelmeztet-e a nem feloldható xref-ekre.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Egy új osztály nem jelenik meg a dokumentációban.</seg>
+        <seg>Az új oldal xi:include-olva van a <filename>&lt;csomag&gt;-docs.{xml,sgml}</filename> fájlból?</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Egy új szimbólum nem jelenik meg a dokumentációban.</seg>
+        <seg>Megfelelően van formázva a doc-comment tulajdonság? Ellenőrizze, hogy nincsenek-e helyesírási hibák a megjegyzés elején. Ellenőrizze, hogy a gtkdoc-fixxref figyelmeztet-e a feloldhatatlan xref-ekre. Ellenőrizze, hogy a szimbólum helyesen van-e felsorolva a <filename>&lt;csomag&gt;-sections.txt</filename> fájl egy nyilvános alszakaszában.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Egy típus hiányzik az osztályhierarchiából.</seg>
+        <seg>Ha a típus fel van sorolva a <filename>&lt;csomag&gt;.hierarchy</filename> fájlban, de nincs az <filename>xml/tree_index.sgml</filename> fájlban, akkor ellenőrizze kétszer is, hogy a típus helyesen van-e elhelyezve a <filename>&lt;csomag&gt;-sections.txt</filename> fájlban. Ha a típuspéldány (például <type>GtkWidget</type>) nincs felsorolva vagy véletlenül privátként van megjelölve, akkor nem fog megjelenni.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Az összes gobject megjegyzéshez foldoc hivatkozásokat kapok.</seg>
+        <seg>Ellenőrizze, hogy az <filename>xml/annotation-glossary.xml</filename> fájl xi:include-olva van-e a <filename>&lt;csomag&gt;-docs.{xml,sgml}</filename> fájlból.</seg>
+      </seglistitem>
+
+      <!-- gtk-doc warnings: -->
+      <seglistitem>
+        <seg>A paraméter le van írva a forráskód megjegyzésblokkjában, de nem létezik</seg>
+        <seg>Ellenőrizze, hogy a fejlécben lévő prototípusnak más paraméternevei vannak-e, mint a forrásban.</seg>
+      </seglistitem>
+
+      <!-- docbook warnings: -->
+      <seglistitem>
+        <seg>Több „azonosító” a korlátozó hivatkozásvéghez: XYZ</seg>
+        <seg>Az XYZ szimbólum kétszer jelenik meg a <filename>&lt;csomag&gt;-sections.txt</filename> fájlban.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>A „” névtérben lévő típusnév elem megtalálható a bekezdésben, de nincs megfelelő sablon.</seg>
+        <seg/>
+      </seglistitem>
+    </segmentedlist>
+  </chapter>
+
+  <chapter id="contrib">
+    <title>A GTK-Doc kapcsolódó eszközei</title>
+
+    <para>GtkDocPlugin – egy <ulink url="http://trac-hacks.org/wiki/GtkDocPlugin">Trac GTK-Doc</ulink> integrációs bővítmény, amely API-dokumentációkat ad egy trac oldalhoz, és integrálódik a trac keresővel.</para>
+    <para>Gtkdoc-depscan – egy eszköz (a GTK-Doc része), amely ellenőrzi a használt API-t, hogy mióta vannak a címkék az API-ban, hogy meghatározza a minimálisan szükséges verziót.</para>
+
+  </chapter>
+
+  <!-- ======== Appendix: FDL ================================== -->
+  <!--  
+     The GNU Free Documentation License 1.1 in DocBook
+     Markup by Eric Baudais <baudais@okstate.edu>
+     Maintained by the GNOME Documentation Project
+     http://developer.gnome.org/projects/gdp
+     Version: 1.0.1
+     Last Modified: Nov 16, 2000
+-->
+
+<appendix id="fdl">
+  <appendixinfo>
+    <releaseinfo>1.1-es verzió, 2000. március</releaseinfo>
+    <copyright>
+      <year>2000</year><holder>Free Software Foundation, Inc.</holder>
+    </copyright>
+    <legalnotice id="fdl-legalnotice">
+      <para><address>Free Software Foundation, Inc. <street>51 Franklin Street, 
+        Suite 330</street>, <city>Boston</city>, <state>MA</state>  
+        <postcode>02110-1301</postcode>  <country>USA</country></address> A jelen licencdokumentumot bárki szabadon lemásolhatja és a pontos másolatait terjesztheti, de a módosítása tilos.</para>
+    </legalnotice>
+  </appendixinfo>
+  <title>GNU Free Documentation License (nem hivatalos magyar fordítás)</title>
+
+  <sect1 id="fdl-preamble">
+    <title>0. ELŐSZÓ</title>
+    <para>
+      The purpose of this License is to make a manual, textbook, or
+      other written document <quote>free</quote> in the sense of
+      freedom: to assure everyone the effective freedom to copy and
+      redistribute it, with or without modifying it, either
+      commercially or noncommercially. Secondarily, this License
+      preserves for the author and publisher a way to get credit for
+      their work, while not being considered responsible for
+      modifications made by others.
+    </para>
+    
+    <para>
+      This License is a kind of <quote>copyleft</quote>, which means
+      that derivative works of the document must themselves be free in
+      the same sense. It complements the GNU General Public License,
+      which is a copyleft license designed for free software.
+    </para>
+    
+    <para>A jelen Licenc a szabad szoftverek kézikönyveihez való használatra készült, hiszen a szabad szoftver egyben szabad dokumentációt is igényel: egy szabad programot olyan kézikönyvvel kell ellátni, amely ugyanazon szabadságokat biztosítja, mint maga a program. Mindazonáltal a jelen Licenc nem korlátozódik pusztán kézikönyvekre; feltételei tetszőleges tárgykörű írott dokumentumra alkalmazhatók, függetlenül attól, hogy az könyvformában valaha megjelent-e. Mindamellett e Licencet főként olyan munkákhoz ajánljuk, melyek elsődleges célja az útmutatás vagy a tájékoztatás.</para>
+  </sect1>
+  <sect1 id="fdl-section1">
+    <title>1. ALKALMAZHATÓSÁG ÉS DEFINÍCIÓK</title>
+    <para id="fdl-document">
+      This License applies to any manual or other work that contains a
+      notice placed by the copyright holder saying it can be
+      distributed under the terms of this License. The
+      <quote>Document</quote>, below, refers to any such manual or
+      work. Any member of the public is a licensee, and is addressed
+      as <quote>you</quote>.
+    </para>
+    
+    <para id="fdl-modified">
+      A <quote>Modified Version</quote> of the Document means any work
+      containing the Document or a portion of it, either copied
+      verbatim, or with modifications and/or translated into another
+      language.
+    </para>
+	
+    <para id="fdl-secondary">
+      A <quote>Secondary Section</quote> is a named appendix or a
+      front-matter section of the <link linkend="fdl-document">Document</link> that deals exclusively
+      with the relationship of the publishers or authors of the
+      Document to the Document's overall subject (or to related
+      matters) and contains nothing that could fall directly within
+      that overall subject. (For example, if the Document is in part a
+      textbook of mathematics, a Secondary Section may not explain any
+      mathematics.)  The relationship could be a matter of historical
+      connection with the subject or with related matters, or of
+      legal, commercial, philosophical, ethical or political position
+      regarding them.
+    </para>
+
+    <para id="fdl-invariant">
+      The <quote>Invariant Sections</quote> are certain <link linkend="fdl-secondary"> Secondary Sections</link> whose titles
+      are designated, as being those of Invariant Sections, in the
+      notice that says that the <link linkend="fdl-document">Document</link> is released under this
+      License.
+    </para>
+    
+    <para id="fdl-cover-texts">
+      The <quote>Cover Texts</quote> are certain short passages of
+      text that are listed, as Front-Cover Texts or Back-Cover Texts,
+      in the notice that says that the <link linkend="fdl-document">Document</link> is released under this
+      License.
+    </para>
+	
+    <para id="fdl-transparent">
+      A <quote>Transparent</quote> copy of the <link linkend="fdl-document"> Document</link> means a machine-readable
+      copy, represented in a format whose specification is available
+      to the general public, whose contents can be viewed and edited
+      directly and straightforwardly with generic text editors or (for
+      images composed of pixels) generic paint programs or (for
+      drawings) some widely available drawing editor, and that is
+      suitable for input to text formatters or for automatic
+      translation to a variety of formats suitable for input to text
+      formatters. A copy made in an otherwise Transparent file format
+      whose markup has been designed to thwart or discourage
+      subsequent modification by readers is not Transparent.  A copy
+      that is not <quote>Transparent</quote> is called
+      <quote>Opaque</quote>.
+    </para>
+    
+    <para>Az Átlátszóság kritériumainak megfelelő formátumok között megtalálható például a jelölőnyelvet nem használó egyszerű ASCII, a Texinfo beviteli formátum, a LaTeX beviteli formátum, az SGML vagy az XML egy általánosan hozzáférhető DTD használatával, és a szabványnak megfelelő, emberi módosításra tervezett egyszerű HTML. Az Átlátszatlan formátumok közé sorolhatóak a PostScript, a PDF, a szellemi tulajdont képező formátumok, amelyeket csak szellemi tulajdont képező szövegszerkesztőkkel lehet elolvasni, az olyan SGML vagy XML, amelyhez a szükséges DTD és/vagy egyéb feldolgozó eszközök nem általánosan hozzáférhetők, és az olyan gépileg generált HTML formátum, amely kizárólag egyes szövegszerkesztők kimeneti formátumaként áll elő.</para>
+    
+    <para id="fdl-title-page">
+      The <quote>Title Page</quote> means, for a printed book, the
+      title page itself, plus such following pages as are needed to
+      hold, legibly, the material this License requires to appear in
+      the title page. For works in formats which do not have any title
+      page as such, <quote>Title Page</quote> means the text near the
+      most prominent appearance of the work's title, preceding the
+      beginning of the body of the text.
+    </para>
+  </sect1>
+    
+  <sect1 id="fdl-section2">
+    <title>2. SZÓ SZERINTI SOKSZOROSÍTÁS</title>
+    <para>
+      You may copy and distribute the <link linkend="fdl-document">Document</link> in any medium, either
+      commercially or noncommercially, provided that this License, the
+      copyright notices, and the license notice saying this License
+      applies to the Document are reproduced in all copies, and that
+      you add no other conditions whatsoever to those of this
+      License. You may not use technical measures to obstruct or
+      control the reading or further copying of the copies you make or
+      distribute. However, you may accept compensation in exchange for
+      copies. If you distribute a large enough number of copies you
+      must also follow the conditions in <link linkend="fdl-section3">section 3</link>.
+    </para>
+    
+    <para>A fenti feltételeket betartva kölcsönözhet is példányokat, de akár nyilvánosan is közzéteheti a szöveget.</para>
+    </sect1>
+    
+  <sect1 id="fdl-section3">
+    <title>3. SOKSZOROSÍTÁS NAGYOBB MENNYISÉGBEN</title>
+    <para>
+      If you publish printed copies of the <link linkend="fdl-document">Document</link> numbering more than 100,
+      and the Document's license notice requires <link linkend="fdl-cover-texts">Cover Texts</link>, you must enclose
+      the copies in covers that carry, clearly and legibly, all these
+      Cover Texts: Front-Cover Texts on the front cover, and
+      Back-Cover Texts on the back cover. Both covers must also
+      clearly and legibly identify you as the publisher of these
+      copies. The front cover must present the full title with all
+      words of the title equally prominent and visible. You may add
+      other material on the covers in addition. Copying with changes
+      limited to the covers, as long as they preserve the title of the
+      <link linkend="fdl-document">Document</link> and satisfy these
+      conditions, can be treated as verbatim copying in other
+      respects.
+    </para>
+    
+    <para>Abban az esetben, ha a borítólapok bármelyikén megkövetelt szövegrészek túl hosszúnak bizonyulnának az olvasható közzétételhez, úgy csak az elsőként felsoroltakat kell feltüntetnie (amennyi józan belátás szerint elfér) a tényleges borítón, a továbbiak pedig átkerülhetnek a következő oldalakra.</para>
+    
+    <para>
+      If you publish or distribute <link linkend="fdl-transparent">Opaque</link> copies of the <link linkend="fdl-document">Document</link> numbering more than 100,
+      you must either include a machine-readable <link linkend="fdl-transparent">Transparent</link> copy along with
+      each Opaque copy, or state in or with each Opaque copy a
+      publicly-accessible computer-network location containing a
+      complete Transparent copy of the Document, free of added
+      material, which the general network-using public has access to
+      download anonymously at no charge using public-standard network
+      protocols. If you use the latter option, you must take
+      reasonably prudent steps, when you begin distribution of Opaque
+      copies in quantity, to ensure that this Transparent copy will
+      remain thus accessible at the stated location until at least one
+      year after the last time you distribute an Opaque copy (directly
+      or through your agents or retailers) of that edition to the
+      public.
+    </para>
+    
+    <para>
+      It is requested, but not required, that you contact the authors
+      of the <link linkend="fdl-document">Document</link> well before
+      redistributing any large number of copies, to give them a chance
+      to provide you with an updated version of the Document.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section4">
+    <title>4. MÓDOSÍTÁSOK</title>
+    <para>
+      You may copy and distribute a <link linkend="fdl-modified">Modified Version</link> of the <link linkend="fdl-document">Document</link> under the conditions of
+      sections <link linkend="fdl-section2">2</link> and <link linkend="fdl-section3">3</link> above, provided that you release
+      the Modified Version under precisely this License, with the
+      Modified Version filling the role of the Document, thus
+      licensing distribution and modification of the Modified Version
+      to whoever possesses a copy of it. In addition, you must do
+      these things in the Modified Version:
+    </para>
+    
+    <itemizedlist mark="opencircle">
+      <listitem>
+	<formalpara>
+	  <title>A</title>
+	  <para>
+	    Use in the <link linkend="fdl-title-page">Title
+	    Page</link> (and on the covers, if any) a title distinct
+	    from that of the <link linkend="fdl-document">Document</link>, and from those of
+	    previous versions (which should, if there were any, be
+	    listed in the History section of the Document). You may
+	    use the same title as a previous version if the original
+	    publisher of that version gives permission.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>B</title>
+	  <para>
+	    List on the <link linkend="fdl-title-page">Title
+	    Page</link>, as authors, one or more persons or entities
+	    responsible for authorship of the modifications in the
+	    <link linkend="fdl-modified">Modified Version</link>,
+	    together with at least five of the principal authors of
+	    the <link linkend="fdl-document">Document</link> (all of
+	    its principal authors, if it has less than five).
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>C</title>
+	  <para>
+	    State on the <link linkend="fdl-title-page">Title
+	    Page</link> the name of the publisher of the <link linkend="fdl-modified">Modified Version</link>, as the
+	    publisher.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>D</title>
+	  <para>
+	    Preserve all the copyright notices of the <link linkend="fdl-document">Document</link>.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>E</title>
+	  <para>Saját módosításaira vonatkozóan is tegyen közzé egy szerzői jogi megjegyzést, a többi ilyen jellegű figyelmeztetés mellett.</para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>F</title>
+	  <para>
+	    Include, immediately after the copyright notices, a
+	    license notice giving the public permission to use the
+	    <link linkend="fdl-modified">Modified Version</link> under
+	    the terms of this License, in the form shown in the
+	    Addendum below.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>G</title>
+	  <para>
+	    Preserve in that license notice the full lists of <link linkend="fdl-invariant"> Invariant Sections</link> and
+	    required <link linkend="fdl-cover-texts">Cover
+	    Texts</link> given in the <link linkend="fdl-document">Document's</link> license notice.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>H</title>
+	  <para>Mellékelje a jelen Licenc egy eredeti példányát.</para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>I</title>
+	  <para>
+	    Preserve the section entitled <quote>History</quote>, and
+	    its title, and add to it an item stating at least the
+	    title, year, new authors, and publisher of the <link linkend="fdl-modified">Modified Version</link> as given on
+	    the <link linkend="fdl-title-page">Title Page</link>.  If
+	    there is no section entitled <quote>History</quote> in the
+	    <link linkend="fdl-document">Document</link>, create one
+	    stating the title, year, authors, and publisher of the
+	    Document as given on its Title Page, then add an item
+	    describing the Modified Version as stated in the previous
+	    sentence.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>J</title>
+	  <para>
+	    Preserve the network location, if any, given in the <link linkend="fdl-document">Document</link> for public access
+	    to a <link linkend="fdl-transparent">Transparent</link>
+	    copy of the Document, and likewise the network locations
+	    given in the Document for previous versions it was based
+	    on. These may be placed in the <quote>History</quote>
+	    section.  You may omit a network location for a work that
+	    was published at least four years before the Document
+	    itself, or if the original publisher of the version it
+	    refers to gives permission.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>K</title>
+	  <para>
+	    In any section entitled <quote>Acknowledgements</quote> or
+	    <quote>Dedications</quote>, preserve the section's title,
+	    and preserve in the section all the substance and tone of
+	    each of the contributor acknowledgements and/or
+	    dedications given therein.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>L</title>
+	  <para>
+	    Preserve all the <link linkend="fdl-invariant">Invariant
+	    Sections</link> of the <link linkend="fdl-document">Document</link>, unaltered in their
+	    text and in their titles.  Section numbers or the
+	    equivalent are not considered part of the section titles.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>M</title>
+	  <para>
+	    Delete any section entitled
+	    <quote>Endorsements</quote>. Such a section may not be
+	    included in the <link linkend="fdl-modified">Modified
+	    Version</link>.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>N</title>
+	  <para>
+	    Do not retitle any existing section as
+	    <quote>Endorsements</quote> or to conflict in title with
+	    any <link linkend="fdl-invariant">Invariant
+	    Section</link>.
+	  </para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+    
+    <para>
+      If the <link linkend="fdl-modified">Modified Version</link>
+      includes new front-matter sections or appendices that qualify as
+      <link linkend="fdl-secondary">Secondary Sections</link> and
+      contain no material copied from the Document, you may at your
+      option designate some or all of these sections as invariant. To
+      do this, add their titles to the list of <link linkend="fdl-invariant">Invariant Sections</link> in the
+      Modified Version's license notice.  These titles must be
+      distinct from any other section titles.
+    </para>
+    
+    <para>
+      You may add a section entitled <quote>Endorsements</quote>,
+      provided it contains nothing but endorsements of your <link linkend="fdl-modified">Modified Version</link> by various
+      parties--for example, statements of peer review or that the text
+      has been approved by an organization as the authoritative
+      definition of a standard.
+    </para>
+    
+    <para>
+      You may add a passage of up to five words as a <link linkend="fdl-cover-texts">Front-Cover Text</link>, and a passage
+      of up to 25 words as a <link linkend="fdl-cover-texts">Back-Cover Text</link>, to the end of
+      the list of <link linkend="fdl-cover-texts">Cover Texts</link>
+      in the <link linkend="fdl-modified">Modified Version</link>.
+      Only one passage of Front-Cover Text and one of Back-Cover Text
+      may be added by (or through arrangements made by) any one
+      entity. If the <link linkend="fdl-document">Document</link>
+      already includes a cover text for the same cover, previously
+      added by you or by arrangement made by the same entity you are
+      acting on behalf of, you may not add another; but you may
+      replace the old one, on explicit permission from the previous
+      publisher that added the old one.
+    </para>
+    
+    <para>
+      The author(s) and publisher(s) of the <link linkend="fdl-document">Document</link> do not by this License
+      give permission to use their names for publicity for or to
+      assert or imply endorsement of any <link linkend="fdl-modified">Modified Version </link>.
+    </para>
+  </sect1>
+    
+  <sect1 id="fdl-section5">
+    <title>5. KOMBINÁLT DOKUMENTUMOK</title>
+    <para>
+      You may combine the <link linkend="fdl-document">Document</link>
+      with other documents released under this License, under the
+      terms defined in <link linkend="fdl-section4">section 4</link>
+      above for modified versions, provided that you include in the
+      combination all of the <link linkend="fdl-invariant">Invariant
+      Sections</link> of all of the original documents, unmodified,
+      and list them all as Invariant Sections of your combined work in
+      its license notice.
+    </para>
+    
+    <para>
+      The combined work need only contain one copy of this License,
+      and multiple identical <link linkend="fdl-invariant">Invariant
+      Sections</link> may be replaced with a single copy. If there are
+      multiple Invariant Sections with the same name but different
+      contents, make the title of each such section unique by adding
+      at the end of it, in parentheses, the name of the original
+      author or publisher of that section if known, or else a unique
+      number. Make the same adjustment to the section titles in the
+      list of Invariant Sections in the license notice of the combined
+      work.
+    </para>
+    
+    <para>
+      In the combination, you must combine any sections entitled
+      <quote>History</quote> in the various original documents,
+      forming one section entitled <quote>History</quote>; likewise
+      combine any sections entitled <quote>Acknowledgements</quote>,
+      and any sections entitled <quote>Dedications</quote>.  You must
+      delete all sections entitled <quote>Endorsements.</quote>
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section6">
+    <title>6. DOKUMENTUMGYŰJTEMÉNYEK</title>
+    <para>
+      You may make a collection consisting of the <link linkend="fdl-document">Document</link> and other documents
+      released under this License, and replace the individual copies
+      of this License in the various documents with a single copy that
+      is included in the collection, provided that you follow the
+      rules of this License for verbatim copying of each of the
+      documents in all other respects.
+    </para>
+    
+    <para>Tetszése szerint ki is emelhet egy meghatározott dokumentumot a gyűjteményből, továbbá terjesztheti azt jelen Licenc feltételei alapján, feltéve, hogy a szóban forgó dokumentumhoz mellékeli a jelen Licenc egy példányát, és minden egyéb tekintetben betartja jelen Licenc előírásait a dokumentum szó szerinti sokszorosítására vonatkozóan.</para>
+    </sect1>
+    
+  <sect1 id="fdl-section7">
+    <title>7. ÖSSZEFŰZÉS FÜGGETLEN MUNKÁKKAL</title>
+    <para>
+      A compilation of the <link linkend="fdl-document">Document</link> or its derivatives with
+      other separate and independent documents or works, in or on a
+      volume of a storage or distribution medium, does not as a whole
+      count as a <link linkend="fdl-modified">Modified Version</link>
+      of the Document, provided no compilation copyright is claimed
+      for the compilation.  Such a compilation is called an
+      <quote>aggregate</quote>, and this License does not apply to the
+      other self-contained works thus compiled with the Document , on
+      account of their being thus compiled, if they are not themselves
+      derivative works of the Document.  If the <link linkend="fdl-cover-texts">Cover Text</link> requirement of <link linkend="fdl-section3">section 3</link> is applicable to these
+      copies of the Document, then if the Document is less than one
+      quarter of the entire aggregate, the Document's Cover Texts may
+      be placed on covers that surround only the Document within the
+      aggregate. Otherwise they must appear on covers around the whole
+      aggregate.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section8">
+    <title>8. FORDÍTÁS</title>
+    <para>
+      Translation is considered a kind of modification, so you may
+      distribute translations of the <link linkend="fdl-document">Document</link> under the terms of <link linkend="fdl-section4">section 4</link>. Replacing <link linkend="fdl-invariant"> Invariant Sections</link> with
+      translations requires special permission from their copyright
+      holders, but you may include translations of some or all
+      Invariant Sections in addition to the original versions of these
+      Invariant Sections. You may include a translation of this
+      License provided that you also include the original English
+      version of this License. In case of a disagreement between the
+      translation and the original English version of this License,
+      the original English version will prevail.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section9">
+    <title>9. MEGSZŰNÉS</title>
+    <para>
+      You may not copy, modify, sublicense, or distribute the <link linkend="fdl-document">Document</link> except as expressly
+      provided for under this License. Any other attempt to copy,
+      modify, sublicense or distribute the Document is void, and will
+      automatically terminate your rights under this License. However,
+      parties who have received copies, or rights, from you under this
+      License will not have their licenses terminated so long as such
+      parties remain in full compliance.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section10">
+    <title>10. JELEN LICENC JÖVŐBENI JAVÍTÁSAI</title>
+    <para>
+      The <ulink type="http" url="http://www.gnu.org/fsf/fsf.html">Free Software
+      Foundation</ulink> may publish new, revised versions of the GNU
+      Free Documentation License from time to time. Such new versions
+      will be similar in spirit to the present version, but may differ
+      in detail to address new problems or concerns. See <ulink type="http" url="http://www.gnu.org/copyleft">http://www.gnu.org/copyleft/</ulink>.
+    </para>
+    
+    <para>
+      Each version of the License is given a distinguishing version
+      number. If the <link linkend="fdl-document">Document</link>
+      specifies that a particular numbered version of this License
+      <quote>or any later version</quote> applies to it, you have the
+      option of following the terms and conditions either of that
+      specified version or of any later version that has been
+      published (not as a draft) by the Free Software Foundation. If
+      the Document does not specify a version number of this License,
+      you may choose any version ever published (not as a draft) by
+      the Free Software Foundation.
+    </para>
+  </sect1>
+
+  <sect1 id="fdl-using">
+    <title>Függelék</title>
+    <para>Ha a jelen Licencet egy Ön által írt dokumentumban kívánja használni, akkor mellékelje hozzá a Licenc egy példányát, továbbá vezesse rá az alábbi szerzői jogi és licencközleményeket, rögtön a címlapot követően:</para>
+    
+    <blockquote>
+      <para>Copyright (C) ÉV AZ ÖN NEVE.</para>
+      <para>
+	Permission is granted to copy, distribute and/or modify this
+	document under the terms of the GNU Free Documentation
+	License, Version 1.1 or any later version published by the
+	Free Software Foundation; with the <link linkend="fdl-invariant">Invariant Sections</link> being LIST
+	THEIR TITLES, with the <link linkend="fdl-cover-texts">Front-Cover Texts</link> being LIST,
+	and with the <link linkend="fdl-cover-texts">Back-Cover
+	Texts</link> being LIST.  A copy of the license is included in
+	the section entitled <quote>GNU Free Documentation
+	License</quote>.
+      </para>
+    </blockquote>
+      
+    <para>
+      If you have no <link linkend="fdl-invariant">Invariant
+      Sections</link>, write <quote>with no Invariant Sections</quote>
+      instead of saying which ones are invariant.  If you have no
+      <link linkend="fdl-cover-texts">Front-Cover Texts</link>, write
+      <quote>no Front-Cover Texts</quote> instead of
+      <quote>Front-Cover Texts being LIST</quote>; likewise for <link linkend="fdl-cover-texts">Back-Cover Texts</link>.
+    </para>
+    
+    <para>
+      If your document contains nontrivial examples of program code,
+      we recommend releasing these examples in parallel under your
+      choice of free software license, such as the <ulink type="http" url="http://www.gnu.org/copyleft/gpl.html"> GNU General Public
+      License</ulink>, to permit their use in free software.
+    </para>
+  </sect1>
+</appendix>  
+
+
+
+
+
+
+
+
+</book>

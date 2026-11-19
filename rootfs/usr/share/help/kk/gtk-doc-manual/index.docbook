@@ -1,0 +1,2035 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml-stylesheet type="text/xml" href="params.xsl"?>
+<!-- vim: set ai tw=80 ts=3 sw=3: -->
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "
+              http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY FDL SYSTEM "fdl-appendix.xml">
+<!ENTITY FDLlink "<link linkend='fdl'>included</link>">
+]>
+<!-- =============Document Header ============================= -->
+<book id="index" lang="kk">
+  <bookinfo>
+    <title>GTK-Doc нұсқаулығы</title>
+    <edition>1.24.1</edition>
+    <abstract role="description"><para>Әзірлеушілерге арналған GTK-Doc қолдану нұсқаулары бар пайдаланушы нұсқаулығы.</para></abstract>
+    <authorgroup>
+      <author><firstname>Chris</firstname> <surname>Lyttle</surname> <affiliation> <address> <email>chris@wilddev.net</email> </address> </affiliation></author>
+      <author><firstname>Dan</firstname> <surname>Mueth</surname> <affiliation> <address> <email>d-mueth@uchicago.edu</email> </address> </affiliation></author>
+      <author><firstname>Stefan</firstname> <surname>Sauer (Kost)</surname> <affiliation> <address> <email>ensonic@users.sf.net</email> </address> </affiliation></author>
+    </authorgroup>
+    <publisher role="maintainer"><publishername>GTK-Doc жобасы</publishername> <address><email>gtk-doc-list@gnome.org</email></address></publisher>
+    <copyright><year>2000, 2005</year> <holder>Dan Mueth және Chris Lyttle</holder></copyright>
+    <copyright><year>2007-2019</year> <holder>Stefan Sauer (Kost)</holder></copyright>
+
+    <!-- translators: uncomment this:
+    <copyright>
+      <year>2000</year>
+      <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
+    -->
+
+    <legalnotice>
+      <para>Бұл құжатты Free Software Foundation жариялаған <citetitle>GNU Free Documentation License</citetitle> 1.1 нұсқасы немесе кез келген соңғы нұсқасының шарттарына сәйкес, Тұрақты бөлімдерсіз, Алдыңғы мұқаба мәтіндерсіз және Артқы мұқаба мәтіндерсіз көшіруге, таратуға және/немесе өзгертуге рұқсат етіледі. Лицензияның көшірмесі <link linkend="fdl">қоса берілген</link>.</para>
+      <para>Компаниялар өздерінің өнімдері мен қызметтерін ерекшелеу үшін пайдаланатын көптеген атаулар сауда белгілері болып табылады. Мұндай атаулар кез келген GNOME құжаттамасында кездескенде және GNOME құжаттама жобасының мүшелеріне сол сауда белгілері туралы мәлім болса, бұл атаулар БАС ӘРІПТЕРМЕН немесе Бас әріппен басталып жазылған.</para>
+    </legalnotice>
+
+    <revhistory>
+      <revision><revnumber>1.33.0</revnumber> <date>1 қазан 2020</date> <authorinitials>mc</authorinitials> <revremark>gtk4 нұсқасы</revremark></revision>
+      <revision><revnumber>1.32.1</revnumber> <date>15 тамыз 2019</date> <authorinitials>ss</authorinitials> <revremark>әзірлеу нұсқасы</revremark></revision>
+      <revision><revnumber>1.32</revnumber> <date>15 тамыз 2019</date> <authorinitials>ss</authorinitials> <revremark>шұғыл түзету шығарылымы</revremark></revision>
+      <revision><revnumber>1.31</revnumber> <date>05 тамыз 2019</date> <authorinitials>ss</authorinitials> <revremark>рефакторинг және көбірек тест қамтуы</revremark></revision>
+      <revision><revnumber>1.30</revnumber> <date>08 мамыр 2019</date> <authorinitials>ss</authorinitials> <revremark>көбірек тест қамтуы</revremark></revision>
+      <revision><revnumber>1.29</revnumber> <date>28 тамыз 2018</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету</revremark></revision>
+      <revision><revnumber>1.28</revnumber> <date>24 наурыз 2018</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету</revremark></revision>
+      <revision><revnumber>1.27</revnumber> <date>07 желтоқсан 2017</date> <authorinitials>ss</authorinitials> <revremark>python портын дәл баптау</revremark></revision>
+      <revision><revnumber>1.26</revnumber> <date>11 тамыз 2017</date> <authorinitials>ss</authorinitials> <revremark>барлық саймандарды perl/bash-тан python-ға көшіру</revremark></revision>
+      <revision><revnumber>1.25</revnumber> <date>21 наурыз 2016</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету, тесттерді тазарту</revremark></revision>
+      <revision><revnumber>1.24</revnumber> <date>29 мамыр 2015</date> <authorinitials>ss</authorinitials> <revremark>қатені түзету</revremark></revision>
+      <revision><revnumber>1.23</revnumber> <date>17 мамыр 2015</date> <authorinitials>ss</authorinitials> <revremark>қатені түзету</revremark></revision>
+      <revision><revnumber>1.22</revnumber> <date>07 мамыр 2015</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету, ескірген мүмкіндіктерді алып тастау</revremark></revision>
+      <revision><revnumber>1.21</revnumber> <date>17 шілде 2014</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету, ескірген мүмкіндіктерді алып тастау</revremark></revision>
+      <revision><revnumber>1.20</revnumber> <date>16 ақпан 2014</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету, markdown қолдауы, стильді жақсарту</revremark></revision>
+      <revision><revnumber>1.19</revnumber> <date>05 маусым 2013</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету</revremark></revision>
+      <revision><revnumber>1.18</revnumber> <date>14 қыркүйек 2011</date> <authorinitials>ss</authorinitials> <revremark>қателерді түзету, жылдамдату, markdown қолдауы</revremark></revision>
+      <revision><revnumber>1.17</revnumber> <date>26 ақпан 2011</date> <authorinitials>sk</authorinitials> <revremark>шұғыл қателерді түзету жаңартуы</revremark></revision>
+      <revision><revnumber>1.16</revnumber> <date>14 қаңтар 2011</date> <authorinitials>sk</authorinitials> <revremark>қателерді түзету, жайманы жақсарту</revremark></revision>
+      <revision><revnumber>1.15</revnumber> <date>21 мамыр 2010</date> <authorinitials>sk</authorinitials> <revremark>қателер мен регрессияларды түзету</revremark></revision>
+      <revision><revnumber>1.14</revnumber> <date>28 наурыз 2010</date> <authorinitials>sk</authorinitials> <revremark>қателерді түзету және өнімділікті жақсарту</revremark></revision>
+      <revision><revnumber>1.13</revnumber> <date>18 желтоқсан 2009</date> <authorinitials>sk</authorinitials> <revremark>бүлінген tarball жаңартуы</revremark></revision>
+      <revision><revnumber>1.12</revnumber> <date>18 желтоқсан 2009</date> <authorinitials>sk</authorinitials> <revremark>сайманның жаңа мүмкіндіктері мен қателерді түзету</revremark></revision>
+      <revision><revnumber>1.11</revnumber> <date>16 қараша 2008</date> <authorinitials>mal</authorinitials> <revremark>GNOME doc-utils миграциясы</revremark></revision>
+    </revhistory>
+
+  </bookinfo>
+
+  <!-- ======== Chapter 1: Introduction ======================== -->
+
+  <chapter id="introduction">
+    <title>Кіріспе</title>
+
+    <para>Бұл тарау GTK-Doc-пен таныстырады және оның не екендігі мен қалай қолданылатыны туралы шолу береді.</para>
+
+    <sect1 id="whatisgtkdoc">
+      <title>GTK-Doc дегеніміз не?</title>
+
+      <para>GTK-Doc C кодын құжаттау үшін қолданылады. Ол әдетте GTK+ және GNOME кітапханалары сияқты кітапханалардың ашық API-ын құжаттау үшін пайдаланылады. Бірақ оны қолданба кодын құжаттау үшін де пайдалануға болады.</para>
+    </sect1>
+
+    <sect1 id="howdoesgtkdocwork">
+      <title>GTK-Doc қалай жұмыс істейді?</title>
+
+      <para>GTK-Doc бастапқы файлдар ішіне арнайы пішімделген түсіндірме блоктарында орналастырылған функциялар құжаттамасын немесе GTK-Doc пайдаланатын үлгі файлдарына қосылған құжаттаманы пайдалану арқылы жұмыс істейді (бірақ ескеріңіз, GTK-Doc тек тақырыптық файлдарда жарияланған функцияларды құжаттайды; ол статикалық функциялар үшін нәтиже бермейді).</para>
+
+      <para>GTK-Doc процестің әрбір қадамын орындайтын бірқатар python скрипттерінен тұрады.</para>
+
+      <para>Процесте 5 негізгі қадам бар:</para>
+
+      <orderedlist>
+
+        <listitem>
+          <para><guilabel>Құжаттаманы жазу.</guilabel> Автор бастапқы файлдарды әрбір функция, макрос, құрылымдар немесе біріктірулер және т.б. үшін құжаттамамен толтырады.</para>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>Код туралы ақпаратты жинау.</guilabel> <application>gtkdoc-scan</application> кодтың тақырыптық файлдарын функциялар, макростар, тізімдер, құрылымдар және біріктірулердің декларацияларын іздеп сканерлейді. Ол декларациялар тізімі бар <filename>&lt;module&gt;-decl-list.txt</filename> файлын жасайды және оларды қай тақырыптық файлда болғанына байланысты бөлімдерге орналастырады. Бірінші іске қосуда бұл файл <filename>&lt;module&gt;-sections.txt</filename> файлына көшіріледі. Автор соңғы қалаған реттілікке қол жеткізу үшін бөлімдерді және олардың ішіндегі декларациялар ретін қайта реттей алады. Ол жасайтын екінші файл — <filename>&lt;module&gt;-decl.txt</filename>. Бұл файлда сканер тапқан толық декларациялар болады. Егер қандай да бір себеппен сканер толық декларацияны таба алмаса немесе декларация басқаша көрінуі тиіс болса және кейбір таңбалардың құжаттарда көрінуін қаласаңыз, <filename>&lt;module&gt;-decl.txt</filename> файлындағыға ұқсас нысандарды <filename>&lt;module&gt;-overrides.txt</filename> файлына орналастыруға болады.</para>
+         <para><application>gtkdoc-scangobj</application> сонымен қатар кітапханадан ол экспорттайтын кез келген GObject ішкі кластары туралы динамикалық түрде сұрау үшін пайдаланылуы мүмкін. Ол әрбір объектінің класс иерархиясындағы орны және ол беретін кез келген GObject қасиеттері мен сигналдары туралы ақпаратты сақтайды.</para>
+         <para><application>gtkdoc-scanobj</application> бұдан былай қолданылмауы керек. Ол бұрын GObject әлі gtk+ ішінде GtkObject болған кезде қажет болған.</para>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>XML және HTML/PDF жасау.</guilabel> <application>gtkdoc-mkdb</application> үлгі файлдарын <filename class="directory">xml/</filename> ішкі бумасындағы XML файлдарына айналдырады. Егер бастапқы кодта арнайы түсіндірме блоктарын пайдаланатын функциялар туралы құжаттама болса, ол осында біріктіріледі. Егер tmpl файлдары пайдаланылмаса, ол құжаттарды тек бастапқы кодтардан және интроспекция деректерінен оқиды.</para>
+          <para><application>gtkdoc-mkhtml</application> XML файлдарын <filename class="directory">html/</filename> ішкі бумасындағы HTML файлдарына айналдырады. Сол сияқты <application>gtkdoc-mkpdf</application> XML файлдарын <filename>&lt;package&gt;.pdf</filename> деп аталатын PDF құжатына айналдырады.</para>
+          <para><filename class="directory">xml/</filename> және <filename class="directory">html/</filename> бумаларындағы файлдар әрқашан қайта жазылады. Оларды ешқашан тікелей түзетуге болмайды.</para>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>Құжаттар арасындағы өзара сілтемелерді түзету.</guilabel> HTML файлдарын орнатқаннан кейін, жеке құжаттар арасындағы кез келген өзара сілтемелерді түзету үшін <application>gtkdoc-fixxref</application> іске қосылуы мүмкін. Мысалы, GTK+ құжаттамасында GLib нұсқаулығында құжатталған түрлерге көптеген өзара сілтемелер бар. Тарату үшін бастапқы tarball жасау кезінде <application>gtkdoc-rebase</application> барлық сыртқы сілтемелерді веб-сілтемелерге айналдырады. Таратылған (алдын ала жасалған) құжаттарды орнатқан кезде, сол қолданба сілтемелерді қайтадан жергілікті сілтемелерге (сол құжаттар орнатылған жерге) айналдыруға тырысады.</para>
+        </listitem>
+      </orderedlist>
+
+    </sect1>
+
+    <sect1 id="gettinggtkdoc">
+      <title>GTK-Doc алу</title>
+
+      <sect2 id="requirements">
+        <title>Талаптар</title>
+        <para><guilabel>python 2/3</guilabel> - негізгі скрипттер python тілінде жазылған.</para>
+        <para><guilabel>xsltproc</guilabel> - libxslt-тен алынған xslt процессоры <ulink url="http://xmlsoft.org/XSLT/" type="http">xmlsoft.org/XSLT/</ulink></para>
+        <para><guilabel>docbook-xsl</guilabel> - docbook xsl стиль кестелері <ulink url="http://sourceforge.net/projects/docbook/files/docbook-xsl/" type="http">sourceforge.net/projects/docbook/files/docbook-xsl</ulink></para>
+        <para><guilabel>source-highlight</guilabel>, <guilabel>highlight</guilabel> немесе <guilabel>vim</guilabel> біреуі - міндетті емес - мысалдардың синтаксисін жарықтандыру үшін қолданылады</para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="aboutgtkdoc">
+      <title>GTK-Doc туралы</title>
+
+      <para>Тарихи тұрғыдан GTK-Doc бастапқы кодтан үлгі файлдарын жасау үшін қолданылған. Бұл үлгі файлдарын әзірлеушілер API құжаттамасын енгізу үшін пайдалана алатын. Бұл тәсіл өте ыңғайсыз болды, өйткені ол жасалған файлдарды нұсқаларды бақылау жүйесінде сақтауды талап етті. GTK-Doc 1.9 нұсқасынан бастап барлық API ақпаратын бастапқы код түсіндірмелеріне орналастыру мүмкін болды, бұл үлгілерді қолдауды қажетсіз етті. 1.26 нұсқасында үлгілерді қолдау мүлдем алынып тасталды.</para>
+
+      <para>(ТҮЗЕТУ КЕРЕК)</para>
+
+      <para>(авторлар, веб-беттер, тарату тізімі, лицензия, болашақ жоспарлар, басқа ұқсас жүйелермен салыстыру.)</para>
+
+    </sect1>
+
+    <sect1 id="aboutthismanual">
+      <title>Бұл нұсқаулық туралы</title>
+
+      <para>(ТҮЗЕТУ КЕРЕК)</para>
+
+      <para>(кімге арналған, қайдан алуға болады, лицензия)</para>
+
+    </sect1>
+
+  </chapter>
+
+  <chapter id="settingup">
+    <title>Жобаны баптау</title>
+
+    <para>Бұл тарауда GTK-Doc-ты жобаңызға біріктіру үшін қажетті қадамдар сипатталған. GTK-Doc-ты жобаға біріктіру келесі қадамдарды қамтиды:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Бума құрылымын дайындау және GTK-Doc құжаттамаңыз үшін қажетті конфигурация файлдарын жасау (<link linkend="settingup_docfiles">Құжаттама қаңқасын баптау</link> қараңыз).</para>
+      </listitem>
+      <listitem>
+        <para>GTK-Doc саймандарын пайдаланып құжаттамаңызды құрастыру үшін құрастыру жүйесін реттеу. Бірнеше құрастыру жүйелеріне қолдау көрсетіледі, бұл нұсқаулықта біз GTK-Doc-ты <link linkend="settingup_autotools">Autotools</link>, <link linkend="settingup_cmake">CMake</link> және <link linkend="settingup_plain_makefiles">жай Makefiles</link> жүйелерімен қалай біріктіруге болатынын сипаттаймыз.</para>
+      </listitem>
+      <listitem>
+        <para>GTK-Doc арнайы файлдарын нұсқаларды бақылау жүйесіне қосу және қай файлдарды елемеу керектігін шешу (<link linkend="settingup_vcs">Нұсқаларды бақылау жүйелерімен біріктіру</link> қараңыз).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Келесі бөлімдерде біз <code>meep</code> деп аталатын жобада жұмыс істейміз деп есептейміз. Бұл жоба екі дестеден (немесе модульден) тұрады: <code>libmeep</code> деп аталатын кітапхана және <code>meeper</code> деп аталатын соңғы пайдаланушы қолданбасы.</para>
+
+    <sect1 id="settingup_docfiles">
+      <title>Құжаттама қаңқасын баптау</title>
+
+      <para>Жалпы қабылданған ереже — құжаттаманы жобаңыздың жоғарғы деңгейлі бумасындағы <code>docs</code> деп аталатын бумаға орналастыру. Біз әдетте әзірлеушілерге арналған <emphasis>анықтамалық құжаттама</emphasis> мен соңғы пайдаланушыларға арналған <emphasis>пайдаланушы нұсқаулығын</emphasis> ажыратамыз. Тағы да, екеуі үшін бөлек бумалардың болуы — қалыпты жағдай. Біз әдетте анықтамалық құжаттаманы <code>reference</code> деп аталатын бумаға, ал пайдаланушы нұсқаулығын <code>help</code> бумасына орналастырамыз. Жоғарыдағы ережеге сәйкес, біздің <code>libmeep</code> дестеміз үшін құжаттама мына жерде орналасады: <code>docs/reference/libmeep</code>. Тек бір кітапханасы немесе қолданбасы бар дестелер үшін құжаттама тікелей <code>docs/reference</code> ішіне де орналастырылуы мүмкін. Жоғарыдағы ережені қолдану міндетті емес, бірақ егер сіз басқа бума құрылымын таңдасаңыз, құрастыру жүйесінің конфигурациясын бума құрылымыңызға сәйкес реттеуіңіз керек.</para>
+
+      <para>Келесі бөлімдерде біз жоғарыдағы ережелерді пайдаланатын <emphasis>meep</emphasis> жобасы үшін бума құрылымын қарастырамыз. <example>
+          <title><emphasis>meep</emphasis> жобасының бума құрылымының мысалы</title>
+          <programlisting>
+meep/
+  docs/
+    reference/  # анықтамалық құжаттама
+      libmeep/
+      meeper/
+    help/       # міндетті емес: пайдаланушы нұсқаулығы
+      meeper/
+  src/
+    libmeep/
+    meeper/
+</programlisting>
+        </example></para>
+    </sect1>
+
+    <sect1 id="settingup_autotools">
+      <title>Autotools-пен біріктіру</title>
+      <para>GTK-Doc-ты autotools-қа негізделген құрастыру жүйесіне біріктіру келесі қадамдарды талап етеді:</para>
+      <itemizedlist>
+        <listitem>
+          <para><application>gtkdocize</application> бағдарламасы <filename>configure</filename> скриптінен бұрын бір рет іске қосылғанына көз жеткізіңіз. Егер <filename>autogen.sh</filename> скрипті болса, оны GTK-Doc-ты тексеру үшін реттеп, <application>gtkdocize</application> шақыруын қосыңыз.</para>
+
+          <para><application>gtkdocize</application> бағдарламасының негізгі мақсаты — <filename>gtk-doc.make</filename> Makefile файлын және <filename>gtk-doc.m4</filename> макрос анықтамасы файлын жобаға көшіру немесе сілтеу арқылы құрастыру жүйесіне қолжетімді ету.</para>
+        </listitem>
+        <listitem>
+          <para>Жасалған <filename>configure</filename> скрипті арқылы GTK-Doc конфигурациясын жасауға мүмкіндік беру үшін құрастыру жүйесінде GTK-Doc-ты іске қосатын <filename>configure.ac</filename> файлына қажетті <application>autoconf</application> макростарын қосыңыз.</para>
+          <para>Басқалармен қатар, бұл <filename>configure</filename> скриптімен <code>--enable-gtk-doc</code> опциясын тіркейді.</para>
+        </listitem>
+        <listitem>
+          <para>Жобаңыздағы әрбір қолданба немесе кітапхана үшін <application>automake</application> скриптін жасаңыз. Осы құжаттамада пайдаланылған мысалда бұл қадам <code>meeper</code> және <code>libmeep</code> екеуіне де қатысты.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Келесі бөлімдерде біз жоғарыдағы қадамдарды кері ретпен орындаймыз. Біз <application>automake</application> скрипттерінен бастап, <filename>configure.ac</filename> және <filename>autogen.sh</filename> файлдарына қарай жүреміз. Содан кейін құрастыру жүйесінде Gtk-Doc-ты қалай іске қосуды және құжаттаманы қалай құрастыруды көрсетеміз.</para>
+
+      <sect2 id="settingup_automake">
+        <title>Automake-пен біріктіру</title>
+
+        <para>Алдымен <filename class="directory">examples</filename> ішкі бумасындағы <filename>Makefile.am</filename> файлын <ulink url="https://gitlab.gnome.org/GNOME/gtk-doc/raw/master/examples/Makefile.am"> gtkdoc-sources</ulink> ішінен жобаңыздың анықтамалық құжаттама бумасына (мысалы, <filename class="directory">docs/reference/&lt;package&gt;</filename>) көшіріңіз. Жергілікті көшірмесі мына жерде қолжетімді болуы керек: <filename>/usr/share/doc/gtk-doc-tools/examples/Makefile.am</filename>. Егер сізде бірнеше десте болса, мұны әрқайсысы үшін қайталаңыз.</para>
+
+        <note>
+          <simpara>Әрбір <filename>Makefile.am</filename> файлын <filename>configure.ac</filename> ішіндегі <function>AC_CONFIG_FILES</function> макросына қосуды ұмытпаңыз. <filename>docs/reference/libmeep/Makefile.am</filename> үшін <function>AC_CONFIG_FILES</function> ішіне <filename>docs/reference/libmeep/Makefile</filename> жазбасын қосу керек болады.</simpara>
+        </note>
+
+        <example>
+          <title><filename>Makefiles.am</filename> файлдары бар бума құрылымының мысалы</title>
+          <programlisting>
+meep/
+  docs/
+    reference/  # анықтамалық құжаттама
+      libmeep/
+        Makefile.am
+      meeper/
+        Makefile.am
+    help/       # міндетті емес: пайдаланушы нұсқаулығы
+      meeper/
+  src/
+    libmeep/
+    meeper/
+</programlisting>
+        </example>
+
+        <para>Әрі қарай, көшірілген Makefile файлдарын теңшеуіңіз және әрбір <filename>Makefile.am</filename> ішіндегі түрлі параметрлерге мәндер беруіңіз керек. Барлық баптаулардың үстінде олардың мақсаты мен баптауды қалай теңшеу керектігін сипаттайтын түсіндірме бар. Көптеген баптаулар тиісті саймандарға қосымша жалаушалар беру үшін қолданылады. Әрбір сайманда қолдау көрсетілетін опцияларды тізімдеу үшін <option>--help</option> опциясы бар (мысалы, <application>gtkdoc-mkhtml</application> сайманында <code>MKHTML_OPTIONS</code> деп аталатын опция бар).</para>
+
+        <para>Келесі тізімде ең маңызды опциялар түсіндірілген. Қосымша опциялар үшін <filename>Makefile.am</filename> мысалын қараңыз. <itemizedlist>
+            <listitem>
+              <para><option>DOC_MODULE</option> құжатталатын дестенің атын көрсету үшін қолданылады (мысалы, <code>meeper</code> немесе <code>libmeep</code>).</para>
+            </listitem>
+            <listitem>
+              <para><option>DOC_SOURCE_DIR</option> GTK-Doc сіздің API құжаттамаңызды іздейтін бастапқы код бумасының орнын көрсету үшін қолданылады. Бұл әдетте <code> DOC_SOURCE_DIR=$(top_srcdir)/src </code> немесе сол буманың ішкі бумасы болады.</para>
+            </listitem>
+
+            <listitem>
+              <para><option>HFILE_GLOB</option> және <option>CFILE_GLOB</option> тәуелділіктер үшін қолданылады. Әрбір опция файл маскасын (file-glob) қабылдайды (мысалы, <code>HFILE_GLOB=$(top_srcdir)/src/*.c</code>). Сәйкес келетін файлдардың кез келгені өзгерсе, құжаттама қайта құрастырылады.</para>
+            </listitem>
+
+            <listitem>
+              <para><option>EXTRA_HFILES</option> API құжаттамасын сканерлеу кезінде <code>DOC_SOURCE_DIR</code> ішінде табылмаған қосымша тақырыптық файлдарды қосуға мүмкіндік береді (мысалы, <code> EXTRA_HFILES=$(top_srcdir}/contrib/extra.h</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para><option>IGNORE_HFILES</option> API құжаттамасын сканерлеу кезінде елемейтін тақырыптық файлдарды немесе бумаларды көрсетуге мүмкіндік береді. Файлдың немесе буманың негізгі атын пайдаланыңыз (мысалы, <code> IGNORE_HFILES=gtkdebug.h gtkintl.h private_code_folder</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para><option>HTML_IMAGES</option> жасалған құжаттаманың <filename>html/</filename> бумасына көшірілетін сурет файлдарын көрсетуге мүмкіндік береді. Егер сіздің API құжаттамаңызға қандай да бір суреттер кірсе, оларды осы опцияға қосу керек (мысалы, <code> HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para><option>content_files</option> <code>$(DOC_MAIN_SGML_FILE)</code> файлына қосылатын қосымша файлдарды көрсетуге мүмкіндік береді (мысалы, <code> content_files=running.xml building.xml changes-2.0.xml</code>).</para>
+            </listitem>
+
+            <listitem>
+              <para><option>expand_content_files</option> <code>#GtkWidget</code> сияқты <emphasis>gtk-doc қысқартулары</emphasis> жазылатын файлдарды көрсетуге мүмкіндік береді (мысалы, <code> expand_content_files=running.xml</code>).</para>
+            </listitem>
+          </itemizedlist></para>
+
+      </sect2>
+
+      <sect2 id="settingup_autoconf">
+        <title>Autoconf-пен біріктіру</title>
+
+        <para><application>autoconf</application> жүйесімен біріктіру өте оңай және бір міндетті қадамды және қосымша міндетті емес (бірақ ұсынылатын) қадамды қамтиды. Бірінші қадам — <filename>configure.ac</filename> скриптіне <function>GTK_DOC_CHECK</function> макросын қосу. Бұл GTK-Doc-ты іске қосу үшін бірнеше конфигурация опцияларын тіркейді және <application>gtkdocize</application> үшін әдепкі аргументтерді орнатуға мүмкіндік береді.</para>
+
+        <warning>
+          <simpara><code>GTK_DOC_CHECK</code> макросының шегініссіз екеніне көз жеткізіңіз. Макрос жолдың басынан басталуы керек және бос орыннан басталмауы керек.</simpara>
+        </warning>
+
+        <para>Екінші қадам — <filename>configure.ac</filename> файлына <code>AC_CONFIG_MACRO_DIR(m4)</code> қосу. Бұл міндетті емес, бірақ <application>gtkdocize</application> бағдарламасына <function>GTK_DOC_CHECK</function> макросы бар макрос анықтамасын (мысалы, <filename>gtk-doc.m4</filename>) жобаңыздың макрос бумасына автоматты түрде көшіруге көмектеседі. Бұлсыз GTK_DOC_CHECK макросы табылмауы мүмкін және сізге <application>aclocal</application> сайманына макрос анықтамасы файлының қайда екенін нақты көрсету керек болады.</para>
+
+        <para>
+          <example><title>Autoconf-пен минималды біріктіру</title>
+            <programlisting>
+# ұсынылады: m4 бумасын орнату
+AC_CONFIG_MACRO_DIR(m4)
+# міндетті емес: configure-де gtk-doc тіркеу
+GTK_DOC_CHECK([1.28])
+</programlisting>
+          </example>
+        </para>
+
+        <para>Жоғарыдағы мысал жұмыс істейді, бірақ ол барлық әзірлеушілерден gtk-doc орнатылған болуын талап етеді. Жақсырақ жол — келесі мысалда көрсетілгендей құжаттаманы құрастыруды міндетті емес ету: <example>
+            <title>Міндетті емес gtk-doc тәуелділігімен біріктіру</title>
+            <programlisting>
+m4_ifdef([GTK_DOC_CHECK], [
+# ұсынылады: m4 бумасын орнату
+AC_CONFIG_MACRO_DIR(m4)
+# міндетті емес: configure-де gtk-doc тіркеу
+GTK_DOC_CHECK([1.28])
+],[
+AM_CONDITIONAL([ENABLE_GTK_DOC], false)
+])
+</programlisting>
+          </example></para>
+
+        <para>Бірінші аргумент конфигурация кезінде Gtk-Doc нұсқасын тексеру үшін қолданылады. 2-ші, міндетті емес аргументті <application>gtkdocize</application> пайдаланады. <symbol>GTK_DOC_CHECK</symbol> макросы сонымен қатар бірнеше конфигурация ауыстырып-қосқыштарын қосады:</para>
+
+        <orderedlist>
+          <listitem><para>--with-html-dir=PATH : орнатылған құжаттардың жолы</para></listitem>
+          <listitem><para>--enable-gtk-doc : құжаттаманы құрастыру үшін gtk-doc пайдалану [әдепкі=жоқ]</para></listitem>
+          <listitem><para>--enable-gtk-doc-html : құжаттаманы html пішімінде құрастыру [әдепкі=иә]</para></listitem>
+          <listitem><para>--enable-gtk-doc-pdf : құжаттаманы pdf пішімінде құрастыру [әдепкі=жоқ]</para></listitem>
+        </orderedlist>
+
+        <important>
+          <para>GTK-Doc әдепкі бойынша сөндірулі! Келесі <filename>configure</filename> іске қосу кезінде <option>'--enable-gtk-doc'</option> опциясын беруді ұмытпаңыз. Әйтпесе, алдын ала жасалған құжаттама орнатылады (бұл пайдаланушылар үшін тиімді, бірақ әзірлеушілер үшін емес).</para>
+        </important>
+
+        <para><filename>configure.ac</filename> файлына барлық өзгерістер енгізілгеннен кейін, <filename>configure</filename> файлын жаңартыңыз. Мұны <code>autogen.sh</code> файлын қайта іске қосу арқылы жасауға болады.</para>
+      </sect2>
+
+      <sect2 id="settingup_autogen">
+        <title>Autogen-мен біріктіру</title>
+
+        <para>Көптеген жобаларда жоба нұсқаларды бақылау жүйесінен (мысалы, git немесе svn) алынғаннан кейін құрастыру инфрақұрылымын баптау үшін <filename>autogen.sh</filename> скрипті болады. GTK-Doc құрамында Gtk-Doc үшін қажетті файлдарды бастапқы код бумасына көшіру үшін қолданылатын <application>gtkdocize</application> атты скрипт бар.</para>
+
+        <para>Оны autoreconf, autoheader, automake немесе autoconf-тан бұрын іске қосу керек.</para>
+
+        <para>
+          <example><title>gtkdocize бағдарламасын autogen.sh ішінен іске қосу</title>
+            <programlisting>
+gtkdocize || exit 1
+</programlisting>
+          </example>
+        </para>
+
+        <para>
+          <example>
+            <title>gtkdocize бағдарламасын autogen.sh ішінен шартты түрде іске қосу</title>
+            <programlisting>
+GTKDOCIZE=$(which gtkdocize 2&gt;/dev/null)
+if test $? -ne 0; then
+  echo "gtk-doc қолдауы табылмады. Құжаттарды құрастыра алмайсыз."
+else
+  $GTKDOCIZE || exit 1
+fi
+</programlisting>
+          </example>
+        </para>
+
+        <para><application>gtkdocize</application> іске қосылғанда, ол <filename>gtk-doc.make</filename> файлын жобаңыздың түбіріне (немесе <option>--docdir</option> опциясымен көрсетілген кез келген бумаға) көшіреді.</para>
+
+        <para><application>gtkdocize</application> сіздің <filename>configure.ac</filename> скриптіңізді <function>GTK_DOC_CHECK</function> макросының бар-жоғына тексереді. <function>GTK_DOC_CHECK</function> макросын <application>gtkdocize</application> скриптіне қосымша аргументтерді беру үшін пайдалануға болады. Бұл <function>GTK_DOC_CHECK</function> макросындағы 2-ші параметр.</para>
+
+        <para>Сонымен қатар, қосымша аргументтерді <application>gtkdocize</application> скриптіне <function>GTKDOCIZE_FLAGS</function> орта айнымалысы арқылы немесе <filename>autogen.sh</filename> ішінде тікелей <application>gtkdocize</application>-ға көрсету арқылы беруге болады.</para>
+
+      </sect2>
+
+      <sect2 id="settingup_firstrun">
+        <title>GTK-Doc-ты құрастыру жүйесінен орындау</title>
+
+        <para>Алдыңғы қадамдардан кейін құрастыруды іске қосатын уақыт келді. Алдымен <filename>autogen.sh</filename> файлын қайта іске қосуымыз керек. Егер бұл скрипт сіз үшін configure-ді іске қосса, оған <option>--enable-gtk-doc</option> опциясын беріңіз. Әйтпесе, <filename>configure</filename> файлын осы опциямен кейінірек қолмен іске қосыңыз.</para>
+        <para>Бірінші make іске қосылуы құжаттама бумаларында бірнеше қосымша файлдарды жасайды. Маңыздылары: <filename>&lt;package&gt;.types</filename>, <filename>&lt;package&gt;-docs.xml</filename> (бұрын .sgml болатын), <filename>&lt;package&gt;-sections.txt</filename>.</para>
+        <para>
+          <example><title>Құжаттарды құрастыруды іске қосу</title>
+            <programlisting>
+./autogen.sh --enable-gtk-doc
+make
+</programlisting>
+          </example>
+        </para>
+
+        <para>Енді браузеріңізді <filename>docs/reference/&lt;package&gt;/index.html</filename> файлына бағыттай аласыз. Осы бастапқы баптаумен сіз тек өте қарапайым құжатты көресіз. Келесі тарау сізге арнайы түсіндірме блоктары арқылы кодыңыздан API құжаттамасын қалай қосу керектігін үйретеді. Одан кейінгі тарау <link linkend="metafiles">қосымша файлдармен</link> таныстырады және құжаттама файлдарына қосымша тараулар мен бөлімдерді қосу үшін <link linkend="metafiles_master">негізгі үлгіні</link> қалай түзету керектігін көрсетеді.</para>
+
+      </sect2>
+
+    </sect1>
+
+    <sect1 id="settingup_cmake">
+      <title>CMake құрастыру жүйелерімен біріктіру</title>
+
+      <para>GTK-Doc енді <filename>GtkDocConfig.cmake</filename> модулін (және тиісті <filename>GtkDocConfigVersion.cmake</filename> модулін) ұсынады. Бұл <filename>CMakeLists.txt</filename> файлында орнатуға болатын <literal>gtk_doc_add_module</literal> командасын береді.</para>
+
+      <para>Келесі мысалда осы команданы қалай пайдалану керектігі көрсетілген. <example><title>GTK-Doc-ты CMake-тен пайдалану мысалы</title>
+          <programlisting>
+find_package(GtkDoc 1.25 REQUIRED)
+
+# doc-libmeep мақсатын жасау.
+gtk_doc_add_module(
+   libmeep ${CMAKE_SOURCE_DIR}/libmeep
+      XML meep-docs.xml
+      LIBRARIES libmeep
+)
+
+# Әдепкі мақсаттың бөлігі ретінде doc-libmeep құрастыру. Бұлсыз, сізге
+# құжаттарды құрастыру үшін `make doc-libmeep` сияқты команданы қолмен іске қосу керек болар еді.
+add_custom_target(documentation ALL DEPENDS doc-libmeep)
+
+# Құжаттарды орнату. (Бұл CMAKE_INSTALL_DOCDIR айнымалысын дұрыс орнату үшін
+# GNUInstallDirs CMake модулін пайдаланып жатырсыз деп есептейді).
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/libmeep/html
+        DESTINATION ${CMAKE_INSTALL_DOCDIR})
+</programlisting>
+        </example></para>
+    </sect1>
+
+    <sect1 id="settingup_plain_makefiles">
+      <title>Жай makefile немесе басқа құрастыру жүйелерімен біріктіру</title>
+
+      <para>Егер біреу automake-ті, демек <filename>gtk-doc.mak</filename> файлын пайдаланғысы келмесе, жеке makefile файлдарында (немесе басқа құрастыру саймандарында) gtkdoc саймандарын дұрыс ретпен шақыруы керек болады.</para>
+
+      <para>
+        <example><title>Құжаттаманы құрастыру қадамдары</title>
+          <programlisting>
+DOC_MODULE=meep
+// бастапқы кодтар өзгерді
+gtkdoc-scan --module=$(DOC_MODULE) &lt;source-dir&gt;
+gtkdoc-scangobj --module=$(DOC_MODULE)
+gtkdoc-mkdb --module=$(DOC_MODULE) --output-format=xml --source-dir=&lt;source-dir&gt;
+// xml файлдары өзгерді
+mkdir html
+cd html &amp;&amp; gtkdoc-mkhtml $(DOC_MODULE) ../meep-docs.xml
+gtkdoc-fixxref --module=$(DOC_MODULE) --module-dir=html
+</programlisting>
+        </example>
+      </para>
+
+      <para>Қажетті қосымша опцияларды таңдау үшін <filename>Makefile.am</filename> және <filename>gtk-doc.mak</filename> файлдарына қарау керек болады.</para>
+    </sect1>
+
+    <sect1 id="settingup_vcs">
+      <title>Нұсқаларды бақылау жүйелерімен біріктіру</title>
+
+      <para>Жалпы ереже бойынша, нұсқаларды бақылау жүйесіне сіз түзетін файлдар кіруі керек. Типтік жобалар үшін бұл келесі файлдар: <filename>&lt;package&gt;.types</filename>, <filename>&lt;package&gt;-docs.xml</filename> (бұрын .sgml), <filename>&lt;package&gt;-sections.txt</filename>, <filename>Makefile.am</filename>.</para>
+      <para><filename>xml/</filename> және <filename>html/</filename> бумаларындағы файлдар нұсқаларды бақылау жүйесіне кірмеуі керек. Сондай-ақ ешбір <filename>.stamp</filename> файлдары да.</para>
+    </sect1>
+
+  </chapter>
+
+  <chapter id="documenting">
+    <title>Кодты құжаттау</title>
+
+    <para>GTK-Doc кодты құжаттау үшін арнайы синтаксисі бар бастапқы код түсіндірмелерін пайдаланады. Әрі қарай, ол басқа дереккөздерден жобаңыздың құрылымы туралы ақпаратты алады. Келесі бөлімде түсіндірмелер синтаксисі туралы барлық ақпаратты таба аласыз.</para>
+
+    <para>GTK-Doc сканері C тақырыптық файлдарының көпшілігін жақсы өңдей алады. Егер сканерден ерекше жағдайға ұқсайтын ескертулер алсаңыз, GTK-Doc-қа оларды өткізіп жіберу туралы нұсқау беруге болады. <example><title>GTK-Doc түсіндірме блогы</title>
+        <programlisting>
+#ifndef __GTK_DOC_IGNORE__
+/* талданбайтын код осында */
+#endif
+</programlisting>
+      </example></para>
+
+    <note>
+      <title>Шектеулер</title>
+      <para>Ескеріңіз, GTK-Doc <code>#ifndef(__GTK_DOC_IGNORE__)</code> форматын қолдайды, бірақ <code>#if !defined(__GTK_DOC_IGNORE__)</code> немесе басқа тіркесімдерді қолдамайды.</para>
+    </note>
+
+    <!--  -->
+
+    <sect1 id="documenting_syntax">
+      <title>Құжаттама түсіндірмелері</title>
+
+      <para>Қосымша '*' таңбасынан басталатын көпжолды түсіндірме GTK-Doc саймандарымен өңделетін құжаттама блогын білдіреді. <example><title>GTK-Doc түсіндірме блогы</title>
+          <programlisting>
+/**
+ * идентификатор:
+ * құжаттама ...
+ */
+</programlisting>
+        </example></para>
+
+      <para>'Идентификатор' — бұл түсіндірмеге қатысты элементтің атауы бар бір жол. Синтаксис элементке байланысты аздап ерекшеленеді. (ЖАСАУ КЕРЕК: идентификаторларды көрсететін кестені қосу)</para>
+
+      <para>'Құжаттама' блогы да әрбір таңба түрі үшін әртүрлі болады. Функциялар немесе макростар сияқты параметрлерді алатын таңба түрлерінде алдымен параметр сипаттамасы, содан кейін бос жол келеді (тек '*'). Одан кейін егжей-тегжейлі сипаттама келеді. Тек ' *' (бос орын-жұлдызша) таңбасынан тұратын барлық жолдар (бағдарлама тізімдері мен CDATA бөлімдерінен тыс) абзац үзілімдеріне айналдырылады. Егер абзац үзілімін қаламасаңыз, оны ' * ' (бос орын-жұлдызша-бос орын-бос орын) етіп өзгертіңіз. Бұл алдын ала пішімделген мәтінде (код тізімдерінде) пайдалы.</para>
+
+      <tip>
+        <para>Кодты құжаттау кезінде екі аспектіні сипаттаңыз: <itemizedlist>
+             <listitem>
+               <para>Ол не: Класс немесе функция атауы басқа ортадан келген адамдар үшін кейде жаңылыстыруы мүмкін.</para>
+             </listitem>
+             <listitem>
+               <para>Ол не істейді: Жалпы қолдану тәсілдері туралы айтыңыз. Оны басқа API-мен байланыстырыңыз.</para>
+             </listitem>
+           </itemizedlist></para>
+      </tip>
+
+      <para>Гипермәтіннің жай мәтіннен бір артықшылығы — құжатта сілтемелердің болуы. Сілтеме үшін дұрыс белгіні жазу жалықтыруы мүмкін. GTK-Doc бірнеше пайдалы қысқартуларды ұсыну арқылы көмекке келеді. <itemizedlist>
+          <listitem>
+            <para>Аргументтерді алатын функцияларға немесе макростарға сілтеме жасау үшін функция() пайдаланыңыз.</para>
+          </listitem>
+          <listitem>
+            <para>Параметрлерге сілтеме жасау үшін @параметр пайдаланыңыз. Мұны сипатталып жатқан функцияға қатысты басқа функциялардың параметрлеріне сілтеме жасағанда да пайдаланыңыз.</para>
+          </listitem>
+          <listitem>
+            <para>Константаға сілтеме жасау үшін %константа пайдаланыңыз, мысалы, %G_TRAVERSE_LEAFS.</para>
+          </listitem>
+          <listitem>
+            <para>Аргументтерді алмайтын құрылымдар, тізімдер және макростар сияқты таңбалардың басқа түрлеріне сілтеме жасау үшін #таңба пайдаланыңыз.</para>
+          </listitem>
+          <listitem>
+            <para>GObject сигналына сілтеме жасау үшін #Объект::сигнал пайдаланыңыз.</para>
+          </listitem>
+          <listitem>
+            <para>GObject қасиетіне сілтеме жасау үшін #Объект:қасиет пайдаланыңыз.</para>
+          </listitem>
+          <listitem>
+            <para>Құрылым ішіндегі өріске сілтеме жасау үшін #Құрылым.өріс және vmethod-қа сілтеме жасау үшін #GObjectClass.foo_bar() пайдаланыңыз.</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <tip>
+        <para>Егер құжаттамаңызда GTK-Doc оларды өзгертпей, '&lt;', '&gt;', '()', '@', '%', немесе '#' арнайы таңбаларын пайдалану қажет болса, тиісінше "&amp;lt;", "&amp;gt;", "&amp;lpar;", "&amp;rpar;", "&amp;commat;", "&amp;percnt;" және "&amp;num;" XML нысандарын пайдалануға болады немесе оларды кері қиғаш сызықпен '\' экрандауға болады.</para>
+      </tip>
+
+      <para>DocBook тек сілтемелерден де көп нәрсені істей алады. Сонымен қатар тізімдер, мысалдар, тақырыптар және суреттер болуы мүмкін. 1.20 нұсқасынан бастап, <ulink url="http://daringfireball.net/projects/markdown/">Markdown</ulink> деп аталатын негізгі мәтінді пішімдеу синтаксисінің ішкі жиынын пайдалану ұсынылады. Ескі GTK-Doc нұсқаларында Markdown қамтитын кез келген құжаттама сол қалпында көрсетіледі. Мысалы, тізім элементтері сызықшадан басталатын жолдар ретінде көрінеді.</para>
+
+      <para>Қазір markdown-ға басымдық берілсе де, екеуін де араластыруға болады. Мұндағы бір шектеу — markdown ішінде docbook xml пайдалануға болады, бірақ docbook xml ішінде markdown-ға қолдау көрсетілмейді.</para>
+
+      <para>Ескі GTK-Doc шығарылымдарында, егер сізге қосымша пішімдеуді қолдау қажет болса, <filename>Makefile.am</filename> ішіндегі <symbol>MKDB_OPTIONS</symbol> айнымалысына <option>--xml-mode</option> (немесе <option>--sgml-mode</option>) қосу арқылы түсіндірмелер ішінде docbook XML тегтерін пайдалануды қосуыңыз керек болар еді.</para>
+
+      <para>
+        <example><title>Markdown пайдаланатын GTK-Doc түсіндірме блогы</title>
+          <programlisting>
+/**
+ * идентификатор:
+ *
+ * құжаттама абзацы ...
+ *
+ * # Ішкі тақырып #
+ *
+ * ## Екінші ішкі тақырып
+ *
+ * # Сілтеме якорі бар ішкі тақырып # {#heading-two}
+ *
+ * көбірек құжаттама:
+ *
+ * - тізім элементі 1
+ *
+ *   Тізім элементінің ішіндегі абзац.
+ *
+ * - тізім element 2
+ *
+ * 1. нөмірленген тізім элементі
+ *
+ * 2. басқа нөмірленген тізім элементі
+ *
+ * Басқа абзац. [GNOME веб-сайтына сілтеме](http://www.gnome.org/)
+ *
+ * ![кірістірілген сурет](plot-result.png)
+ *
+ * [Жоғарыдағы тақырып якоріне сілтеме][heading-two]
+ *
+ * C тіліндегі мысал:
+ * |[&lt;!-- language="C" --&gt;
+ * GtkWidget *label = gtk_label_new ("Gorgeous!");
+ * ]|
+ */
+</programlisting>
+        </example>
+      </para>
+
+      <para>Қандай markdown тегтеріне қолдау көрсетілетіні туралы көбірек мысалдарды <ulink url="https://wiki.gnome.org/Projects/GTK/DocumentationSyntax/Markdown">GTK құжаттамасының Markdown синтаксисі анықтамалығынан</ulink> табуға болады.</para>
+
+      <tip>
+        <para>Бұған дейін айтылғандай, GTK-Doc ашық API құжаттауға арналған. Сондықтан статикалық таңбалар үшін құжаттама жазу мүмкін емес. Соған қарамастан, ол таңбаларға да түсіндірме берген дұрыс. Бұл басқа әзірлеушілерге кодыңызды түсінуге көмектеседі. Сондықтан біз оларды қалыпты түсіндірмелерді пайдаланып сипаттауды ұсынамыз (бірінші жолда екінші '*' таңбасынсыз). Егер кейінірек функцияны ашық ету қажет болса, түсіндірме блогына тағы бір '*' қосып, бөлімдер файлының ішіндегі тиісті жерге таңба атын енгізу жеткілікті.</para>
+      </tip>
+    </sect1>
+
+    <sect1 id="documenting_sections">
+      <title>Бөлімдерді құжаттау</title>
+
+      <para>Құжаттаманың әрбір бөлімінде бір класс немесе модуль туралы ақпарат болады. Компонентті таныстыру үшін бөлім блогын жазуға болады. Қысқаша сипаттама мазмұн кестесінде де қолданылады. Барлық @өрістер міндетті емес.</para>
+
+      <para>
+        <example><title>Бөлім түсіндірме блогы</title>
+          <programlisting>
+/**
+ * SECTION:meepapp
+ * @short_description: қолданба класы
+ * @title: Meep қолданбасы
+ * @section_id:
+ * @see_also: #MeepSettings
+ * @stability: Stable
+ * @include: meep/app.h
+ * @image: application.png
+ *
+ * Қолданба класы ... өңдейді
+ */
+</programlisting>
+        </example>
+      </para>
+
+      <variablelist>
+        <varlistentry>
+          <term>SECTION:&lt;аты&gt;</term>
+          <listitem>
+            <para>Аты бөлім құжаттамасын <filename>&lt;package&gt;-sections.txt</filename> файлындағы тиісті бөлікке байланыстырады. Мұнда берілген ат <filename>&lt;package&gt;-sections.txt</filename> файлындағы &lt;FILE&gt; тегіне сәйкес келуі керек.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@short_description</term>
+          <listitem>
+            <para>Бөлімнің бір жолдық сипаттамасы, ол кейінірек мазмұн кестесіндегі сілтемелерден кейін және бөлім бетінің жоғарғы жағында пайда болады.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@title</term>
+          <listitem>
+            <para>Бөлім тақырыбы әдепкі бойынша SECTION декларациясындағы &lt;аты&gt; болады. Оны @title өрісімен алмастыруға болады.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@section_id</term>
+          <listitem>
+            <para>Тақырыпты бөлім идентификаторы ретінде пайдалануды алмастырады. GObjects үшін &lt;title&gt; бөлім идентификаторы (section_id) ретінде қолданылады, ал басқа бөлімдер үшін ол &lt;MODULE&gt;-&lt;title&gt; болады.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@see_also</term>
+          <listitem>
+            <para>Осы бөлімге қатысты таңбалар тізімі.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@stability</term>
+          <listitem>
+            <para>Бұл API ие болатын тұрақтылық деңгейінің бейресми сипаттамасы. Біз мына терминдердің бірін пайдалануды ұсынамыз: <itemizedlist>
+                <listitem>
+                  <para>Тұрақты (Stable) — Тұрақты интерфейстің мақсаты — кез келген үшінші тараптарға осы интерфейстерге арналған қолданбаларды әзірлеуге, оларды шығаруға және олардың өнімнің барлық кіші шығарылымдарында (интерфейс енгізілген нұсқадан кейін және сол негізгі нұсқа ішінде) жұмыс істейтініне сенімді болуға мүмкіндік беру. Тіпті негізгі шығарылымда да үйлесімсіз өзгерістер сирек болады деп күтіледі және олардың күшті негіздемесі болуы керек.</para>
+                </listitem>
+                <listitem>
+                  <para>Тұрақты емес (Unstable) — Тұрақты емес интерфейстер эксперименттік немесе өтпелі болып табылады. Олар әдетте сыртқы әзірлеушілерге жаңа немесе тез өзгеретін технологияға ерте қол жеткізуге мүмкіндік беру үшін немесе жалпы шешім күтілетін мәселеге аралық шешім ұсыну үшін пайдаланылады. Бір кіші шығарылымнан екіншісіне бастапқы кодтың немесе бинарлық файлдың үйлесімділігі туралы ешқандай уәде берілмейді.</para>
+                </listitem>
+                <listitem>
+                  <para>Жеке (Private) — GNOME жиынтығының өзінде қолдануға болатын, бірақ соңғы пайдаланушылар үшін құжатталмаған интерфейс. Мұндай функциялар тек көрсетілген және құжатталған тәсілдермен ғана пайдаланылуы керек.</para>
+                </listitem>
+                <listitem>
+                  <para>Ішкі (Internal) — Модульге тән және соңғы пайдаланушы құжаттамасын қажет етпейтін интерфейс. Құжатталмаған функциялар Ішкі деп есептеледі.</para>
+                </listitem>
+              </itemizedlist></para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@include</term>
+          <listitem>
+            <para>Бөлім синопсисінде (үтірмен ажыратылған тізім) көрсетілетін <literal>#include</literal> файлдары, <link linkend="metafiles_sections">бөлім файлынан</link> немесе командалық жолдан алынған глобалды мәнді алмастырады. Бұл элемент міндетті емес.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>@image</term>
+          <listitem>
+            <para>Осы бөлімнің анықтамалық бетінің жоғарғы жағында көрсетілетін сурет. Бұл көбінесе кластың көрнекі көрінісін немесе оның басқа кластармен байланысын сипаттайтын қандай да бір диаграмма болады. Бұл элемент міндетті емес.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <tip>
+        <para>Құжат өзгерістерінен кейін қажетсіз қайта құрастыруды болдырмау үшін, бөлім құжаттарын мүмкіндігінше c-бастапқы кодына орналастырыңыз.</para>
+      </tip>
+
+    </sect1>
+
+    <sect1 id="documenting_symbols">
+      <title>Таңбаларды құжаттау</title>
+
+      <para>Әрбір таңба (функция, макрос, құрылым, тізім, сигнал және қасиет) жеке блокта құжатталады. Блокты таңбалардың анықтамасына жақын орналастырған дұрыс, сонда оларды синхрондау оңай болады. Осылайша, функциялар әдетте c-бастапқы кодында, ал макростар, құрылымдар мен тізімдер тақырыптық файлда құжатталады.</para>
+
+      <sect2><title>Жалпы тегтер</title>
+
+        <para>API-дың қашан енгізілгенін немесе қашан ескіргенін көрсету үшін барлық құжаттама элементтеріне нұсқа туралы ақпаратты қосуға болады.</para>
+
+        <variablelist><title>Нұсқа тегтері</title>
+          <varlistentry><term>Бастап:</term>
+            <listitem>
+              <para>Кодтың қай нұсқасынан бастап API қолжетімді екендігі туралы сипаттама.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>Ескірген:</term>
+            <listitem>
+              <para>Бұл функцияны бұдан былай қолдануға болмайтынын білдіретін абзац. Сипаттама оқырманды жаңа API-ға бағыттауы керек.</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+
+        <para>Сондай-ақ жобаның барлық болашақ кіші шығарылымдары үшін API тұрақтылығына кепілдік берілгенін көрсету үшін барлық құжаттама элементтеріне тұрақтылық туралы ақпаратты қосуға болады.</para>
+
+        <para>Барлық құжаттама элементтері үшін әдепкі тұрақтылық деңгейін <application>gtkdoc-mkdb</application> бағдарламасына төмендегі мәндердің бірімен <option>--default-stability</option> аргументін беру арқылы орнатуға болады.</para>
+
+        <variablelist><title>Тұрақтылық тегтері</title>
+          <varlistentry><term>Тұрақтылығы: Тұрақты</term>
+            <listitem>
+              <para>Элементті тұрақты ретте белгілеңіз. Бұл жобаның барлық болашақ кіші шығарылымдары үшін тұрақты болып қалуына кепілдік берілген ашық API интерфейстеріне арналған.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>Тұрақтылығы: Тұрақты емес</term>
+            <listitem>
+              <para>Элементті тұрақты емес ретте белгілеңіз. Бұл тұрақтандырылғанға дейін алдын ала қарау ретінде шығарылатын ашық API интерфейстеріне арналған.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>Тұрақтылығы: Жеке</term>
+            <listitem>
+              <para>Элементті жеке ретте белгілеңіз. Бұл бір-бірімен тығыз байланысты модульдер арқылы пайдаланылуы мүмкін, бірақ кез келген үшінші тараптар үшін емес интерфейстерге арналған.</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+
+        <example><title>Жалпы тегтер</title>
+          <programlisting>
+/**
+ * foo_get_bar:
+ * @foo: кейбір foo
+ *
+ * @foo-дың bar-ын алады.
+ *
+ * Қайтарады: @foo-дың bar-ы
+ *
+ * Бастап: 2.6
+ * Ескірген: 2.12: Оның орнына foo_baz_get_bar() пайдаланыңыз.
+ */
+Bar *
+foo_get_bar(Foo *foo)
+{
+...
+</programlisting>
+        </example>
+      </sect2>
+
+      <sect2><title>Аннотациялар</title>
+
+        <para>Құжаттама блоктарында аннотация тегтері болуы мүмкін. Бұл тегтер олардың мағынасын сипаттайтын құралдардың көмегімен көрсетіледі. Тегтер GObject Introspection арқылы тілдік байланыстарды жасау үшін қолданылады. Қолдау көрсетілетін тегтердің егжей-тегжейлі тізімін <ulink url="https://gi.readthedocs.io/en/latest/annotations/giannotations.html" type="http">GObject Introspection құжаттамасынан</ulink> табуға болады.</para>
+
+        <example><title>Аннотациялар</title>
+          <programlisting>
+/**
+ * foo_get_bar: (аннотация)
+ * @foo: (аннотация): кейбір foo
+ *
+ * @foo-дың bar-ын алады.
+ *
+ * Қайтарады: (аннотация): @foo-дың bar-ы
+ */
+...
+/**
+ * foo_set_bar_using_the_frobnicator: (аннотация) (тағы бір аннотация)
+ *                                    (және тағы бір аннотация)
+ * @foo: (аннотация) (тағы бір аннотация): кейбір foo
+ *
+ * @foo-да bar-ды орнатады.
+ */
+</programlisting>
+        </example>
+      </sect2>
+
+      <sect2><title>Функция түсіндірме блогы</title>
+
+        <para>Келесілерді ұмытпаңыз: <itemizedlist>
+            <listitem>
+              <para>Қайтарылған объектілерді, тізімдерді, жолдарды және т.б. босату/сілтемесін жою/босату (free/unref/release) қажеттігін құжаттаңыз.</para>
+            </listitem>
+            <listitem>
+              <para>Параметрлердің NULL болуы мүмкін-болмауын және егер солай болса не болатынын құжаттаңыз.</para>
+            </listitem>
+            <listitem>
+              <para>Қажет болған жағдайда қызықты алдын ала шарттар мен кейінгі шарттарды атап өтіңіз.</para>
+            </listitem>
+          </itemizedlist></para>
+
+        <para>Gtk-doc '_' таңбасынан басталатын барлық таңбаларды (макростар, функциялар) жеке деп есептейді. Олар статикалық функциялар ретінде қарастырылады.</para>
+
+        <example><title>Функция түсіндірме блогы</title>
+          <programlisting>
+/**
+ * функция_аты:
+ * @par1:  1-параметрдің сипаттамасы. Ол бірнеше жолға созылуы
+ * мүмкін.
+ * @par2:  2-параметрдің сипаттамасы
+ * @...: %NULL-мен аяқталатын bar-лар тізімі
+ *
+ * Функцияның сипаттамасы осында жазылады. Параметрлерге сілтеме жасау үшін @par1
+ * пайдалануға болады, сонда олар нәтижеде ерекшеленеді. Сондай-ақ константалар
+ * үшін %константа, функциялар үшін функция_аты2() және басқа декларацияларға
+ * сілтемелер (олар басқа жерде құжатталған болуы мүмкін) үшін #GtkWidget пайдалана аласыз.
+ *
+ * Қайтарады: бүтін сан.
+ *
+ * Бастап: 2.2
+ * Ескірген: 2.18: Оның орнына басқа_функция() пайдаланыңыз.
+ */
+</programlisting>
+        </example>
+
+        <variablelist><title>Функция тегтері</title>
+          <varlistentry><term>Қайтарады:</term>
+            <listitem>
+              <para>Қайтарылған нәтижені сипаттайтын абзац.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>@...:</term>
+            <listitem>
+              <para>Егер функцияда айнымалы аргументтер болса, осы тегті пайдалану керек (@Varargs: тарихи себептермен де жұмыс істейді).</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+
+      </sect2>
+
+      <sect2><title>Қасиет түсіндірме блогы</title>
+
+        <example><title>Қасиет түсіндірме блогы</title>
+          <programlisting>
+/**
+ * SomeWidget:some-property:
+ *
+ * Мұнда сіз қасиетті құжаттай аласыз.
+ */
+g_object_class_install_property (object_class, PROP_SOME_PROPERTY, ...);
+</programlisting>
+        </example>
+
+      </sect2>
+
+      <sect2><title>Сигнал түсіндірме блогы</title>
+
+        <para>Келесілерді ұмытпаңыз: <itemizedlist>
+            <listitem>
+              <para>Сигналдың қашан таратылатынын және оның басқа сигналдардан бұрын немесе кейін таратылатынын құжаттаңыз.</para>
+            </listitem>
+            <listitem>
+              <para>Сигнал өңдеушісінде қолданба не істей алатынын құжаттаңыз.</para>
+            </listitem>
+          </itemizedlist></para>
+
+        <example><title>Сигнал түсіндірме блогы</title>
+          <programlisting>
+/**
+ * FooWidget::foobarized:
+ * @widget: сигналды алған виджет
+ * @foo: кейбір foo
+ * @bar: кейбір bar
+ *
+ * ::foobarized сигналы біреу @widget-ті foobarize жасауға тырысқан сайын таратылады.
+ */
+foo_signals[FOOBARIZED] =
+  g_signal_new ("foobarized",
+                ...
+</programlisting>
+        </example>
+
+      </sect2>
+
+      <sect2><title>Құрылым түсіндірме блогы</title>
+        <example><title>Құрылым түсіндірме блогы</title>
+          <programlisting>
+/**
+ * FooWidget:
+ * @bar: кейбір #gboolean
+ *
+ * Бұл ең жақсы виджет.
+ */
+typedef struct _FooWidget {
+  GtkWidget parent_instance;
+
+  gboolean bar;
+} FooWidget;
+</programlisting>
+        </example>
+
+        <para>Жасқырғыңыз келетін жеке құрылым өрістерінің алдында <code>/*&lt; private &gt;*/</code> пайдаланыңыз. Керісінше әрекет үшін <code>/*&lt; public &gt;*/</code> пайдаланыңыз.</para>
+
+        <para>Егер бірінші өріс "g_iface", "parent_instance" немесе "parent_class" болса, ол автоматты түрде жеке деп есептеледі және оны түсіндірме блогында атап өтудің қажеті жоқ.</para>
+
+        <para>Құрылым түсіндірме блоктарын GObjects және GObjectClasses үшін де пайдалануға болады. Егер класта vmethod-тар болса (оларды осылай құжаттауға болады), оған түсіндірме блогын қосқан жөн. GObject-тың өзі үшін тиісті бөлім құжаттарын пайдалануға болады, егер данада ашық өрістер болса, дана құрылымы үшін жеке блоктың болуы пайдалы болар еді. Мұндағы бір кемшілік — бұл бір атаумен екі индекс жазбасын жасайды (құрылым және бөлім).</para>
+
+      </sect2>
+
+      <sect2><title>Тізім (enum) түсіндірме блогы</title>
+        <example><title>Тізім (enum) түсіндірме блогы</title>
+          <programlisting>
+/**
+ * Something:
+ * @SOMETHING_FOO: something foo
+ * @SOMETHING_BAR: something bar
+ *
+ * Нәрсені көрсету үшін қолданылатын тізім мәндері.
+ */
+typedef enum {
+  SOMETHING_FOO,
+  SOMETHING_BAR,
+  /*&lt; private &gt;*/
+  SOMETHING_COUNT
+} Something;
+</programlisting>
+        </example>
+
+        <para>Жасқырғыңыз келетін жеке тізім мәндерінің алдында <code>/*&lt; private &gt;*/</code> пайдаланыңыз. Керісінше әрекет үшін <code>/*&lt; public &gt;*/</code> пайдаланыңыз.</para>
+
+      </sect2>
+    </sect1>
+
+
+    <sect1 id="documenting_inline_program">
+      <title>Бағдарламаның ішкі құжаттамасы</title>
+      <para>Бағдарламаларды және олардың командалық жол интерфейсін ішкі құжаттама арқылы құжаттай аласыз.</para>
+
+      <variablelist>
+      <title>Тегтер</title>
+
+      <varlistentry><term>PROGRAM</term>
+
+      <listitem>
+      <para>Бағдарлама құжаттамасының басталуын анықтайды.</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@short_description:</term>
+      <listitem>
+      <para>Бағдарламаның қысқаша сипаттамасын анықтайды. (Міндетті емес)</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@synopsis:</term>
+      <listitem>
+      <para>Бағдарлама қабылдай алатын аргументтерді немесе аргументтер тізімін анықтайды. (Міндетті емес)</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@see_also:</term>
+      <listitem>
+      <para>Нұсқаулық бетінің "Сондай-ақ қараңыз" бөлімі. (Міндетті емес)</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>@arg:</term>
+      <listitem>
+      <para>Бағдарламаға берілетін аргумент(тер) және олардың сипаттамасы. (Міндетті емес)</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>Сипаттамасы:</term>
+      <listitem>
+      <para>Бағдарламаның толығырақ сипаттамасы.</para>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry>
+      <term>Қайтарады:</term>
+      <listitem>
+      <para>Бағдарлама қандай мән(дер) қайтаратынын көрсетіңіз. (Міндетті емес)</para>
+      </listitem>
+      </varlistentry>
+
+      </variablelist>
+
+      <sect2>
+        <title>Бағдарлама құжаттамасының мысалы.</title>
+        <example><title>Бағдарлама құжаттамасының блогы</title>
+        <programlisting>
+/**
+ * PROGRAM:test-program
+ * @short_description: Тесттік бағдарлама
+ * @synopsis: test-program [*ОПЦИЯЛАР*...] --arg1 *арг* *ФАЙЛ*
+ * @see_also: test(1)
+ * @--arg1 *арг*: arg1 мәнін *арг* етіп орнату
+ * @--arg2 *арг*: arg2 мәнін *арг* етіп орнату
+ * @-v, --version: Нұсқа нөмірін басып шығару
+ * @-h, --help: Көмек хабарын басып шығару
+ *
+ * Бағдарламаның толық сипаттамасы.
+ *
+ * Қайтарады: Сәтті болғанда нөл, сәтсіз болғанда нөл емес мән
+ */
+int main(int argc, char *argv[])
+{
+	return 0;
+}
+</programlisting>
+        </example>
+
+      </sect2>
+    </sect1>
+
+    <sect1 id="documenting_docbook">
+      <title>Пайдалы DocBook тегтері</title>
+
+      <para>Мұнда кодты құжаттау кезінде ең пайдалы DocBook тегтері берілген.</para>
+
+      <para>GTK құжаттарындағы басқа бөлімге сілтеме жасау үшін: <informalexample>
+          <programlisting>
+&lt;link linkend="glib-Hash-Tables"&gt;Хэш-кестелер&lt;/link&gt;
+</programlisting>
+        </informalexample> linkend — сілтеме жасағыңыз келетін беттің жоғарғы элементіндегі SGML/XML идентификаторы. Көптеген беттер үшін бұл қазіргі уақытта бөлім ("gtk", "gdk", "glib"), содан кейін бет тақырыбы ("Хэш-кестелер"). Виджеттер үшін бұл жай ғана класс атауы. SGML/XML талаптарына сәйкес келу үшін бос орындар мен астын сызу таңбалары '-' таңбасына айналдырылады.</para>
+
+      <para>Сыртқы функцияға сілтеме жасау үшін, мысалы, стандартты C функциясы: <informalexample>
+          <programlisting>
+&lt;function&gt;...&lt;/function&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Код мысалын қосу үшін: <informalexample>
+          <programlisting>
+&lt;example&gt;
+  &lt;title&gt;GHashTable пайдалану.&lt;/title&gt;
+  &lt;programlisting language="C"&gt;
+      ...
+  &lt;/programlisting&gt;
+&lt;/example&gt;
+</programlisting>
+        </informalexample> немесе тақырыпты қажет етпейтін өте қысқа код фрагменттері үшін: <informalexample>
+          <programlisting>
+&lt;informalexample&gt;
+  &lt;programlisting language="C"&gt;
+  ...
+  &lt;/programlisting&gt;
+&lt;/informalexample&gt;
+</programlisting>
+        </informalexample> Екі жағдайда да language атрибуты міндетті емес және синтаксисті жарықтандыру қозғалтқышына (html нәтижесі үшін pygments) нұсқау ретінде қолданылады. Соңғысы үшін GTK-Doc қысқартуды да қолдайды: <informalexample>
+          <programlisting>
+|[&lt;!-- language="C" --&gt;
+  ...
+]|
+</programlisting>
+        </informalexample></para>
+
+      <para>Таңбаланған тізімдерді қосу үшін: <informalexample>
+          <programlisting>
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;
+      ...
+    &lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;
+      ...
+    &lt;/para&gt;
+  &lt;/listitem&gt;
+&lt;/itemizedlist&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Мәтіннен ерекшеленіп тұратын ескертуді қосу үшін: <informalexample>
+          <programlisting>
+&lt;note&gt;
+  &lt;para&gt;
+    Пайдаланғаннан кейін деректерді босатуды ұмытпаңыз.
+  &lt;/para&gt;
+&lt;/note&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Түрге (type) сілтеме жасау үшін: <informalexample>
+          <programlisting>
+&lt;type&gt;unsigned char&lt;/type&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Сыртқы құрылымға сілтеме жасау үшін (GTK құжаттарында сипатталмаған): <informalexample>
+          <programlisting>
+&lt;structname&gt;XFontStruct&lt;/structname&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Құрылымның өрісіне сілтеме жасау үшін: <informalexample>
+          <programlisting>
+&lt;structfield&gt;len&lt;/structfield&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Класс атауына сілтеме жасау үшін біз мынаны пайдалана аламыз: <informalexample>
+          <programlisting>
+&lt;classname&gt;GtkWidget&lt;/classname&gt;
+</programlisting>
+        </informalexample> бірақ сіз оның орнына #GtkWidget пайдаланатын шығарсыз (GtkWidget бетіне автоматты түрде сілтеме жасау үшін — <link linkend="documenting_syntax">қысқартуларды</link> қараңыз).</para>
+
+      <para>Мәтінді ерекшелеу үшін: <informalexample>
+          <programlisting>
+&lt;emphasis&gt;Бұл маңызды&lt;/emphasis&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Файл аттары үшін пайдаланыңыз: <informalexample>
+          <programlisting>
+&lt;filename&gt;/home/user/documents&lt;/filename&gt;
+</programlisting>
+        </informalexample></para>
+
+      <para>Пернелерге сілтеме жасау үшін пайдаланыңыз: <informalexample>
+          <programlisting>
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;L&lt;/keycap&gt;&lt;/keycombo&gt;
+</programlisting>
+        </informalexample></para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="metafiles">
+    <title>Қосымша файлдарды толтыру</title>
+
+    <para>Бастапқы кодтағы ішкі түсіндірмелермен бірге сақталуы керек бірнеше қосымша файлдар бар: <filename>&lt;package&gt;.types</filename>, <filename>&lt;package&gt;-docs.xml</filename> (бұрын .sgml), <filename>&lt;package&gt;-sections.txt</filename>.</para>
+
+    <sect1 id="metafiles_types">
+      <title>Түрлер (types) файлын түзету</title>
+
+      <para>Егер сіздің кітапханаңызда немесе қолданбаңызда GObjects болса, олардың сигналдары, аргументтері/параметрлері және иерархиядағы орны құжаттамада көрсетілгенін қалайсыз. Сізге тек <function>xxx_get_type</function> функцияларын олардың include файлымен бірге <filename>&lt;package&gt;.types</filename> файлында тізімдеу керек.</para>
+
+      <para>
+        <example><title>&lt;package&gt;.types файлының мысалы</title>
+          <programlisting>
+#include &lt;gtk/gtk.h&gt;
+
+gtk_accel_label_get_type
+gtk_adjustment_get_type
+gtk_alignment_get_type
+gtk_arrow_get_type
+</programlisting>
+        </example>
+      </para>
+
+      <para>GTK-Doc 1.8 нұсқасынан бастап <application>gtkdoc-scan</application> бұл тізімді сіз үшін жасай алады. Тек <filename>Makefile.am</filename> ішіндегі SCAN_OPTIONS айнымалысына "--rebuild-types" қосыңыз. Егер сіз осы тәсілді пайдалансаңыз, types файлын таратпауыңыз немесе оны нұсқаларды бақылау жүйесінде сақтамауыңыз керек.</para>
+
+    </sect1>
+
+    <sect1 id="metafiles_master">
+      <title>Негізгі құжатты түзету</title>
+
+      <para>GTK-Doc DocBook SGML/XML пішімінде құжаттама жасайды. Бастапқы кодтың ішкі түсіндірмелерін өңдеу кезінде GTK-Doc саймандары әрбір класс немесе модуль үшін жеке файл ретінде бір құжаттама бетін жасайды. Негізгі құжат оларды қамтиды және белгілі бір ретпен орналастырады.</para>
+
+      <para>GTK-Doc сіз үшін негізгі үлгі құжатын жасағанымен, кейінгі іске қосулар оған тиіспейді. Бұл құжаттаманы еркін құрылымдауға болатынын білдіреді. Бұл беттерді топтастыруды және қосымша беттерді қосуды қамтиды. GTK-Doc-та қазір тест жинағы бар, онда негізгі құжат нөлден қайта жасалады. Онда қандай да бір жаңа мүмкіндіктер енгізілгенін көру үшін оған мезгіл-мезгіл қарап тұрған дұрыс.</para>
+
+      <tip>
+        <para>Оқулықтарды қосымша құжат ретінде жасамаңыз. Тек қосымша тараулар жазыңыз. Кітапханаңызға арналған оқулықты тікелей API құжаттамасына енгізудің пайдасы — оқулықтан таңба құжаттамасына сілтеме жасау оңай болады. Сонымен қатар, оқулықтың кітапханамен бірге жаңару мүмкіндігі жоғары болады.</para>
+      </tip>
+
+      <para>Сонымен, негізгі құжат ішінде нені өзгерту керек? Бастапқыда өте аз нәрсе. Онда сіз назар аударуыңыз керек кейбір толтырғыштар (шаршы жақшадағы мәтін) бар.</para>
+
+      <para>
+        <example><title>Негізгі құжаттың тақырыптамасы</title>
+          <programlisting>
+&lt;bookinfo&gt;
+  &lt;title&gt;MODULENAME анықтамалық нұсқаулығы&lt;/title&gt;
+  &lt;releaseinfo&gt;
+    MODULENAME [VERSION] үшін
+    Бұл құжаттаманың соңғы нұсқасын желіде мына жерден табуға болады:
+    &lt;ulink role="online-location" url="http://[SERVER]/MODULENAME/index.html"&gt;http://[SERVER]/MODULENAME/&lt;/ulink&gt;.
+  &lt;/releaseinfo&gt;
+&lt;/bookinfo&gt;
+
+&lt;chapter&gt;
+  &lt;title&gt;[Атауды осында енгізіңіз]&lt;/title&gt;
+</programlisting>
+        </example>
+      </para>
+
+      <para>Бұған қоса, түсіндірме түрінде бірнеше опциялық элементтер жасалады. Сіз оларды қарап шығып, қалауыңызша іске қоса аласыз.</para>
+
+      <para>
+        <example><title>Негізгі құжаттағы міндетті емес бөлік</title>
+          <programlisting>
+&lt;!-- gobject introspection аннотацияларын пайдаланған кезде мұны іске қосыңыз
+  &lt;xi:include href="xml/annotation-glossary.xml"&gt;&lt;xi:fallback /&gt;&lt;/xi:include&gt;
+  --&gt;
+</programlisting>
+        </example>
+      </para>
+
+      <para>Соңында, жаңа бөлім енгізген сайын оны қосу керек. <link linkend="modernizing-gtk-doc-1-16">gtkdoc-check</link> сайманы әлі құжатқа енгізілмеген жаңадан жасалған xml файлдары туралы еске салып отырады.</para>
+
+      <para>
+        <example><title>Жасалған бөлімдерді қосу</title>
+          <programlisting>
+&lt;chapter&gt;
+    &lt;title&gt;менің кітапханам&lt;/title&gt;
+      &lt;xi:include href="xml/object.xml"/&gt;
+      ...
+</programlisting>
+        </example>
+      </para>
+
+    </sect1>
+
+    <sect1 id="metafiles_sections">
+      <title>Бөлім файлын түзету</title>
+
+      <para>Бөлім файлы GTK-Doc шығаратын құжаттаманы ұйымдастыру үшін қолданылады. Мұнда қай таңба қай модульге немесе класқа жататыны көрсетіледі және көрінуі (ашық немесе жеке) басқарылады.</para>
+
+      <para>Бөлім файлы — бөлімдерді ажырататын тегтері бар жай мәтіндік файл. Бос жолдар еленбейді және '#' таңбасынан басталатын жолдар түсіндірме жолдары ретінде қарастырылады.</para>
+
+      <note>
+        <para>Тегтер файлды xml сияқты етіп көрсеткенімен, ол xml емес. Өтінеміз, &lt;SUBSECTION&gt; сияқты тегтерді жаппаңыз.</para>
+      </note>
+
+      <para>
+        <example><title>Жасалған бөлімдерді қосу</title>
+          <programlisting>
+&lt;INCLUDE&gt;libmeep/meep.h&lt;/INCLUDE&gt;
+
+&lt;SECTION&gt;
+&lt;FILE&gt;meepapp&lt;/FILE&gt;
+&lt;TITLE&gt;MeepApp&lt;/TITLE&gt;
+MeepApp
+&lt;SUBSECTION Standard&gt;
+MEEP_APP
+...
+MeepAppClass
+meep_app_get_type
+&lt;/SECTION&gt;
+</programlisting>
+        </example>
+      </para>
+
+      <para>&lt;FILE&gt; ... &lt;/FILE&gt; тегі суффиксіз файл атын көрсету үшін қолданылады. Мысалы, '&lt;FILE&gt;gnome-config&lt;/FILE&gt;' пайдалану бөлім декларацияларының <filename>tmpl/gnome-config.sgml</filename> үлгі файлында шығарылуына әкеледі, ол <filename>xml/gnome-config.sgml</filename> DocBook XML файлына немесе <filename>xml/gnome-config.xml</filename> DocBook XML файлына айналдырылады. (HTML файлының аты модуль атына және бөлім тақырыбына негізделеді немесе GObjects үшін ол кіші әріптерге айналдырылған GObjects класс атына негізделеді).</para>
+
+      <para>&lt;TITLE&gt; ... &lt;/TITLE&gt; тегі бөлім тақырыбын көрсету үшін қолданылады. Ол тек үлгілер (егер пайдаланылса) бастапқыда жасалғанға дейін ғана пайдалы, өйткені үлгі файлында орнатылған тақырып оны алмастырады. Сондай-ақ, егер бастапқы кодтарда SECTION түсіндірмесі пайдаланылса, бұл ескірген болып саналады.</para>
+
+      <para>Элементтерді бөлімде &lt;SUBSECTION&gt; тегі арқылы топтастыруға болады. Қазіргі уақытта ол синопсис бөліміндегі ішкі бөлімдер арасында бос жолды шығарады. Стандартты GObject декларациялары (мысалы, g_object_get_type сияқты функциялар және G_OBJECT(), G_IS_OBJECT() және т.б. сияқты макростар) үшін &lt;SUBSECTION Standard&gt; пайдалануға болады. Қазіргі уақытта олар құжаттамадан тыс қалады. Сондай-ақ шығарылмайтын жеке декларациялар үшін &lt;SUBSECTION Private&gt; пайдалануға болады (бұл пайдаланылмаған декларациялар туралы ескерту хабарламаларын болдырмаудың ыңғайлы жолы). Егер кітапханаңызда объект иерархиясында және іске асырылған немесе талап етілетін интерфейстер тізімінде көрінуін қаламайтын жеке түрлер болса, оларды Private ішкі бөліміне қосыңыз. GObject және GObjectClass сияқты құрылымдарды public немесе Standard бөліміне орналастыру олардың ашық жазбаларының (айнымалылар, vmethod-тар) болуына байланысты.</para>
+
+      <para>Синопсис бөлімдерінде көрсетілетін #include файлдарын көрсету үшін &lt;INCLUDE&gt; ... &lt;/INCLUDE&gt; де пайдалануға болады. Онда бұрыштық жақшасыз, үтірмен ажыратылған #include файлдарының тізімі болады. Егер оны кез келген бөлімнен тыс орнатсаңыз, ол файлдың соңына дейін барлық бөлімдер үшін әрекет етеді. Егер оны бөлім ішінде орнатсаңыз, ол тек сол бөлімге ғана қатысты болады.</para>
+
+    </sect1>
+
+  </chapter>
+
+  <chapter id="reports">
+    <title>Нәтижені бақылау</title>
+
+    <para>GTK-Doc іске қосылуы құжаттама бумасында есеп файлдарын жасайды. Жасалған файлдар келесідей аталады: <filename>&lt;package&gt;-undocumented.txt</filename>, <filename>&lt;package&gt;-undeclared.txt</filename> және <filename>&lt;package&gt;-unused.txt</filename>. Бұлардың барлығы оңай қарауға және өңдеуге болатын жай мәтіндік файлдар.</para>
+
+    <para><filename>&lt;package&gt;-undocumented.txt</filename> файлы құжаттаманың қамтылуы туралы жиынтықпен басталады. Төменде бос жолдармен бөлінген екі бөлім бар. Бірінші бөлімде құжатталмаған немесе толық емес таңбалар тізімі берілген. Екінші бөлімде бөлім құжаттары үшін дәл солай жасалған. Толық емес жазбалар — бұл құжаттамасы бар, бірақ, мысалы, жаңа параметр қосылған жазбалар.</para>
+
+    <para><filename>&lt;package&gt;-undeclared.txt</filename> файлы <filename>&lt;package&gt;-sections.txt</filename> файлында берілген, бірақ бастапқы кодтарда табылмаған таңбаларды тізімдейді. Олардың жойылғанын немесе қате жазылғанын тексеріңіз.</para>
+
+    <para><filename>&lt;package&gt;-unused.txt</filename> файлы GTK-Doc сканері құжаттамасын тапқан, бірақ оны қайда қою керектігін білмейтін таңбалардың атауларын тізімдейді. Бұл таңба әлі <filename>&lt;package&gt;-sections.txt</filename> файлына қосылмағанын білдіреді.</para>
+
+    <tip>
+      <para>Makefile.am ішіне <option>TESTS=$(GTKDOC_CHECK)</option> жолын қосыңыз немесе іске қосыңыз. Егер кем дегенде GTK-Doc 1.9 орнатылған болса, бұл <command>make check</command> іске қосу кезінде дұрыстық тексерулерін орындайды.</para>
+    </tip>
+
+    <para>Сондай-ақ бастапқы код сканері шығарған файлдарды қарауға болады: <filename>&lt;package&gt;-decl-list.txt</filename> және <filename>&lt;package&gt;-decl.txt</filename>. Біріншісін бөлім файлымен салыстыруға болады, егер ол қолмен сақталса. Екіншісі тақырыптық файлдардағы барлық декларацияларды тізімдейді. Егер таңба жетіспесе, осы файлда оның бар-жоғын тексеруге болады.</para>
+
+    <para>Егер жоба GObject негізінде болса, объект сканері шығарған файлдарды да қарауға болады: <filename>&lt;package&gt;.args.txt</filename>, <filename>&lt;package&gt;.hierarchy.txt</filename>, <filename>&lt;package&gt;.interfaces.txt</filename>, <filename>&lt;package&gt;.prerequisites.txt</filename> және <filename>&lt;package&gt;.signals.txt</filename>. Егер олардың кез келгенінде таңбалар жетіспесе, GTK-Doc-ты <command>GTK_DOC_KEEP_INTERMEDIATE=1 make</command> арқылы іске қосып, одан әрі талдау үшін аралық сканер файлын сақтауын сұрауға болады.</para>
+  </chapter>
+
+  <chapter id="modernizing">
+    <title>Құжаттаманы заманауи ету</title>
+
+    <para>GTK-Doc біраз уақыттан бері бар. Бұл бөлімде біз жаңа мүмкіндіктерді олардың қолжетімді болған нұсқасымен бірге тізімдейміз.</para>
+
+    <sect1 id="modernizing-gtk-doc-1-9">
+      <title>GTK-Doc 1.9</title>
+
+      <para>sgml орнына xml пайдаланған кезде, негізгі құжатты <filename>&lt;package&gt;-docs.xml</filename> деп атауға болады.</para>
+
+      <para>Бұл нұсқа <filename>Makefile.am</filename> ішіндегі <option>SCAN_OPTIONS=--rebuild-sections</option> параметрін қолдайды. Бұл іске қосылғанда, <filename>&lt;package&gt;-sections.txt</filename> автоматты түрде жасалады және оны нұсқаларды бақылау жүйесінен алып тастауға болады. Бұл тек өте тұрақты құрылымы бар жобалар үшін жақсы жұмыс істейді (мысалы, әрбір .{c,h} жұбы жаңа бөлім жасайды). Егер сіз жобаны соған жақын ұйымдастырсаңыз, қолмен сақталатын бөлім файлын жаңарту <code>meld &lt;package&gt;-decl-list.txt &lt;package&gt;-sections.txt</code> іске қосу сияқты оңай болуы мүмкін.</para>
+
+      <para>1.8 нұсқасы <filename class="directory">tmpl</filename> ішіндегі жеке файлдардың орнына бастапқы кодтардағы бөлімдерді құжаттау синтаксисін енгізді. Бұл нұсқа <filename>configure.ac</filename> ішінде <option>--flavour no-tmpl</option> пайдалану арқылы бүкіл құжат модулін қосымша tmpl құрастыру қадамын мүлдем пайдаланбауға ауыстыру опцияларын қосады. Егер сізде нұсқаларды бақылау жүйесіне енгізілген <filename class="directory">tmpl</filename> болмаса және әлі ауыспаған болсаңыз, жай ғана <filename>configure.ac</filename> файлына жалаушаны қосыңыз, болды.</para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-10">
+      <title>GTK-Doc 1.10</title>
+
+      <para>Бұл нұсқа <filename>Makefile.am</filename> ішіндегі <option>SCAN_OPTIONS=--rebuild-types</option> параметрін қолдайды. Бұл іске қосылғанда, <filename>&lt;package&gt;.types</filename> автоматты түрде жасалады және оны нұсқаларды бақылау жүйесінен алып тастауға болады. Бұл мүмкіндікті пайдаланған кезде шартты түрде құрастырылатын код үшін <filename>Makefile.am</filename> ішінде <varname>IGNORE_HFILES</varname> параметрін де орнату маңызды.</para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-16">
+      <title>GTK-Doc 1.16</title>
+
+      <para>Бұл нұсқа gtkdoc-check деп аталатын жаңа сайманды қамтиды. Бұл сайман құжаттамаңызда бірқатар дұрыстық тексерулерін орындай алады. Ол <filename>Makefile.am</filename> файлының соңына мына жолдарды қосу арқылы іске қосылады. <example><title>gtkdoc-check іске қосу</title>
+          <programlisting>
+if ENABLE_GTK_DOC
+TESTS_ENVIRONMENT = \
+  DOC_MODULE=$(DOC_MODULE) DOC_MAIN_SGML_FILE=$(DOC_MAIN_SGML_FILE) \
+  SRCDIR=$(abs_srcdir) BUILDDIR=$(abs_builddir)
+TESTS = $(GTKDOC_CHECK)
+endif
+</programlisting>
+        </example></para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-20">
+      <title>GTK-Doc 1.20</title>
+
+      <para>1.18 нұсқасы кейбір бастапқы markdown қолдауын әкелді. Құжат түсіндірмелерінде markdown пайдалану docbook xml жазуға қарағанда ыңғайлырақ. Бұл нұсқа оны айтарлықтай жақсартады және көптеген стильдерді қосады. <link linkend="documenting_syntax">Түсіндірме синтаксисін</link> түсіндіретін бөлімде барлық мәліметтер бар.</para>
+    </sect1>
+
+    <sect1 id="modernizing-gtk-doc-1-25">
+      <title>GTK-Doc 1.25</title>
+
+      <para>Осы нұсқамен бірге келетін makefile файлдары <filename>xml/gtkdocentities.ent</filename> мекенжайында нысан (entity) файлын жасайды, онда мысалы, package_name және package_version нысандары болады. Нұсқа нөмірін қолмен жазбау үшін оны негізгі xml файлында пайдалануға болады. Төменде нысан файлының негізгі үлгіге қалай қосылатыны және нысандардың қалай қолданылатыны көрсетілген мысал берілген. Нысандарды барлық жасалған файлдарда да пайдалануға болады, GTK-Doc жасалған xml файлдарында бірдей xml тақырыптамасын пайдаланады. <example><title>Алдын ала жасалған нысандарды (entities) пайдалану</title>
+          <programlisting>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  &lt;!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'"&gt;
+  &lt;!ENTITY % gtkdocentities SYSTEM "xml/gtkdocentities.ent"&gt;
+  %gtkdocentities;
+]&gt;
+&lt;book id="index" xmlns:xi="http://www.w3.org/2003/XInclude"&gt;
+  &lt;bookinfo&gt;
+    &lt;title&gt;&amp;package_name; анықтамалық нұсқаулығы&lt;/title&gt;
+    &lt;releaseinfo&gt;
+      &amp;package_string; үшін.
+      Бұл құжаттаманың соңғы нұсқасын желіде мына жерден табуға болады:
+      &lt;ulink role="online-location" url="http://[SERVER]/&amp;package_name;/index.html"&gt;http://[SERVER]/&amp;package_name;/&lt;/ulink&gt;.
+    &lt;/releaseinfo&gt;
+  &lt;/bookinfo&gt;
+</programlisting>
+        </example></para>
+    </sect1>
+  </chapter>
+
+  <chapter id="documenting-others">
+    <title>Басқа интерфейстерді құжаттау</title>
+
+    <para>Осы уақытқа дейін біз GTK-Doc-ты кодтың API-ын құжаттау үшін пайдаланып келдік. Келесі бөлімдерде саймандарды басқа интерфейстерді құжаттау үшін қалай пайдалануға болатыны туралы ұсыныстар берілген.</para>
+
+    <sect1 id="commandline-interfaces">
+      <title>Командалық жол опциялары және man беттері</title>
+
+      <para>Docbook refentry үшін де man беттерін жасауға болатындықтан, оны осы мақсатта пайдалану жақсы идея болып көрінеді. Осылайша интерфейс анықтамалықтың бір бөлігі болады және сіз man-бетті тегін аласыз.</para>
+
+      <sect2 id="commandline-interfaces-file">
+        <title>Сайманды құжаттау</title>
+
+        <para>Әр сайман үшін бір refentry файлын жасаңыз. <link linkend="settingup_docfiles">Біздің мысалымызға</link> сүйене отырып, біз оны <filename>meep/docs/reference/meeper/meep.xml</filename> деп атар едік. Қолданылуы тиіс xml тегтері үшін xml ішкі бумасындағы жасалған файлды, сондай-ақ glib ішіндегі мысалдарды қарауға болады.</para>
+      </sect2>
+
+      <sect2 id="commandline-interfaces-configure">
+        <title>Қосымша configure тексеруін қосу</title>
+
+        <para>
+          <example><title>Қосымша configure тексерулері</title>
+            <programlisting>
+AC_ARG_ENABLE(man,
+              [AC_HELP_STRING([--enable-man],
+                              [man беттерін Docbook-тан қайта жасау [әдепкі=жоқ]])],enable_man=yes,
+              enable_man=no)
+
+AC_PATH_PROG([XSLTPROC], [xsltproc])
+AM_CONDITIONAL(ENABLE_MAN, test x$enable_man != xno)
+</programlisting>
+          </example>
+        </para>
+      </sect2>
+
+      <sect2 id="commandline-interfaces-make">
+        <title>Қосымша makefile ережелерін қосу</title>
+
+        <para>
+          <example><title>Қосымша configure тексерулері</title>
+            <programlisting>
+man_MANS = \
+       meeper.1
+
+if ENABLE_GTK_DOC
+if ENABLE_MAN
+
+%.1 : %.xml
+        @XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $&lt;
+
+endif
+endif
+
+BUILT_EXTRA_DIST = $(man_MANS)
+EXTRA_DIST += meep.xml
+</programlisting>
+          </example>
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="dbus-interfaces">
+      <title>DBus интерфейстері</title>
+
+      <para>(ТҮЗЕТУ КЕРЕК: http://hal.freedesktop.org/docs/DeviceKit/DeviceKit.html, http://cgit.freedesktop.org/DeviceKit/DeviceKit/tree/doc/dbus)</para>
+    </sect1>
+
+  </chapter>
+
+  <chapter id="faq">
+    <title>Жиі қойылатын сұрақтар</title>
+
+    <segmentedlist>
+      <?dbhtml list-presentation="list"?>
+      <segtitle>Сұрақ</segtitle>
+      <segtitle>Жауап</segtitle>
+      <seglistitem>
+        <seg>Класс иерархиясы жоқ.</seg>
+        <seg>Объектілердің <function>xxx_get_type()</function> функциясы <filename>&lt;package&gt;.types</filename> файлына енгізілмеген.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Әлі де класс иерархиясы жоқ.</seg>
+        <seg><filename>&lt;package&gt;-sections.txt</filename> файлында атау жетіспейді немесе қате берілген (<ulink url="http://mail.gnome.org/archives/gtk-doc-list/2003-October/msg00006.html">түсіндірмесін</ulink> қараңыз).</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Қап, менде әлі де класс иерархиясы жоқ.</seg>
+        <seg>Объект аты (мысалы, <type>GtkWidget</type> дана құрылымының аты) қалыпты бөлімнің бөлігі болып табыла ма (оны Standard немесе Private ішкі бөлімдеріне қоймаңыз).</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Таңбалар индексі жоқ.</seg>
+        <seg><filename>&lt;package&gt;-docs.{xml,sgml}</filename> файлында жасалған индексті xi:include арқылы қосатын индекс бар ма?</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Таңбалар өздерінің құжаттама бөліміне сілтемеленбеген.</seg>
+        <seg>Құжат түсіндірмесінде дұрыс белгілер (#, % немесе ()) қолданылған ба? gtkdoc-fixxref шешілмейтін xref-тер туралы ескертетінін тексеріңіз.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Жаңа класс құжаттарда көрінбейді.</seg>
+        <seg>Жаңа бет <filename>&lt;package&gt;-docs.{xml,sgml}</filename> ішінен xi:include арқылы қосылған ба.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Жаңа таңба құжаттарда көрінбейді.</seg>
+        <seg>Құжат түсіндірмесі дұрыс пішімделген бе? Түсіндірменің басындағы емле қателерін тексеріңіз. gtkdoc-fixxref шешілмейтін xref-тер туралы ескертетінін тексеріңіз. Таңба <filename>&lt;package&gt;-sections.txt</filename> файлындағы ашық ішкі бөлімде дұрыс тізімделгенін тексеріңіз.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Класс иерархиясында түр (type) жетіспейді.</seg>
+        <seg>Егер түр <filename>&lt;package&gt;.hierarchy</filename> ішінде тізімделген, бірақ <filename>xml/tree_index.sgml</filename> ішінде болмаса, түрдің <filename>&lt;package&gt;-sections.txt</filename> файлында дұрыс орналастырылғанын қайта тексеріңіз. Егер түр данасы (мысалы, <type>GtkWidget</type>) тізімделмесе немесе байқаусызда жеке ретінде белгіленсе, ол көрсетілмейді.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>Мен барлық gobject аннотациялары үшін foldoc сілтемелерін аламын.</seg>
+        <seg><filename>xml/annotation-glossary.xml</filename> файлы <filename>&lt;package&gt;-docs.{xml,sgml}</filename> ішінен xi:include арқылы қосылғанын тексеріңіз.</seg>
+      </seglistitem>
+
+      <!-- gtk-doc warnings: -->
+      <seglistitem>
+        <seg>Параметр бастапқы кодтың түсіндірме блогында сипатталған, бірақ ол жоқ</seg>
+        <seg>Тақырыптағы прототипте бастапқы кодтағыдан басқа параметр атауларының бар-жоғын тексеріңіз.</seg>
+      </seglistitem>
+
+      <!-- docbook warnings: -->
+      <seglistitem>
+        <seg>шектеулі linkend үшін бірнеше "ID" бар: XYZ</seg>
+        <seg>XYZ таңбасы <filename>&lt;package&gt;-sections.txt</filename> файлында екі рет кездеседі.</seg>
+      </seglistitem>
+      <seglistitem>
+        <seg>para ішінде '' атаулар кеңістігіндегі typename элементі кездесті, бірақ ешбір үлгі сәйкес келмеді.</seg>
+        <seg/>
+      </seglistitem>
+    </segmentedlist>
+  </chapter>
+
+  <chapter id="contrib">
+    <title>gtk-doc-қа қатысты саймандар</title>
+
+    <para>GtkDocPlugin — trac сайтына API құжаттарын қосатын және trac іздеуімен біріктіретін <ulink url="http://trac-hacks.org/wiki/GtkDocPlugin">Trac GTK-Doc</ulink> біріктіру плагині.</para>
+    <para>Gtkdoc-depscan — ең төменгі қажетті нұсқаны анықтау үшін пайдаланылған API-ды API-дағы since тегтеріне қарсы тексеретін сайман (gtk-doc бөлігі).</para>
+
+  </chapter>
+
+  <!-- ======== Appendix: FDL ================================== -->
+  <!--  
+     The GNU Free Documentation License 1.1 in DocBook
+     Markup by Eric Baudais <baudais@okstate.edu>
+     Maintained by the GNOME Documentation Project
+     http://developer.gnome.org/projects/gdp
+     Version: 1.0.1
+     Last Modified: Nov 16, 2000
+-->
+
+<appendix id="fdl">
+  <appendixinfo>
+    <releaseinfo>1.1 нұсқасы, наурыз 2000</releaseinfo>
+    <copyright>
+      <year>2000</year><holder>Free Software Foundation, Inc.</holder>
+    </copyright>
+    <legalnotice id="fdl-legalnotice">
+      <para><address>Free Software Foundation, Inc. <street>51 Franklin Street, 
+        Suite 330</street>, <city>Boston</city>, <state>MA</state>  
+        <postcode>02110-1301</postcode>  <country>USA</country></address> Осы лицензиялық құжаттың сөзбе-сөз көшірмелерін көшіруге және таратуға барлығына рұқсат етіледі, бірақ оны өзгертуге жол берілмейді.</para>
+    </legalnotice>
+  </appendixinfo>
+  <title>GNU еркін құжаттама лицензиясы</title>
+
+  <sect1 id="fdl-preamble">
+    <title>0. КІРІСПЕ</title>
+    <para>
+      The purpose of this License is to make a manual, textbook, or
+      other written document <quote>free</quote> in the sense of
+      freedom: to assure everyone the effective freedom to copy and
+      redistribute it, with or without modifying it, either
+      commercially or noncommercially. Secondarily, this License
+      preserves for the author and publisher a way to get credit for
+      their work, while not being considered responsible for
+      modifications made by others.
+    </para>
+    
+    <para>
+      This License is a kind of <quote>copyleft</quote>, which means
+      that derivative works of the document must themselves be free in
+      the same sense. It complements the GNU General Public License,
+      which is a copyleft license designed for free software.
+    </para>
+    
+    <para>Біз бұл Лицензияны еркін бағдарламалық қамтамаға арналған нұсқаулықтар үшін пайдалану мақсатында әзірледік, өйткені еркін бағдарламалық қамтамаға еркін құжаттама қажет: еркін бағдарлама бағдарламалық қамтама беретін бостандықтарды қамтамасыз ететін нұсқаулықтармен бірге келуі керек. Бірақ бұл Лицензия тек бағдарламалық қамтама нұсқаулықтарымен шектелмейді; оны мазмұнына немесе баспа кітап ретінде жарияланғанына қарамастан кез келген мәтіндік жұмыс үшін пайдалануға болады. Біз бұл Лицензияны негізінен мақсаты нұсқаулық немесе анықтамалық болып табылатын жұмыстар үшін ұсынамыз.</para>
+  </sect1>
+  <sect1 id="fdl-section1">
+    <title>1. ҚОЛДАНЫЛУЫ ЖӘНЕ АНЫҚТАМАЛАР</title>
+    <para id="fdl-document">
+      This License applies to any manual or other work that contains a
+      notice placed by the copyright holder saying it can be
+      distributed under the terms of this License. The
+      <quote>Document</quote>, below, refers to any such manual or
+      work. Any member of the public is a licensee, and is addressed
+      as <quote>you</quote>.
+    </para>
+    
+    <para id="fdl-modified">
+      A <quote>Modified Version</quote> of the Document means any work
+      containing the Document or a portion of it, either copied
+      verbatim, or with modifications and/or translated into another
+      language.
+    </para>
+	
+    <para id="fdl-secondary">
+      A <quote>Secondary Section</quote> is a named appendix or a
+      front-matter section of the <link linkend="fdl-document">Document</link> that deals exclusively
+      with the relationship of the publishers or authors of the
+      Document to the Document's overall subject (or to related
+      matters) and contains nothing that could fall directly within
+      that overall subject. (For example, if the Document is in part a
+      textbook of mathematics, a Secondary Section may not explain any
+      mathematics.)  The relationship could be a matter of historical
+      connection with the subject or with related matters, or of
+      legal, commercial, philosophical, ethical or political position
+      regarding them.
+    </para>
+
+    <para id="fdl-invariant">
+      The <quote>Invariant Sections</quote> are certain <link linkend="fdl-secondary"> Secondary Sections</link> whose titles
+      are designated, as being those of Invariant Sections, in the
+      notice that says that the <link linkend="fdl-document">Document</link> is released under this
+      License.
+    </para>
+    
+    <para id="fdl-cover-texts">
+      The <quote>Cover Texts</quote> are certain short passages of
+      text that are listed, as Front-Cover Texts or Back-Cover Texts,
+      in the notice that says that the <link linkend="fdl-document">Document</link> is released under this
+      License.
+    </para>
+	
+    <para id="fdl-transparent">
+      A <quote>Transparent</quote> copy of the <link linkend="fdl-document"> Document</link> means a machine-readable
+      copy, represented in a format whose specification is available
+      to the general public, whose contents can be viewed and edited
+      directly and straightforwardly with generic text editors or (for
+      images composed of pixels) generic paint programs or (for
+      drawings) some widely available drawing editor, and that is
+      suitable for input to text formatters or for automatic
+      translation to a variety of formats suitable for input to text
+      formatters. A copy made in an otherwise Transparent file format
+      whose markup has been designed to thwart or discourage
+      subsequent modification by readers is not Transparent.  A copy
+      that is not <quote>Transparent</quote> is called
+      <quote>Opaque</quote>.
+    </para>
+    
+    <para>Тұнық көшірмелер үшін қолайлы пішімдердің мысалдарына белгілеусіз жай ASCII, Texinfo енгізу пішімі, LaTeX енгізу пішімі, жалпыға қолжетімді DTD пайдаланатын SGML немесе XML және адамның өзгертуіне арналған стандартқа сәйкес келетін қарапайым HTML жатады. Күңгірт пішімдерге PostScript, PDF, тек меншікті мәтіндік процессорлармен оқуға және түзетуге болатын меншікті пішімдер, DTD және/немесе өңдеу саймандары жалпыға бірдей қолжетімді емес SGML немесе XML, сондай-ақ кейбір мәтіндік процессорлар тек шығару мақсатында жасаған машинамен жасалған HTML жатады.</para>
+    
+    <para id="fdl-title-page">
+      The <quote>Title Page</quote> means, for a printed book, the
+      title page itself, plus such following pages as are needed to
+      hold, legibly, the material this License requires to appear in
+      the title page. For works in formats which do not have any title
+      page as such, <quote>Title Page</quote> means the text near the
+      most prominent appearance of the work's title, preceding the
+      beginning of the body of the text.
+    </para>
+  </sect1>
+    
+  <sect1 id="fdl-section2">
+    <title>2. СӨЗБЕ-СӨЗ КӨШІРУ</title>
+    <para>
+      You may copy and distribute the <link linkend="fdl-document">Document</link> in any medium, either
+      commercially or noncommercially, provided that this License, the
+      copyright notices, and the license notice saying this License
+      applies to the Document are reproduced in all copies, and that
+      you add no other conditions whatsoever to those of this
+      License. You may not use technical measures to obstruct or
+      control the reading or further copying of the copies you make or
+      distribute. However, you may accept compensation in exchange for
+      copies. If you distribute a large enough number of copies you
+      must also follow the conditions in <link linkend="fdl-section3">section 3</link>.
+    </para>
+    
+    <para>Сондай-ақ, сіз жоғарыда аталған шарттармен көшірмелерді қарызға бере аласыз және көшірмелерді көпшілікке көрсете аласыз.</para>
+    </sect1>
+    
+  <sect1 id="fdl-section3">
+    <title>3. КӨП МӨЛШЕРДЕ КӨШІРУ</title>
+    <para>
+      If you publish printed copies of the <link linkend="fdl-document">Document</link> numbering more than 100,
+      and the Document's license notice requires <link linkend="fdl-cover-texts">Cover Texts</link>, you must enclose
+      the copies in covers that carry, clearly and legibly, all these
+      Cover Texts: Front-Cover Texts on the front cover, and
+      Back-Cover Texts on the back cover. Both covers must also
+      clearly and legibly identify you as the publisher of these
+      copies. The front cover must present the full title with all
+      words of the title equally prominent and visible. You may add
+      other material on the covers in addition. Copying with changes
+      limited to the covers, as long as they preserve the title of the
+      <link linkend="fdl-document">Document</link> and satisfy these
+      conditions, can be treated as verbatim copying in other
+      respects.
+    </para>
+    
+    <para>Егер кез келген мұқаба үшін талап етілетін мәтіндер оңай оқылатын етіп орналасуы үшін тым көлемді болса, тізімдегі біріншілерін (мүмкіндігінше көп) нақты мұқабаға орналастырып, қалғанын іргелес беттерде жалғастыруыңыз керек.</para>
+    
+    <para>
+      If you publish or distribute <link linkend="fdl-transparent">Opaque</link> copies of the <link linkend="fdl-document">Document</link> numbering more than 100,
+      you must either include a machine-readable <link linkend="fdl-transparent">Transparent</link> copy along with
+      each Opaque copy, or state in or with each Opaque copy a
+      publicly-accessible computer-network location containing a
+      complete Transparent copy of the Document, free of added
+      material, which the general network-using public has access to
+      download anonymously at no charge using public-standard network
+      protocols. If you use the latter option, you must take
+      reasonably prudent steps, when you begin distribution of Opaque
+      copies in quantity, to ensure that this Transparent copy will
+      remain thus accessible at the stated location until at least one
+      year after the last time you distribute an Opaque copy (directly
+      or through your agents or retailers) of that edition to the
+      public.
+    </para>
+    
+    <para>
+      It is requested, but not required, that you contact the authors
+      of the <link linkend="fdl-document">Document</link> well before
+      redistributing any large number of copies, to give them a chance
+      to provide you with an updated version of the Document.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section4">
+    <title>4. ӨЗГЕРТУЛЕР</title>
+    <para>
+      You may copy and distribute a <link linkend="fdl-modified">Modified Version</link> of the <link linkend="fdl-document">Document</link> under the conditions of
+      sections <link linkend="fdl-section2">2</link> and <link linkend="fdl-section3">3</link> above, provided that you release
+      the Modified Version under precisely this License, with the
+      Modified Version filling the role of the Document, thus
+      licensing distribution and modification of the Modified Version
+      to whoever possesses a copy of it. In addition, you must do
+      these things in the Modified Version:
+    </para>
+    
+    <itemizedlist mark="opencircle">
+      <listitem>
+	<formalpara>
+	  <title>A</title>
+	  <para>
+	    Use in the <link linkend="fdl-title-page">Title
+	    Page</link> (and on the covers, if any) a title distinct
+	    from that of the <link linkend="fdl-document">Document</link>, and from those of
+	    previous versions (which should, if there were any, be
+	    listed in the History section of the Document). You may
+	    use the same title as a previous version if the original
+	    publisher of that version gives permission.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>B</title>
+	  <para>
+	    List on the <link linkend="fdl-title-page">Title
+	    Page</link>, as authors, one or more persons or entities
+	    responsible for authorship of the modifications in the
+	    <link linkend="fdl-modified">Modified Version</link>,
+	    together with at least five of the principal authors of
+	    the <link linkend="fdl-document">Document</link> (all of
+	    its principal authors, if it has less than five).
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>C</title>
+	  <para>
+	    State on the <link linkend="fdl-title-page">Title
+	    Page</link> the name of the publisher of the <link linkend="fdl-modified">Modified Version</link>, as the
+	    publisher.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>D</title>
+	  <para>
+	    Preserve all the copyright notices of the <link linkend="fdl-document">Document</link>.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>E</title>
+	  <para>Басқа авторлық құқық туралы ескертулердің жанына өзгертулеріңіз үшін тиісті авторлық құқық туралы ескертуді қосыңыз.</para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>F</title>
+	  <para>
+	    Include, immediately after the copyright notices, a
+	    license notice giving the public permission to use the
+	    <link linkend="fdl-modified">Modified Version</link> under
+	    the terms of this License, in the form shown in the
+	    Addendum below.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>G</title>
+	  <para>
+	    Preserve in that license notice the full lists of <link linkend="fdl-invariant"> Invariant Sections</link> and
+	    required <link linkend="fdl-cover-texts">Cover
+	    Texts</link> given in the <link linkend="fdl-document">Document's</link> license notice.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>H</title>
+	  <para>Осы Лицензияның өзгертілмеген көшірмесін қосыңыз.</para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>I</title>
+	  <para>
+	    Preserve the section entitled <quote>History</quote>, and
+	    its title, and add to it an item stating at least the
+	    title, year, new authors, and publisher of the <link linkend="fdl-modified">Modified Version</link> as given on
+	    the <link linkend="fdl-title-page">Title Page</link>.  If
+	    there is no section entitled <quote>History</quote> in the
+	    <link linkend="fdl-document">Document</link>, create one
+	    stating the title, year, authors, and publisher of the
+	    Document as given on its Title Page, then add an item
+	    describing the Modified Version as stated in the previous
+	    sentence.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>J</title>
+	  <para>
+	    Preserve the network location, if any, given in the <link linkend="fdl-document">Document</link> for public access
+	    to a <link linkend="fdl-transparent">Transparent</link>
+	    copy of the Document, and likewise the network locations
+	    given in the Document for previous versions it was based
+	    on. These may be placed in the <quote>History</quote>
+	    section.  You may omit a network location for a work that
+	    was published at least four years before the Document
+	    itself, or if the original publisher of the version it
+	    refers to gives permission.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>K</title>
+	  <para>
+	    In any section entitled <quote>Acknowledgements</quote> or
+	    <quote>Dedications</quote>, preserve the section's title,
+	    and preserve in the section all the substance and tone of
+	    each of the contributor acknowledgements and/or
+	    dedications given therein.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>L</title>
+	  <para>
+	    Preserve all the <link linkend="fdl-invariant">Invariant
+	    Sections</link> of the <link linkend="fdl-document">Document</link>, unaltered in their
+	    text and in their titles.  Section numbers or the
+	    equivalent are not considered part of the section titles.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>M</title>
+	  <para>
+	    Delete any section entitled
+	    <quote>Endorsements</quote>. Such a section may not be
+	    included in the <link linkend="fdl-modified">Modified
+	    Version</link>.
+	  </para>
+	</formalpara>
+      </listitem>
+      
+      <listitem>
+	<formalpara>
+	  <title>N</title>
+	  <para>
+	    Do not retitle any existing section as
+	    <quote>Endorsements</quote> or to conflict in title with
+	    any <link linkend="fdl-invariant">Invariant
+	    Section</link>.
+	  </para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+    
+    <para>
+      If the <link linkend="fdl-modified">Modified Version</link>
+      includes new front-matter sections or appendices that qualify as
+      <link linkend="fdl-secondary">Secondary Sections</link> and
+      contain no material copied from the Document, you may at your
+      option designate some or all of these sections as invariant. To
+      do this, add their titles to the list of <link linkend="fdl-invariant">Invariant Sections</link> in the
+      Modified Version's license notice.  These titles must be
+      distinct from any other section titles.
+    </para>
+    
+    <para>
+      You may add a section entitled <quote>Endorsements</quote>,
+      provided it contains nothing but endorsements of your <link linkend="fdl-modified">Modified Version</link> by various
+      parties--for example, statements of peer review or that the text
+      has been approved by an organization as the authoritative
+      definition of a standard.
+    </para>
+    
+    <para>
+      You may add a passage of up to five words as a <link linkend="fdl-cover-texts">Front-Cover Text</link>, and a passage
+      of up to 25 words as a <link linkend="fdl-cover-texts">Back-Cover Text</link>, to the end of
+      the list of <link linkend="fdl-cover-texts">Cover Texts</link>
+      in the <link linkend="fdl-modified">Modified Version</link>.
+      Only one passage of Front-Cover Text and one of Back-Cover Text
+      may be added by (or through arrangements made by) any one
+      entity. If the <link linkend="fdl-document">Document</link>
+      already includes a cover text for the same cover, previously
+      added by you or by arrangement made by the same entity you are
+      acting on behalf of, you may not add another; but you may
+      replace the old one, on explicit permission from the previous
+      publisher that added the old one.
+    </para>
+    
+    <para>
+      The author(s) and publisher(s) of the <link linkend="fdl-document">Document</link> do not by this License
+      give permission to use their names for publicity for or to
+      assert or imply endorsement of any <link linkend="fdl-modified">Modified Version </link>.
+    </para>
+  </sect1>
+    
+  <sect1 id="fdl-section5">
+    <title>5. ҚҰЖАТТАРДЫ БІРІКТІРУ</title>
+    <para>
+      You may combine the <link linkend="fdl-document">Document</link>
+      with other documents released under this License, under the
+      terms defined in <link linkend="fdl-section4">section 4</link>
+      above for modified versions, provided that you include in the
+      combination all of the <link linkend="fdl-invariant">Invariant
+      Sections</link> of all of the original documents, unmodified,
+      and list them all as Invariant Sections of your combined work in
+      its license notice.
+    </para>
+    
+    <para>
+      The combined work need only contain one copy of this License,
+      and multiple identical <link linkend="fdl-invariant">Invariant
+      Sections</link> may be replaced with a single copy. If there are
+      multiple Invariant Sections with the same name but different
+      contents, make the title of each such section unique by adding
+      at the end of it, in parentheses, the name of the original
+      author or publisher of that section if known, or else a unique
+      number. Make the same adjustment to the section titles in the
+      list of Invariant Sections in the license notice of the combined
+      work.
+    </para>
+    
+    <para>
+      In the combination, you must combine any sections entitled
+      <quote>History</quote> in the various original documents,
+      forming one section entitled <quote>History</quote>; likewise
+      combine any sections entitled <quote>Acknowledgements</quote>,
+      and any sections entitled <quote>Dedications</quote>.  You must
+      delete all sections entitled <quote>Endorsements.</quote>
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section6">
+    <title>6. ҚҰЖАТТАР ЖИНАҚТАРЫ</title>
+    <para>
+      You may make a collection consisting of the <link linkend="fdl-document">Document</link> and other documents
+      released under this License, and replace the individual copies
+      of this License in the various documents with a single copy that
+      is included in the collection, provided that you follow the
+      rules of this License for verbatim copying of each of the
+      documents in all other respects.
+    </para>
+    
+    <para>Мұндай жинақтан бір құжатты бөліп алып, оны осы Лицензия бойынша жеке тарата аласыз, егер сіз бөліп алынған құжатқа осы Лицензияның көшірмесін енгізсеңіз және сол құжатты сөзбе-сөз көшіруге қатысты барлық басқа жағынан осы Лицензияны орындасаңыз.</para>
+    </sect1>
+    
+  <sect1 id="fdl-section7">
+    <title>7. ТӘУЕЛСІЗ ЖҰМЫСТАРМЕН БІРІКТІРУ</title>
+    <para>
+      A compilation of the <link linkend="fdl-document">Document</link> or its derivatives with
+      other separate and independent documents or works, in or on a
+      volume of a storage or distribution medium, does not as a whole
+      count as a <link linkend="fdl-modified">Modified Version</link>
+      of the Document, provided no compilation copyright is claimed
+      for the compilation.  Such a compilation is called an
+      <quote>aggregate</quote>, and this License does not apply to the
+      other self-contained works thus compiled with the Document , on
+      account of their being thus compiled, if they are not themselves
+      derivative works of the Document.  If the <link linkend="fdl-cover-texts">Cover Text</link> requirement of <link linkend="fdl-section3">section 3</link> is applicable to these
+      copies of the Document, then if the Document is less than one
+      quarter of the entire aggregate, the Document's Cover Texts may
+      be placed on covers that surround only the Document within the
+      aggregate. Otherwise they must appear on covers around the whole
+      aggregate.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section8">
+    <title>8. АУДАРМА</title>
+    <para>
+      Translation is considered a kind of modification, so you may
+      distribute translations of the <link linkend="fdl-document">Document</link> under the terms of <link linkend="fdl-section4">section 4</link>. Replacing <link linkend="fdl-invariant"> Invariant Sections</link> with
+      translations requires special permission from their copyright
+      holders, but you may include translations of some or all
+      Invariant Sections in addition to the original versions of these
+      Invariant Sections. You may include a translation of this
+      License provided that you also include the original English
+      version of this License. In case of a disagreement between the
+      translation and the original English version of this License,
+      the original English version will prevail.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section9">
+    <title>9. ТОҚТАТУ</title>
+    <para>
+      You may not copy, modify, sublicense, or distribute the <link linkend="fdl-document">Document</link> except as expressly
+      provided for under this License. Any other attempt to copy,
+      modify, sublicense or distribute the Document is void, and will
+      automatically terminate your rights under this License. However,
+      parties who have received copies, or rights, from you under this
+      License will not have their licenses terminated so long as such
+      parties remain in full compliance.
+    </para>
+    </sect1>
+    
+  <sect1 id="fdl-section10">
+    <title>10. ОСЫ ЛИЦЕНЗИЯНЫҢ БОЛАШАҚ ҚАЙТА ҚАРАУЛАРЫ</title>
+    <para>
+      The <ulink type="http" url="http://www.gnu.org/fsf/fsf.html">Free Software
+      Foundation</ulink> may publish new, revised versions of the GNU
+      Free Documentation License from time to time. Such new versions
+      will be similar in spirit to the present version, but may differ
+      in detail to address new problems or concerns. See <ulink type="http" url="http://www.gnu.org/copyleft">http://www.gnu.org/copyleft/</ulink>.
+    </para>
+    
+    <para>
+      Each version of the License is given a distinguishing version
+      number. If the <link linkend="fdl-document">Document</link>
+      specifies that a particular numbered version of this License
+      <quote>or any later version</quote> applies to it, you have the
+      option of following the terms and conditions either of that
+      specified version or of any later version that has been
+      published (not as a draft) by the Free Software Foundation. If
+      the Document does not specify a version number of this License,
+      you may choose any version ever published (not as a draft) by
+      the Free Software Foundation.
+    </para>
+  </sect1>
+
+  <sect1 id="fdl-using">
+    <title>Қосымша</title>
+    <para>Осы Лицензияны өзіңіз жазған құжатта пайдалану үшін құжатқа Лицензияның көшірмесін енгізіңіз және титулдық беттен кейін бірден келесі авторлық құқық және лицензиялық ескертулерді қойыңыз:</para>
+    
+    <blockquote>
+      <para>Copyright ЖЫЛ СІЗДІҢ АТЫҢЫЗ.</para>
+      <para>
+	Permission is granted to copy, distribute and/or modify this
+	document under the terms of the GNU Free Documentation
+	License, Version 1.1 or any later version published by the
+	Free Software Foundation; with the <link linkend="fdl-invariant">Invariant Sections</link> being LIST
+	THEIR TITLES, with the <link linkend="fdl-cover-texts">Front-Cover Texts</link> being LIST,
+	and with the <link linkend="fdl-cover-texts">Back-Cover
+	Texts</link> being LIST.  A copy of the license is included in
+	the section entitled <quote>GNU Free Documentation
+	License</quote>.
+      </para>
+    </blockquote>
+      
+    <para>
+      If you have no <link linkend="fdl-invariant">Invariant
+      Sections</link>, write <quote>with no Invariant Sections</quote>
+      instead of saying which ones are invariant.  If you have no
+      <link linkend="fdl-cover-texts">Front-Cover Texts</link>, write
+      <quote>no Front-Cover Texts</quote> instead of
+      <quote>Front-Cover Texts being LIST</quote>; likewise for <link linkend="fdl-cover-texts">Back-Cover Texts</link>.
+    </para>
+    
+    <para>
+      If your document contains nontrivial examples of program code,
+      we recommend releasing these examples in parallel under your
+      choice of free software license, such as the <ulink type="http" url="http://www.gnu.org/copyleft/gpl.html"> GNU General Public
+      License</ulink>, to permit their use in free software.
+    </para>
+  </sect1>
+</appendix>  
+
+
+
+
+
+
+
+
+</book>

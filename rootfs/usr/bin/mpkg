@@ -1,0 +1,57 @@
+#!/bin/sh
+. /etc/mpkg/repo.conf
+DB="/var/lib/mpkg/installed"
+INDEX="/var/lib/mpkg/packages.json"
+GH_REL="https://github.com"
+mkdir -p "$DB"
+
+case "$1" in
+    update)
+        echo "[mpkg] Syncing package index..."
+        wget -q -O "$INDEX" "${REPO_URL}/packages.json" && \
+            echo "[mpkg] Store index updated!" || \
+            echo "[mpkg] Error: Could not sync index."
+        ;;
+    search)
+        TERM="$2"
+        [ ! -f "$INDEX" ] && echo "Run 'mpkg update' first." && exit 1
+        echo "=== MutantLinux Store Packages ==="
+        grep -E '"name"|"version"|"description"' "$INDEX" | grep -i -C 1 "${TERM:-.}"
+        ;;
+    install)
+        PKG="$2"
+        [ -z "$PKG" ] && echo "Usage: mpkg install <package>" && exit 1
+        echo "[mpkg] Checking GitHub Releases & Store for $PKG..."
+        if ! wget -q -O "/tmp/${PKG}.mpk" "${GH_REL}/${PKG}.mpk"; then
+            wget -q -O "/tmp/${PKG}.mpk" "${REPO_URL}/${PKG}.mpk" || {
+                rm -f "/tmp/${PKG}.mpk"
+                echo "[mpkg] Error: Package '$PKG' not found."
+                exit 1
+            }
+        fi
+        echo "[mpkg] Installing $PKG..."
+        tar -xzf "/tmp/${PKG}.mpk" -C /
+        touch "$DB/$PKG"
+        rm -f "/tmp/${PKG}.mpk"
+        echo "[mpkg] $PKG installed successfully!"
+        ;;
+    remove)
+        PKG="$2"
+        [ -f "$DB/$PKG" ] && rm -f "$DB/$PKG" && echo "[mpkg] Removed $PKG." || echo "[mpkg] Not installed."
+        ;;
+    list)
+        echo "=== Installed Packages ==="
+        ls -1 "$DB"
+        ;;
+    build)
+        DIR="$2"
+        OUT="$3"
+        [ -z "$DIR" ] || [ -z "$OUT" ] && echo "Usage: mpkg build <dir> <out.mpk>" && exit 1
+        tar --exclude='./proc' --exclude='./dev' --exclude='./sys' -czf "$OUT" -C "$DIR" .
+        echo "[mpkg] Built package: $OUT"
+        ;;
+    *)
+        echo "MutantLinux Package Manager (mpkg v1.2)"
+        echo "Commands: update | search [term] | install <pkg> | remove <pkg> | list | build <dir> <out.mpk>"
+        ;;
+esac

@@ -1,0 +1,2 @@
+rootfs/usr/lib/libLLVM.so.22.1 filter=lfs diff=lfs merge=lfs -text
+rootfs/usr/lib/firefox-esr/libxul.so filter=lfs diff=lfs merge=lfs -text

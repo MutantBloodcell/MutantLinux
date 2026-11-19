@@ -1,0 +1,5 @@
+[Unit]
+Description=Live Error Console on tty3
+[Service]
+ExecStart=/usr/sbin/mutant-ttylog
+Restart=always

@@ -1,0 +1,7 @@
+libmozsandbox.so
+libgkcodecs.so
+liblgpllibs.so
+libmozsqlite3.so
+libmozgtk.so
+libmozwayland.so
+libxul.so

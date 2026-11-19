@@ -1,0 +1,6 @@
+[Unit]
+Description=Virtual Console on tty3 (Ctrl+Alt+F3)
+
+[Service]
+ExecStart=/sbin/getty 38400 tty3
+Restart=always

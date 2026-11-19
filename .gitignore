@@ -1,0 +1,9 @@
+*firebase*
+serviceAccountKey*.json
+google-services.json
+build/
+iso/
+*.iso
+*.qcow2
+*.raw
+src/linux-*.tar.xz

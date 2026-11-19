@@ -1,0 +1,16 @@
+[General]
+ColorScheme=MutantWhite
+Name=Mutant White
+
+[Colors:Window]
+BackgroundNormal=248,250,252
+BackgroundAlternate=241,245,249
+ForegroundNormal=15,23,42
+
+[Colors:View]
+BackgroundNormal=255,255,255
+ForegroundNormal=15,23,42
+
+[Colors:Selection]
+BackgroundNormal=15,23,42
+ForegroundNormal=255,255,255

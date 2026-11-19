@@ -1,0 +1,16 @@
+[General]
+ColorScheme=MutantBlack
+Name=Mutant Black
+
+[Colors:Window]
+BackgroundNormal=0,0,0
+BackgroundAlternate=9,9,11
+ForegroundNormal=255,255,255
+
+[Colors:View]
+BackgroundNormal=9,9,11
+ForegroundNormal=255,255,255
+
+[Colors:Selection]
+BackgroundNormal=63,63,70
+ForegroundNormal=255,255,255

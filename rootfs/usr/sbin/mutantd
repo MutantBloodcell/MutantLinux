@@ -1,0 +1,42 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Protect PID 1 and mutantd from OOM killer
+echo -1000 > /proc/1/oom_score_adj 2>/dev/null
+echo -1000 > /proc/self/oom_score_adj 2>/dev/null
+
+RUN_DIR="/run/mutantd"
+LOG_DIR="/var/log/mutantd"
+ENABLED_DIR="/etc/mutantd/enabled"
+mkdir -p "$RUN_DIR" "$LOG_DIR" "$ENABLED_DIR"
+
+start_service() {
+    UNIT="$1"
+    SVC=$(basename "$UNIT" .service)
+    EXEC_CMD=$(grep -E "^ExecStart=" "$UNIT" | head -n 1 | cut -d'=' -f2-)
+    [ -z "$EXEC_CMD" ] && return
+
+    PID_FILE="$RUN_DIR/${SVC}.pid"
+    if [ -f "$PID_FILE" ]; then
+        OLD_PID=$(cat "$PID_FILE" 2>/dev/null)
+        if [ -n "$OLD_PID" ] && kill -0 "$OLD_PID" 2>/dev/null; then
+            echo -1000 > "/proc/${OLD_PID}/oom_score_adj" 2>/dev/null
+            return
+        fi
+    fi
+
+    sh -c "$EXEC_CMD" >> "$LOG_DIR/${SVC}.log" 2>&1 &
+    NEW_PID=$!
+    echo "$NEW_PID" > "$PID_FILE"
+    echo -1000 > "/proc/${NEW_PID}/oom_score_adj" 2>/dev/null
+}
+
+while true; do
+    # Ensure core system binaries stay executable and protected
+    chmod 755 /init /usr/sbin/mutantd /usr/sbin/mutant-ai-fixer /usr/bin/mutantctl /usr/bin/mutant-gui /usr/bin/startmutantde 2>/dev/null
+    for UNIT in "$ENABLED_DIR"/*.service; do
+        [ -e "$UNIT" ] || continue
+        start_service "$UNIT"
+    done
+    sleep 2
+done

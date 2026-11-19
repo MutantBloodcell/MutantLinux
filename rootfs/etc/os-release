@@ -1,0 +1,5 @@
+NAME="MutantLinux"
+VERSION="1.0 (Genesis)"
+ID=mutantlinux
+PRETTY_NAME="MutantLinux 1.0 ARM64"
+HOME_URL="https://mutantbloodcell.github.io/MutantLinux"

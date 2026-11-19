@@ -1,0 +1,4 @@
+[Compositing]
+Backend=QPainter
+Enabled=false
+OpenGLIsUnsafe=true

@@ -1,0 +1,19 @@
+#!/bin/sh
+exec >/var/log/mutantde.log 2>&1
+
+export HOME=/root
+export USER=root
+export SHELL=/bin/sh
+export DISPLAY=:0
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+mkdir -p /root/Desktop /root/.config /etc/mutantde
+fc-cache -f 2>/dev/null || true
+
+xset r off 2>/dev/null
+xsetroot -solid "#09090b" -cursor_name left_ptr 2>/dev/null
+
+openbox >/var/log/openbox.log 2>&1 &
+sleep 1
+
+exec /usr/bin/mutantde-shell

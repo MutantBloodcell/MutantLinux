@@ -1,0 +1,6 @@
+[Unit]
+Description=MutantLinux Automatic GPU and Soundcard Hardware Detection
+
+[Service]
+ExecStart=/usr/sbin/mutant-hwdetect
+Restart=no

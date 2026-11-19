@@ -1,0 +1,44 @@
+#!/bin/sh
+CMD="$1"
+SVC="$2"
+RUN_DIR="/run/mutantd"
+SYS_DIR="/etc/mutantd/system"
+EN_DIR="/etc/mutantd/enabled"
+
+case "$CMD" in
+    status)
+        for U in "$EN_DIR"/*.service; do
+            [ -e "$U" ] || continue
+            NAME=$(basename "$U" .service)
+            PID=$(cat "$RUN_DIR/${NAME}.pid" 2>/dev/null)
+            if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
+                echo "[ACTIVE] $NAME (PID $PID)"
+            else
+                echo "[DEAD]   $NAME"
+            fi
+        done
+        ;;
+    restart)
+        PID=$(cat "$RUN_DIR/${SVC}.pid" 2>/dev/null)
+        [ -n "$PID" ] && kill "$PID" 2>/dev/null
+        rm -f "$RUN_DIR/${SVC}.pid"
+        echo "Restarting $SVC..."
+        ;;
+    enable)
+        ln -sf "$SYS_DIR/${SVC}.service" "$EN_DIR/${SVC}.service"
+        echo "Enabled $SVC"
+        ;;
+    disable)
+        rm -f "$EN_DIR/${SVC}.service"
+        echo "Disabled $SVC"
+        ;;
+    logs)
+        grep -iE "(\(EE\)|error|critical|segfault|fatal|cannot open|failed|bail out)" /var/log/mutantde.log /var/log/Xorg.0.log /var/log/mutantd/*.log 2>/dev/null | tail -n 25
+        ;;
+    ai-log)
+        cat /var/log/mutantd/ai-fixer.log 2>/dev/null || echo "No AI fixer logs yet."
+        ;;
+    *)
+        echo "Usage: mutantctl [status|restart <svc>|enable <svc>|disable <svc>|logs|ai-log]"
+        ;;
+esac

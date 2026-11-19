@@ -1,0 +1,13 @@
+{
+  "name": "MutantLinux 1.0 Cloud VM",
+  "image": "://microsoft.com",
+  "postCreateCommand": "chmod +x cloud-vm.sh",
+  "postStartCommand": "nohup bash cloud-vm.sh >/tmp/mutant-vm.log 2>&1 &",
+  "forwardPorts":,
+  "portsAttributes": {
+    "6080": {
+      "label": "MutantLinux Browser Desktop (noVNC)",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}

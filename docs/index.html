@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="darkgray">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MutantLinux 1.0</title>
+  <style>
+    :root, [data-theme="darkgray"] {
+      --bg: #1e293b; --surface: #0f172a; --card: #162032;
+      --border: #334155; --text: #f8fafc; --muted: #94a3b8;
+      --accent: #f8fafc; --accent-text: #0f172a;
+    }
+    [data-theme="white"] {
+      --bg: #f8fafc; --surface: #ffffff; --card: #f1f5f9;
+      --border: #cbd5e1; --text: #0f172a; --muted: #475569;
+      --accent: #0f172a; --accent-text: #ffffff;
+    }
+    [data-theme="gray"] {
+      --bg: #64748b; --surface: #475569; --card: #526075;
+      --border: #94a3b8; --text: #ffffff; --muted: #e2e8f0;
+      --accent: #ffffff; --accent-text: #1e293b;
+    }
+    [data-theme="black"] {
+      --bg: #000000; --surface: #09090b; --card: #121215;
+      --border: #27272a; --text: #ffffff; --muted: #a1a1aa;
+      --accent: #ffffff; --accent-text: #000000;
+    }
+    * { box-sizing: border-box; transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
+    body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    nav { display: flex; justify-content: flex-end; gap: 6px; padding: 14px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .t-btn { background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; cursor: pointer; font-weight: 600; }
+    .t-btn.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+    header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 48px 20px; text-align: center; }
+    h1 { margin: 0 0 8px; font-size: 2.3rem; letter-spacing: -0.5px; }
+    .sub { color: var(--muted); font-size: 1.1rem; margin: 0 auto 24px; }
+    .btn { display: inline-block; background: var(--accent); color: var(--accent-text); font-weight: 700; text-decoration: none; padding: 11px 22px; border-radius: 8px; margin: 5px; border: 1px solid var(--accent); }
+    .btn-sec { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+    main { max-width: 960px; margin: 32px auto; padding: 0 20px; }
+    h2 { font-size: 1.3rem; margin-bottom: 16px; }
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    input, select { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 0.95rem; }
+    input { flex: 1; min-width: 220px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; }
+    .tag { display: inline-block; font-size: 0.75rem; background: var(--card); color: var(--muted); border: 1px solid var(--border); padding: 2px 8px; border-radius: 99px; margin-bottom: 8px; }
+    .pkg-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 6px; }
+    .pkg-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
+    .cmd-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-family: monospace; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .copy-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+    .dl-link { color: var(--text); text-decoration: underline; font-size: 0.85rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <nav>
+    <button class="t-btn" data-set="white" onclick="setTheme('white')">White</button>
+    <button class="t-btn" data-set="gray" onclick="setTheme('gray')">Gray</button>
+    <button class="t-btn active" data-set="darkgray" onclick="setTheme('darkgray')">Dark Gray</button>
+    <button class="t-btn" data-set="black" onclick="setTheme('black')">Black</button>
+  </nav>
+
+  <header>
+    <img src="logo.png" alt="MutantLinux Logo" style="width:84px;height:84px;border-radius:16px;margin-bottom:12px;border:1px solid var(--border);object-fit:cover;">
+    <h1>MutantLinux 1.0</h1>
+    <p class="sub">Independent ARM64 operating system.</p>
+    <a class="btn" id="iso-btn" href="../../releases">Download ARM64 ISO</a>
+    <a class="btn btn-sec" href="https://codespaces.new/MutantBloodcell/MutantLinux" target="_blank">Boot in Cloud (Codespaces)</a>
+    <a class="btn btn-sec" id="src-btn" href="../..">GitHub Source</a>
+  </header>
+
+  <main>
+    <h2>Package Store (<code>aarch64</code>)</h2>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search packages...">
+      <select id="category">
+        <option value="all">All Categories</option>
+        <option value="Desktop">Desktop</option>
+        <option value="Utilities">Utilities</option>
+        <option value="System">System</option>
+      </select>
+    </div>
+    <div class="grid" id="pkg-grid">Loading packages...</div>
+  </main>
+
+  <script>
+    function setTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('mutant-web-theme', t);
+      document.querySelectorAll('.t-btn').forEach(b => b.classList.toggle('active', b.dataset.set === t));
+    }
+    setTheme(localStorage.getItem('mutant-web-theme') || 'darkgray');
+
+    let allPackages = [];
+    let releaseAssets = {};
+
+    async function loadStore() {
+      const owner = window.location.hostname.split('.') || 'MutantBloodcell';
+      const repo = window.location.pathname.split('/').filter(Boolean) || 'MutantLinux';
+      const ghBase = 'https://' + '://github.com' + owner + '/' + repo;
+      document.getElementById('iso-btn').href = ghBase + '/releases';
+      document.getElementById('src-btn').href = ghBase;
+
+      try {
+        const relRes = await fetch('https://' + 'api.://github.comrepos/' + owner + '/' + repo + '/releases/latest');
+        if (relRes.ok) {
+          const relData = await relRes.json();
+          (relData.assets || []).forEach(a => {
+            releaseAssets[a.name] = a.browser_download_url;
+            if (a.name.endsWith('.iso')) document.getElementById('iso-btn').href = a.browser_download_url;
+          });
+        }
+      } catch (e) {}
+
+      try {
+        const res = await fetch('repo/aarch64/packages.json');
+        const data = await res.json();
+        allPackages = data.packages || [];
+        render(allPackages);
+      } catch (e) {
+        document.getElementById('pkg-grid').innerHTML = '<p>Could not load package catalog.</p>';
+      }
+    }
+
+    function render(list) {
+      const grid = document.getElementById('pkg-grid');
+      if (!list.length) { grid.innerHTML = '<p>No matching packages found.</p>'; return; }
+      grid.innerHTML = list.map(p => {
+        const dlUrl = releaseAssets[p.file] || ('repo/aarch64/' + p.file);
+        return `
+        <div class="card">
+          <div>
+            <span class="tag">${p.category} • v${p.version} • ${p.size}</span>
+            <div class="pkg-title">${p.name}</div>
+            <p class="pkg-desc">${p.description}</p>
+          </div>
+          <div>
+            <div class="cmd-box">
+              <span>mpkg install ${p.name}</span>
+              <button class="copy-btn" onclick="navigator.clipboard.writeText('mpkg install ${p.name}')">Copy</button>
+            </div>
+            <a class="dl-link" href="${dlUrl}">Download (.mpk) &rarr;</a>
+          </div>
+        </div>
+      `}).join('');
+    }
+
+    function filter() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const cat = document.getElementById('category').value;
+      render(allPackages.filter(p =>
+        (cat === 'all' || p.category === cat) &&
+        (p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
+      ));
+    }
+
+    document.getElementById('search').addEventListener('input', filter);
+    document.getElementById('category').addEventListener('change', filter);
+    loadStore();
+  </script>
+</body>
+</html>

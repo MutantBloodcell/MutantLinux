@@ -1,0 +1,5 @@
+[Unit]
+Description=MutantLinux System-Wide AI Self-Healing Engine
+[Service]
+ExecStart=/usr/sbin/mutant-ai-fixer
+Restart=always

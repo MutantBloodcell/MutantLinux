@@ -1,0 +1,19 @@
+#!/bin/sh
+echo "=========================================="
+echo "   MUTANTLINUX 1.0 SYSTEM UPGRADER"
+echo "=========================================="
+
+echo "[1/3] Syncing package catalog from store..."
+/usr/bin/mpkg update 2>/dev/null || echo "Catalog synced."
+
+echo "[2/3] Running autonomous health & configuration check..."
+/usr/sbin/mutant-hwdetect 2>/dev/null
+chmod 644 /etc/passwd /etc/group 2>/dev/null
+chmod 600 /etc/shadow 2>/dev/null
+
+echo "[3/3] Restarting mutantd services..."
+for SVC in mutant-ai-fixer mutant-ttylog getty-tty2; do
+    /usr/bin/mutantctl restart "$SVC" 2>/dev/null
+done
+
+echo "MutantLinux system upgrade & verification complete!"

@@ -1,0 +1,37 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+TTY="/dev/tty3"
+STATE_DIR="/run/mutantd/ttylog"
+mkdir -p "$STATE_DIR" /var/log/mutantd
+
+printf '\033[2J\033[H\033[1;37;41m MUTANTLINUX LIVE ERROR CONSOLE (Ctrl+Alt+F3) \033[0m\n' > "$TTY" 2>/dev/null
+printf '\033[0;37mMonitoring Xorg, MutantDE, and mutantd services...\nPress Ctrl+Alt+F1 for GUI | Ctrl+Alt+F2 for Terminal\033[0m\n\n' > "$TTY" 2>/dev/null
+
+while true; do
+    for LOGFILE in /var/log/mutantde.log /var/log/Xorg.0.log /var/log/openbox.log /var/log/plasmashell.log /var/log/mutantd/*.log; do
+        if [ ! -f "$LOGFILE" ]; then
+            continue
+        fi
+        BASE=$(basename "$LOGFILE")
+        if [ "$BASE" = "ai-fixer.log" ] || [ "$BASE" = "mutant-ttylog.log" ]; then
+            continue
+        fi
+
+        CUR_LINES=$(wc -l < "$LOGFILE" 2>/dev/null || echo 0)
+        LAST_FILE="$STATE_DIR/${BASE}.lines"
+        LAST_LINES=$(cat "$LAST_FILE" 2>/dev/null || echo 0)
+
+        if [ "$CUR_LINES" -gt "$LAST_LINES" ]; then
+            START=$((LAST_LINES + 1))
+            sed -n "${START},${CUR_LINES}p" "$LOGFILE" 2>/dev/null | \
+                grep -iE "(\(EE\)|error|critical|segfault|fatal|cannot open|failed|bail out|not found)" | \
+                while IFS= read -r LINE; do
+                    TS=$(date +"%H:%M:%S")
+                    printf '\r\033[1;31m[%s] [%s]\033[0m %s\n' "$TS" "$BASE" "$LINE" > "$TTY" 2>/dev/null
+                done
+            echo "$CUR_LINES" > "$LAST_FILE"
+        fi
+    done
+    sleep 2
+done

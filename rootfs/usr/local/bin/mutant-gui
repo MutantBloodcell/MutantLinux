@@ -1,0 +1,13 @@
+#!/bin/sh
+mkdir -p /run/dbus
+dbus-uuidgen --ensure
+dbus-daemon --system --fork
+
+export DISPLAY=:0
+export XDG_RUNTIME_DIR=/tmp/runtime-$(id -u)
+mkdir -p "$XDG_RUNTIME_DIR"
+chmod 700 "$XDG_RUNTIME_DIR"
+
+Xorg :0 -nolisten tcp vt1 &
+sleep 2
+exec dbus-run-session startxfce4

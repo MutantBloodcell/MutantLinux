@@ -1,0 +1,16 @@
+#!/bin/sh
+clear >/dev/tty1 2>/dev/null
+printf "\033[1;37m" >/dev/tty1 2>/dev/null
+cat << 'LOGO' >/dev/tty1 2>/dev/null
+
+        ╔══════════════════════════════════════════╗
+        ║                                          ║
+        ║           M U T A N T L I N U X          ║
+        ║               Version 1.0                ║
+        ║     Independent ARM64 Operating System   ║
+        ║                                          ║
+        ╚══════════════════════════════════════════╝
+
+LOGO
+printf "\033[0m" >/dev/tty1 2>/dev/null
+sleep 1

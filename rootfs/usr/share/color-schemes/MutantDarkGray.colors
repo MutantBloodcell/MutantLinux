@@ -1,0 +1,16 @@
+[General]
+ColorScheme=MutantDarkGray
+Name=Mutant Dark Gray
+
+[Colors:Window]
+BackgroundNormal=30,41,59
+BackgroundAlternate=15,23,42
+ForegroundNormal=248,250,252
+
+[Colors:View]
+BackgroundNormal=15,23,42
+ForegroundNormal=248,250,252
+
+[Colors:Selection]
+BackgroundNormal=148,163,184
+ForegroundNormal=15,23,42

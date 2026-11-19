@@ -1,0 +1,142 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export SHELL=/bin/sh
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev 2>/dev/null || true
+mkdir -p /dev/pts /dev/shm /tmp /run /var/log/mutantd /etc/mutantde
+mount -t devpts devpts /dev/pts
+mount -t tmpfs tmpfs /dev/shm
+chmod 1777 /tmp /dev/shm
+
+echo -1000 > /proc/self/oom_score_adj 2>/dev/null
+/sbin/udevd --daemon 2>/dev/null; udevadm trigger --action=add 2>/dev/null; udevadm settle --timeout=3 2>/dev/null
+/usr/sbin/mutant-hwdetect 2>/dev/null
+
+chmod 644 /etc/passwd /etc/group 2>/dev/null
+chmod 600 /etc/shadow 2>/dev/null
+
+ip link set lo up 2>/dev/null
+if ip link show eth0 >/dev/null 2>&1; then
+    ip link set eth0 up 2>/dev/null
+    udhcpc -i eth0 -s /usr/share/udhcpc/default.script -b -q >/dev/null 2>&1 &
+fi
+
+# Hardened mobile VNC keyboard debounce (drains stray Enter/CR/LF bytes)
+drain_keys() {
+    sleep 0.3
+    dd if=/dev/tty1 of=/dev/null bs=64 count=16 iflag=nonblock 2>/dev/null || true
+}
+
+# 1. Stylized Monochrome First-Boot Setup Wizard
+if [ ! -f /etc/mutant-configured ]; then
+    exec </dev/tty1 >/dev/tty1 2>&1
+    clear
+    printf "\033[1;37m"
+    echo "┌──────────────────────────────────────────────────────────┐"
+    echo "│                 MUTANTLINUX 1.0 ARM64                    │"
+    echo "│           Independent ARM64 Operating System             │"
+    echo "├──────────────────────────────────────────────────────────┤"
+    echo "│  FIRST-BOOT SYSTEM CONFIGURATION WIZARD                  │"
+    echo "└──────────────────────────────────────────────────────────┘"
+    printf "\033[0m\n"
+    drain_keys
+
+    printf "  \033[1;37m[1/4] System Hostname\033[0m [mutant-arm64]: "
+    read NEW_HOST
+    NEW_HOST=$(printf '%s' "$NEW_HOST" | tr -d '\r')
+    [ -z "$NEW_HOST" ] && NEW_HOST="mutant-arm64"
+    echo "$NEW_HOST" > /etc/hostname
+    hostname "$NEW_HOST"
+    drain_keys
+
+    printf "  \033[1;37m[2/4] Administrator Username\033[0m [admin]: "
+    read NEW_USER
+    NEW_USER=$(printf '%s' "$NEW_USER" | tr -d '\r')
+    [ -z "$NEW_USER" ] && NEW_USER="admin"
+    drain_keys
+
+    printf "  \033[1;37m[3/4] Administrator Password\033[0m [mutant]: "
+    stty -echo 2>/dev/null
+    read NEW_PASS
+    stty echo 2>/dev/null
+    echo ""
+    NEW_PASS=$(printf '%s' "$NEW_PASS" | tr -d '\r')
+    [ -z "$NEW_PASS" ] && NEW_PASS="mutant"
+    drain_keys
+
+    printf "  \033[1;37m[4/4] Desktop Theme\033[0m (1=White 2=Gray 3=DarkGray 4=Black): "
+    read THEME_NUM
+    THEME_NUM=$(printf '%s' "$THEME_NUM" | tr -d '\r')
+    case "$THEME_NUM" in
+        1) SEL_THEME="white" ;;
+        2) SEL_THEME="gray" ;;
+        4) SEL_THEME="black" ;;
+        *) SEL_THEME="darkgray" ;;
+    esac
+    echo "$SEL_THEME" > /etc/mutantde/theme
+    drain_keys
+
+    mkdir -p "/home/$NEW_USER"
+    adduser -D -h "/home/$NEW_USER" -s /bin/sh "$NEW_USER" 2>/dev/null || true
+    echo "${NEW_USER}:${NEW_PASS}" | chpasswd
+    echo "root:${NEW_PASS}" | chpasswd
+    chown -R "${NEW_USER}:${NEW_USER}" "/home/$NEW_USER" 2>/dev/null || true
+    chmod 644 /etc/passwd /etc/group
+    chmod 600 /etc/shadow
+
+    echo "$NEW_USER" > /etc/mutant-configured
+    printf "\n  \033[1;32m✔ Configuration saved! Launching splash screen...\033[0m\n"
+    sleep 1
+fi
+
+/usr/sbin/mutant-binfmt 2>/dev/null
+hostname "$(cat /etc/hostname 2>/dev/null || echo mutant-arm64)"
+
+# 2. Boot Splash Logo
+/usr/bin/mutant-splash 2>/dev/null
+
+# 3. Launch Unkillable mutantd Supervisor & Background Daemons
+/bin/sh /usr/sbin/mutantd &
+sleep 1
+pidof getty >/dev/null 2>&1 || (/sbin/getty -L tty2 115200 vt100 &)
+ps | grep -v grep | grep -q mutant-ttylog || (/bin/sh /usr/sbin/mutant-ttylog &)
+ps | grep -v grep | grep -q mutant-ai-fixer || (/bin/sh /usr/sbin/mutant-ai-fixer &)
+
+# 4. Stylized Boot Mode Selector
+exec </dev/tty1 >/dev/tty1 2>&1
+clear
+drain_keys
+printf "\033[1;37m"
+echo "┌──────────────────────────────────────────────────────────┐"
+echo "│                 MUTANTLINUX 1.0 BOOT MENU                │"
+echo "├──────────────────────────────────────────────────────────┤"
+echo "│  1) MutantDE Graphical Desktop (GUI)                     │"
+echo "│  2) Command Line Terminal (CLI)                          │"
+echo "│                                                          │"
+echo "│  Tip: Ctrl+Alt+F2 = Shell | Ctrl+Alt+F3 = AI Fixer Log   │"
+echo "└──────────────────────────────────────────────────────────┘"
+printf "\033[0m\n"
+printf "  Select Boot Mode [1/2]: "
+read BOOT_CHOICE
+BOOT_CHOICE=$(printf '%s' "$BOOT_CHOICE" | tr -d '\r')
+
+if [ "$BOOT_CHOICE" = "2" ]; then
+    echo "cli" > /etc/mutant-mode
+else
+    echo "gui" > /etc/mutant-mode
+fi
+
+# 5. Unbreakable PID 1 Supervisor Loop
+while true; do
+    MODE=$(cat /etc/mutant-mode 2>/dev/null || echo "gui")
+    if [ "$MODE" = "gui" ]; then
+        /bin/sh /usr/bin/mutant-gui
+        echo "MutantDE session restarting in 3s..."
+        sleep 3
+    else
+        clear
+        /sbin/getty -L tty1 115200 vt100
+    fi
+done

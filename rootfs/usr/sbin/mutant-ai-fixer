@@ -1,0 +1,214 @@
+#!/bin/sh
+# MutantLinux Unkillable AI Autonomous Thinking & Self-Healing Engine
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+echo -1000 > /proc/self/oom_score_adj 2>/dev/null
+
+. /etc/mutantd/ai.conf 2>/dev/null
+. /etc/mutantd/firebase.conf 2>/dev/null
+
+STATE_DIR="/run/mutantd/aifixer"
+LOG_FILE="/var/log/mutantd/ai-fixer.log"
+mkdir -p "$STATE_DIR" /var/log/mutantd /tmp/.X11-unix /run/dbus
+chmod 1777 /tmp /tmp/.X11-unix
+
+HOST=$(cat /etc/hostname 2>/dev/null || echo "mutant-arm64")
+MID=$(cat /etc/machine-id 2>/dev/null || echo "unknown")
+
+# Create guaranteed inline DHCP script for udhcpc
+cat << 'DHCP' > /tmp/udhcpc.script
+#!/bin/sh
+case "$1" in
+    deconfig) ip addr flush dev "$interface" ;;
+    bound|renew)
+        ip addr add "$ip/$mask" dev "$interface" 2>/dev/null
+        [ -n "$router" ] && ip route add default via "$router" dev "$interface" 2>/dev/null
+        echo "nameserver 1.1.1.1" > /etc/resolv.conf
+        ;;
+esac
+DHCP
+chmod 755 /tmp/udhcpc.script
+
+log_ai() {
+    LEVEL="$1"
+    MSG="$2"
+    TS=$(date +"%H:%M:%S")
+    LINE="[AI-FIXER $TS] [$LEVEL] $MSG"
+    echo "$LINE" >> "$LOG_FILE"
+    printf '\r\033[1;36m%s\033[0m\n' "$LINE" > /dev/tty3 2>/dev/null
+
+    if [ "$TELEMETRY_ENABLED" = "1" ] && [ -n "$FIREBASE_DB_URL" ]; then
+        CLEAN_MSG=$(printf '%s' "$MSG" | tr '"' "'" | tr '\n' ' ' | cut -c 1-350)
+        UTC=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        PAYLOAD="{\"host\":\"${HOST}\",\"level\":\"${LEVEL}\",\"message\":\"${CLEAN_MSG}\",\"timestamp\":\"${UTC}\"}"
+        curl -s -X POST -H "Content-Type: application/json" -d "$PAYLOAD" \
+            "${FIREBASE_DB_URL}/autofix/${MID}.json" >/dev/null 2>&1 &
+    fi
+}
+
+ensure_network() {
+    ip link set lo up 2>/dev/null
+    # Detect first non-loopback Ethernet interface (eth0 or enp0s...)
+    NET_IF=$(ip -o link show | awk -F': ' '$2 != "lo" {print $2; exit}')
+    if [ -n "$NET_IF" ]; then
+        if ! ip -4 addr show "$NET_IF" | grep -q "inet "; then
+            ip link set "$NET_IF" up 2>/dev/null
+            udhcpc -i "$NET_IF" -s /tmp/udhcpc.script -q -n >/dev/null 2>&1
+            if ip -4 addr show "$NET_IF" | grep -q "inet "; then
+                log_ai "FIX" "Configured network & DNS on $NET_IF ($(ip -4 addr show "$NET_IF" | awk '/inet / {print $2}'))"
+            fi
+        fi
+    fi
+    [ ! -s /etc/resolv.conf ] && echo "nameserver 1.1.1.1" > /etc/resolv.conf
+}
+
+web_research() {
+    RAW_ERR="$1"
+    QUERY=$(printf 'linux arm64 %s' "$RAW_ERR" | sed 's|/var/log/[^:]*:||g' | tr -cd '[:alnum:] ._-' | cut -c 1-85 | sed 's/ /+/g')
+    log_ai "WEB-SEARCH" "Searching web for: $QUERY"
+
+    DDG_SUB="html"
+    DDG_DOM="duckduckgo.com"
+    HTML=$(curl -s -k --max-time 10 -A "Mozilla/5.0" "https://${DDG_SUB}.${DDG_DOM}/html/?q=${QUERY}")
+
+    SNIPPETS=$(printf '%s' "$HTML" | grep -o 'class="result__snippet"[^>]*>[^<]*' | sed 's/.*>//g' | head -n 3 | tr '\n' ' ' | cut -c 1-500)
+    [ -z "$SNIPPETS" ] && SNIPPETS="No external web snippets returned."
+    printf '%s' "$SNIPPETS"
+}
+
+os_integrity_check() {
+    ensure_network
+
+    if [ ! -s /etc/machine-id ]; then
+        cat /proc/sys/kernel/random/uuid | tr -d '-' > /etc/machine-id
+        mkdir -p /var/lib/dbus && cp -f /etc/machine-id /var/lib/dbus/machine-id
+        log_ai "FIX" "Generated missing /etc/machine-id"
+    fi
+
+    if ! pidof dbus-daemon >/dev/null 2>&1; then
+        mkdir -p /run/dbus
+        dbus-daemon --system --nofork --nopidfile >/dev/null 2>&1 &
+        DBUS_PID=$!
+        echo -1000 > "/proc/${DBUS_PID}/oom_score_adj" 2>/dev/null
+        log_ai "FIX" "Started system dbus-daemon"
+    fi
+
+    FREE_MB=$(free -m | awk '/Mem:/ {print $4}')
+    if [ "${FREE_MB:-999}" -lt 120 ]; then
+        sync && echo 3 > /proc/sys/vm/drop_caches 2>/dev/null
+        log_ai "FIX" "Reclaimed page cache (${FREE_MB}MB free)"
+    fi
+}
+
+collect_all_errors() {
+    LOG_ERRS=$(grep -iE "(\(EE\)|error|critical|segfault|fatal|cannot open|failed|bail out|not found|denied)" \
+        /var/log/mutantde.log /var/log/Xorg.0.log /var/log/openbox.log /var/log/plasmashell.log /var/log/mutantd/*.log 2>/dev/null | \
+        grep -vE "(AI-FIXER|Markers:|not implemented|\(WW\) warning|xf86OpenConsole)" | tail -n 5)
+    KERN_ERRS=$(dmesg -l err,crit,alert,emerg 2>/dev/null | tail -n 3)
+    printf '%s\n%s' "$LOG_ERRS" "$KERN_ERRS" | sed '/^[[:space:]]*$/d'
+}
+
+is_command_safe() {
+    CMD="$1"
+    case "$CMD" in
+        *"rm -rf /"*|*"rm -rf /*"*|*"mkfs"*|*"dd if="*|*"reboot"*|*"shutdown"*|*"poweroff"*|*"halt"*)
+            return 1 ;;
+        *"kill 1"*|*"kill -9 1"*|*"killall mutantd"*|*"pkill mutantd"*|*"killall mutant-ai-fixer"*|*"killall getty"*|*"killall mutant-ttylog"*)
+            return 1 ;;
+        *"> /init"*|*"rm /init"*|*"rm -f /init"*|*"rm /usr/sbin/mutantd"*)
+            return 1 ;;
+    esac
+    return 0
+}
+
+ai_think_and_fix() {
+    ERR_SNIPPET="$1"
+    [ "$AI_ENABLED" != "1" ] && return 1
+    case "$AI_API_KEY" in
+        ""|"YOUR_API_KEY_HERE") return 1 ;;
+    esac
+
+    WEB_INFO=$(web_research "$ERR_SNIPPET")
+    SYS_INFO="Kernel: $(uname -r), Arch: $(uname -m), FreeRAM: $(free -m | awk '/Mem:/ {print $4}')MB, DRM: $(ls /dev/dri 2>/dev/null || echo none)"
+
+    PROMPT="System: ${SYS_INFO} | Detected Errors: ${ERR_SNIPPET} | Internet Search Snippets: ${WEB_INFO}"
+    ESCAPED_PROMPT=$(printf '%s' "$PROMPT" | tr '"' "'" | tr '\n' ' ' | tr '\r' ' ' | cut -c 1-1200)
+
+    REQ_JSON="{\"model\":\"${AI_MODEL}\",\"temperature\":0.1,\"max_tokens\":600,\"messages\":[{\"role\":\"system\",\"content\":\"You are mutant-ai-fixer, the autonomous self-healing AI daemon for MutantLinux (independent ARM64 OS with mutantd and MutantDE). You have full root OS repair permissions (configs, permissions, symlinks, packages, X11, D-Bus) EXCEPT you must NEVER kill PID 1, mutantd, getty, or mutant-ttylog. Diagnose the error and reply in EXACTLY three lines:\nTHOUGHT: <1 concise sentence diagnosing root cause>\nFIX: <1 safe POSIX sh command to fix the underlying cause>\nRESTART: <service/process name to restart ONLY after fixing, or none>\"},{\"role\":\"user\",\"content\":\"${ESCAPED_PROMPT}\"}]}"
+
+    RESP=$(curl -s -k --max-time 20 -X POST "$AI_API_URL" \
+        -H "Content-Type: application/json" \
+        -H "Authorization: Bearer ${AI_API_KEY}" \
+        -d "$REQ_JSON" 2>/tmp/ai_curl.err)
+
+    CONTENT=$(printf '%s' "$RESP" | awk -F'"content"[[:space:]]*:[[:space:]]*"' 'NF>1 {print $2}' | awk -F'"[,}]' '{print $1}' | sed 's/\\n/\n/g; s/\\"/"/g; s/\\\\/\\/g')
+
+    if [ -z "$CONTENT" ]; then
+        CURL_E=$(cat /tmp/ai_curl.err 2>/dev/null | head -n 1)
+        API_E=$(printf '%s' "$RESP" | grep -o '"message"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n 1)
+        log_ai "WARN" "AI response empty (${API_E:-${CURL_E:-retrying}})"
+        return 1
+    fi
+
+    THOUGHT=$(printf '%s\n' "$CONTENT" | grep -i "^THOUGHT:" | head -n 1 | cut -d':' -f2-)
+    FIX_CMD=$(printf '%s\n' "$CONTENT" | grep -i "^FIX:" | head -n 1 | cut -d':' -f2-)
+    RESTART_TGT=$(printf '%s\n' "$CONTENT" | grep -i "^RESTART:" | head -n 1 | cut -d':' -f2- | tr -d ' ')
+
+    [ -n "$THOUGHT" ] && log_ai "THOUGHT" "$THOUGHT"
+
+    if [ -n "$FIX_CMD" ] && [ "$FIX_CMD" != " none" ] && [ "$FIX_CMD" != "none" ]; then
+        if ! is_command_safe "$FIX_CMD"; then
+            log_ai "BLOCKED" "Protected core system rule blocked: $FIX_CMD"
+            return 0
+        fi
+        log_ai "FIX" "Executing: $FIX_CMD"
+        sh -c "$FIX_CMD" >> "$LOG_FILE" 2>&1
+    fi
+
+    if [ -n "$RESTART_TGT" ] && [ "$RESTART_TGT" != "none" ]; then
+        case "$RESTART_TGT" in
+            mutantd|mutant-ai-fixer|mutant-ttylog|getty*|init)
+                log_ai "BLOCKED" "Cannot restart protected core service: $RESTART_TGT"
+                ;;
+            mutantde|plasmashell|openbox)
+                log_ai "RESTART" "Restarting MutantDE session after applying fix..."
+                killall plasmashell openbox 2>/dev/null
+                ;;
+            *)
+                if [ -e "/etc/mutantd/enabled/${RESTART_TGT}.service" ]; then
+                    log_ai "RESTART" "Restarting service: $RESTART_TGT"
+                    /usr/bin/mutantctl restart "$RESTART_TGT" >/dev/null 2>&1
+                fi
+                ;;
+        esac
+    fi
+    return 0
+}
+
+ensure_network
+log_ai "READY" "Unkillable root AI fixer active (Groq GPT-OSS + Web Search)"
+
+TICK=0
+while true; do
+    os_integrity_check
+    ALL_ERRS=$(collect_all_errors)
+
+    if [ -n "$ALL_ERRS" ]; then
+        HASH=$(printf '%s' "$ALL_ERRS" | md5sum | cut -d' ' -f1)
+        LAST_HASH=$(cat "$STATE_DIR/last_err.hash" 2>/dev/null)
+
+        if [ "$HASH" != "$LAST_HASH" ]; then
+            if ai_think_and_fix "$ALL_ERRS"; then
+                echo "$HASH" > "$STATE_DIR/last_err.hash"
+            fi
+        fi
+    fi
+
+    TICK=$((TICK + 1))
+    if [ $((TICK % 12)) -eq 0 ]; then
+        log_ai "OK" "System healthy (Free RAM: $(free -m | awk '/Mem:/ {print $4}')MB)"
+    fi
+
+    sleep 5
+done

@@ -1,0 +1,30 @@
+{
+  "repo": "MutantLinux Official ARM64 Store",
+  "updated": "2026-11-18",
+  "packages": [
+    {
+      "name": "mutantde",
+      "version": "1.0.0",
+      "category": "Desktop",
+      "size": "653M",
+      "description": "MutantDE Desktop",
+      "file": "mutantde.mpk"
+    },
+    {
+      "name": "nano",
+      "version": "8.2.0",
+      "category": "Utilities",
+      "size": "0.6 MB",
+      "description": "Lightweight terminal text editor for quick configuration editing.",
+      "file": "nano.mpk"
+    },
+    {
+      "name": "htop",
+      "version": "3.3.0",
+      "category": "System",
+      "size": "0.4 MB",
+      "description": "Interactive process viewer and real-time CPU/RAM monitor.",
+      "file": "htop.mpk"
+    }
+  ]
+}

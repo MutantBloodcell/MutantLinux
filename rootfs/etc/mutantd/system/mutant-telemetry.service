@@ -1,0 +1,6 @@
+[Unit]
+Description=MutantLinux Firebase Error Collector & Telemetry Service
+
+[Service]
+ExecStart=/usr/sbin/mutant-telemetry
+Restart=always

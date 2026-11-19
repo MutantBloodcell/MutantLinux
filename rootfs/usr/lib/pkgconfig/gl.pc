@@ -1,0 +1,13 @@
+prefix=/usr
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+glx_tls=yes
+
+Name: gl
+Description: Mesa OpenGL Library
+Version: 26.1.6
+Requires: glx
+Requires.private: x11, xext, xfixes, x11-xcb, xcb, xcb-glx >=  1.8.1, xcb-dri2 >=  1.8, xxf86vm, libdrm >=  2.4.75
+Libs.private: -lpthread -pthread -lm
+Cflags: -I${includedir}

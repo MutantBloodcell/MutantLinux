@@ -1,0 +1,8 @@
+#!/bin/sh
+mount -t binfmt_misc binfmt_misc /proc/sys/fs/binfmt_misc 2>/dev/null || true
+
+if [ -w /proc/sys/fs/binfmt_misc/register ]; then
+    echo ':mutant-mbin:M::MBIN\x01::/usr/sbin/mutant-exec:' > /proc/sys/fs/binfmt_misc/register 2>/dev/null || true
+    echo ':mutant-exe:M::MZ::/usr/sbin/mutant-exec:' > /proc/sys/fs/binfmt_misc/register 2>/dev/null || true
+    echo ':mutant-deb:M::!<arch>\x0adebian-binary::/usr/sbin/mutant-exec:' > /proc/sys/fs/binfmt_misc/register 2>/dev/null || true
+fi

@@ -1,0 +1,6 @@
+[Unit]
+Description=MutantLinux DHCP Network Service
+
+[Service]
+ExecStart=/sbin/udhcpc -i eth0 -s /usr/share/udhcpc/default.script -f
+Restart=always

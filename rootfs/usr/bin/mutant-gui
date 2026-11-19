@@ -1,0 +1,29 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export HOME=/root
+export USER=root
+export DISPLAY=:0
+
+mkdir -p /tmp/.X11-unix /var/log
+chmod 1777 /tmp /tmp/.X11-unix
+rm -f /tmp/.X0-lock /tmp/.X11-unix/X0
+
+/usr/sbin/mutant-hwdetect 2>/dev/null
+
+# Launch Xorg on dedicated vt7 so it never conflicts with PID 1 on tty1
+/usr/bin/Xorg :0 vt1 -nolisten tcp -noreset >/var/log/Xorg.0.log 2>&1 &
+XORG_PID=$!
+
+WAIT=0
+while [ ! -S /tmp/.X11-unix/X0 ] && [ "$WAIT" -lt 16 ]; do
+    sleep 0.5
+    WAIT=$((WAIT + 1))
+done
+
+if kill -0 "$XORG_PID" 2>/dev/null && [ -S /tmp/.X11-unix/X0 ]; then
+    /bin/sh /usr/bin/startmutantde
+    kill "$XORG_PID" 2>/dev/null
+else
+    echo "Xorg failed to start—check /var/log/Xorg.0.log"
+    cat /var/log/Xorg.0.log 2>/dev/null | tail -n 10
+fi

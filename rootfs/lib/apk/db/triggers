@@ -1,0 +1,13 @@
+Q1aNqvcdvNvD+OoaREhrt2uoSfECQ= /usr/share/app-info/* /var/cache/swcatalog/xml
+Q1cc/8KYHy1Us5N8Jb4vUWmz+wRTI= /bin /usr/bin /sbin /usr/sbin /lib/modules/* /usr/lib/modules/*
+Q1pu+V2QOpCdgleZRuh6pkvinzs2M= /usr/share/ca-certificates /usr/local/share/ca-certificates /etc/ssl/certs /etc/ca-certificates/update.d
+Q1b92MjI6GljcPpA5Am5my5dnKGLI= /usr/share/dbus-1/system.d
+Q1zdr9FzB3D6EPpHj+OQVaWsv0g6Y= /usr/lib/udev/rules.d
+Q1OQ4MiMLAAqU00RBvrYXcH3hw4YA= /usr/share/fonts/*
+Q1krRRDchMFQvERVlmh2OdruVKlrc= /usr/lib/gdk-pixbuf-2.0/*/loaders
+Q1xr4x8nY4GI+moMoc22rMXA3XG8o= /usr/share/glib-2.0/schemas /usr/lib/gio/modules /usr/lib/gtk-4.0
+Q1VMT/jHXC+DF8lRT/9PRbsIUYLz8= /usr/lib/gtk-3.0/immodules /usr/lib/gtk-3.0/*/immodules
+Q1+sciptxETtL74Jx4nYZHegfM2dM= /usr/share/icons/*
+Q11OTp3jHzcfADfNaofQ5x0FYTggw= /usr/libexec/gvfs
+Q1Fhep3tlqnHqFAfNWgCKmiDF2khk= /usr/share/fonts/*
+Q1zOO7AxR/myIfud14HGNdBohEU6M= /usr/share/mime

@@ -1,0 +1,25 @@
+#!/bin/sh
+THEME="${1:-darkgray}"
+mkdir -p /etc/mutantde /root/.config
+
+case "$THEME" in
+    white)    SCHEME="MutantWhite"; BG="#f8fafc" ;;
+    gray)     SCHEME="MutantGray"; BG="#64748b" ;;
+    darkgray) SCHEME="MutantDarkGray"; BG="#1e293b" ;;
+    black)    SCHEME="MutantBlack"; BG="#000000" ;;
+    *)
+        echo "Usage: mutant-theme [white|gray|darkgray|black]"
+        exit 1
+        ;;
+esac
+
+echo "$THEME" > /etc/mutantde/theme
+[ -n "$DISPLAY" ] && xsetroot -solid "$BG" 2>/dev/null
+
+if command -v plasma-apply-colorscheme >/dev/null 2>&1; then
+    plasma-apply-colorscheme "$SCHEME" >/dev/null 2>&1
+elif command -v kwriteconfig6 >/dev/null 2>&1; then
+    kwriteconfig6 --file kdeglobals --group General --key ColorScheme "$SCHEME"
+fi
+
+echo "Applied MutantDE theme: $THEME ($SCHEME)"

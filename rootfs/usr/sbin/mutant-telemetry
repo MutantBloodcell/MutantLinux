@@ -1,0 +1,49 @@
+#!/bin/sh
+. /etc/mutantd/firebase.conf
+
+STATE_DIR="/run/mutantd/telemetry"
+mkdir -p "$STATE_DIR"
+
+[ "$TELEMETRY_ENABLED" != "1" ] && exit 0
+[ -z "$FIREBASE_DB_URL" ] && exit 0
+
+HOST=$(cat /etc/hostname 2>/dev/null || echo "mutant-arm64")
+MID=$(cat /etc/machine-id 2>/dev/null || echo "unknown")
+
+send_event() {
+    TYPE="$1"
+    SOURCE="$2"
+    MSG=$(printf '%s' "$3" | tr '"' "'" | tr '\n' ' ' | cut -c 1-300)
+    TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+    PAYLOAD="{\"host\":\"${HOST}\",\"machine_id\":\"${MID}\",\"type\":\"${TYPE}\",\"source\":\"${SOURCE}\",\"message\":\"${MSG}\",\"timestamp\":\"${TS}\"}"
+
+    curl -s -X POST \
+      -H "Content-Type: application/json" \
+      -d "$PAYLOAD" \
+      "${FIREBASE_DB_URL}/telemetry/${MID}/${TYPE}.json" >/dev/null 2>&1
+}
+
+# Wait for DHCP network to come online
+sleep 5
+send_event "heartbeat" "mutantd" "MutantLinux 1.0 booted ($(uname -r))"
+
+while true; do
+    for LOGFILE in /var/log/mutantde.log /var/log/Xorg.0.log /var/log/mutantd/*.log; do
+        [ -f "$LOGFILE" ] || continue
+        BASE=$(basename "$LOGFILE")
+        HASH_FILE="$STATE_DIR/${BASE}.last"
+
+        ERRS=$(grep -iE "(\(EE\)|error|segfault|fatal|cannot open|failed)" "$LOGFILE" | tail -n 3)
+        [ -z "$ERRS" ] && continue
+
+        CUR_HASH=$(printf '%s' "$ERRS" | md5sum | cut -d' ' -f1)
+        OLD_HASH=$(cat "$HASH_FILE" 2>/dev/null)
+
+        if [ "$CUR_HASH" != "$OLD_HASH" ]; then
+            echo "$CUR_HASH" > "$HASH_FILE"
+            send_event "errors" "$BASE" "$ERRS"
+        fi
+    done
+    sleep 15
+done

@@ -1,0 +1,8 @@
+#!/bin/sh
+# Detect host RAM (MB) and CPU cores for optimal VM allocation
+TOTAL_KB=$(awk '/MemTotal:/ {print $2}' /proc/meminfo 2>/dev/null || echo 4096000)
+TOTAL_MB=$((TOTAL_KB / 1024))
+ALLOC_MB=$((TOTAL_MB / 2))
+[ "$ALLOC_MB" -lt 1024 ] && ALLOC_MB=1024
+[ "$ALLOC_MB" -gt 8192 ] && ALLOC_MB=8192
+echo "$ALLOC_MB"

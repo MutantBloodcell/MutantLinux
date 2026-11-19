@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org">
+  <menu id="root-menu" label="MutantLinux 1.0">
+    <item label="Terminal (LXTerminal)">
+      <action name="Execute"><command>lxterminal</command></action>
+    </item>
+    <item label="File Manager (PCManFM)">
+      <action name="Execute"><command>pcmanfm</command></action>
+    </item>
+    <separator />
+    <item label="Reconfigure Openbox">
+      <action name="Reconfigure" />
+    </item>
+    <item label="Reboot System">
+      <action name="Execute"><command>reboot -f</command></action>
+    </item>
+  </menu>
+</openbox_menu>
