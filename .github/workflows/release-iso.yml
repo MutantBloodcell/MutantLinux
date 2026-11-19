@@ -82,11 +82,11 @@ jobs:
 
           # 3. Repair Linux Symlinks & Populate Partition 2 via mkfs.ext4 -d
           mkdir -p rootfs/dev rootfs/proc rootfs/sys rootfs/tmp rootfs/run rootfs/bin rootfs/sbin rootfs/lib
-          rm -f rootfs/bin/sh rootfs/sbin/init rootfs/lib/ld-musl-aarch64.so.1
+          rm -f rootfs/bin/sh rootfs/sbin/init
           ln -s busybox rootfs/bin/sh
           ln -s /init rootfs/sbin/init
-          ln -s libc.musl-aarch64.so.1 rootfs/lib/ld-musl-aarch64.so.1
-          chmod 755 rootfs/init rootfs/bin/busybox rootfs/lib/libc.musl-aarch64.so.1
+          ln -sf ld-musl-aarch64.so.1 rootfs/lib/libc.musl-aarch64.so.1
+          chmod 755 rootfs/init rootfs/bin/busybox rootfs/lib/ld-musl-aarch64.so.1
           sed -i 's/\r$//' rootfs/init
           sudo mkfs.ext4 -F -N 1000000 -L "MUTANTROOT" -d rootfs "${LOOP}p2" >/dev/null
           sudo losetup -d "$LOOP"
